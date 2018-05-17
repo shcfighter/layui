@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>数据表格的重载 - 数据表格</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/global.css" media="all">
+</head>
+<body>
+  <div class="layui-fluid">
+	<div class="layui-card">
+	  <div class="layui-card-header">权限菜单</div>
+	  <div class="layui-card-body" style="padding: 15px;">
+          <div class="layui-card-body">
+			<ul id="dept-table"></ul>
+		  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../layuiadmin/layui/layui.js"></script>  
+  <script src="../../layuiadmin/commons.js"></script>
+  <script>
+
+	layui.use(['form', 'tree', 'layer'], function() {
+		var layer = layui.layer;
+		var $ = layui.$;
+		var form = layui.form;
+
+		function reload(){
+			$(".layui-tree").find("li").remove();
+			$.ajax({
+				type: 'GET',
+				contentType: "application/json;",
+				url: domain + "api/menu/findMenu",
+				success: function(result){
+					if(result.code == 0){
+						nodes = result.data;
+						var tree = layui.tree({  
+						  elem: '#dept-table',  
+						  check: 'checkbox',
+						  nodes: nodes,
+						  click: function(item){ 
+							  //点击节点回调
+							}
+						});
+					} else {
+						layer.alert(result.msg);
+					}
+				},
+				error: function () {
+					console.log("网络错误！");
+				}
+			});
+		}
+
+		reload();
+
+		form.on('submit(component-form-demo1)', function(data){
+			  $.ajax({
+					type: 'POST',
+					contentType: "application/json;",
+					url: domain + "api/dept/insertDept",
+					data: JSON.stringify(data.field),
+					success: function(result){
+						if(result.code == 0){
+							layer.msg(result.msg);
+							reload();
+						} else {
+							layer.alert(result.msg);
+						}
+					},
+					error: function () {
+						console.log("网络错误！");
+					}
+				});
+			  return false;
+			});
+
+		/* 触发弹层 */
+    var active = {
+	  del: function(){
+		  var id = $("input[name='pId']").val();
+		  if(undefined == id || "" == id || null == id){
+			  layer.alert("请先选择一个部门");
+			  return false;
+		  }
+		  layer.confirm('真的删除？', function(index){
+			$.ajax({
+				type: 'DELETE',
+				contentType: "application/json;",
+				url: domain + "api/dept/deleteDept/" + id,
+				success: function(result){
+					if(result.code == 0){
+						layer.msg(result.msg);
+						reload();
+					} else {
+						layer.alert(result.msg);
+					}
+				},
+				error: function () {
+					console.log("网络错误！");
+				}
+			});
+        });
+			return false;
+		}
+	 };
+
+	$('.layui-footer .layui-btn').on('click', function(){
+      var type = $(this).data('type');
+      active[type] && active[type].call(this);
+    });
+
+
+	});
+
+  </script>
+</body>
+</html>

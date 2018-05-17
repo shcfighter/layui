@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>数据表格的重载 - 数据表格</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/global.css" media="all">
+</head>
+<body>
+  <div class="layui-fluid">
+	<div class="layui-card">
+	  <div class="layui-card-header">权限菜单</div>
+		<div class="layui-card-body" style="padding: 15px;">
+			<form class="layui-form">
+				<input type="hidden" id="roleId" name="roleId"/>
+			  <div id="xtree3" ></div>
+			  <div class="layui-form-item layui-layout-admin">
+					<div class="layui-input-block">
+					  <div class="layui-footer" style="left: 0;">
+						<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					  </div>
+					</div>
+				</div>
+			</form>
+        </div>
+		
+      </div>
+    </div>
+  </div>
+
+ 
+  <script src="../../layuiadmin/layui/layui.js"></script> 
+  <script src="../../layuiadmin/commons.js"></script>
+  <script src="../../layuiadmin/layui/lay/modules/layui-xtree.js"></script> 
+  <script>
+	layui.use(['form'], function() {
+		var $ = layui.$;
+		var form = layui.form;
+
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  unescape(r[2]); return null;
+		}
+
+		var xtree3 = new layuiXtree({
+			   elem: 'xtree3'                  //必填
+			   , form: form                    //必填
+			   , data: domain + 'api/menu/findMenuTree?roleId=' + GetQueryString("roleId") //必填
+			   , isopen: true  //加载完毕后的展开状态，默认值：true
+			   , ckall: false    //启用全选功能，默认值：false
+			   , ckallback: function () { } //全选框状态改变后执行的回调函数
+			   , icon: {        //三种图标样式，更改几个都可以，用的是layui的图标
+				   open: "&#xe624;"       //节点打开的图标
+				   , close: "&#xe622;"    //节点关闭的图标
+				   , end: "&#xe621;"      //末尾节点的图标
+			   }
+			   , color: {       //三种图标颜色，独立配色，更改几个都可以
+				   open: "#333"        //节点图标打开的颜色
+				   , close: "#333"     //节点图标关闭的颜色
+				   , end: "#333"       //末级节点图标的颜色
+			   }
+			   , click: function (data) {  //节点选中状态改变事件监听，全选框有自己的监听事件
+				   console.log(data.elem); //得到checkbox原始DOM对象
+				   console.log(data.elem.checked); //开关是否开启，true或者false
+				   console.log(data.value); //开关value值，也可以通过data.elem.value得到
+				   console.log(data.othis); //得到美化后的DOM对象
+			   }
+		});
+
+		/* 监听提交 */
+		form.on('submit(component-form-demo1)', function(data){
+			layer.msg(JSON.stringify(data.field));
+			var checked = xtree3.GetChecked();
+			var menuIds = [];
+			for(var i = 0; i < checked.length; i++){
+				menuIds.push(checked[i].value);
+			}
+			
+		  $.ajax({
+				type: 'POST',
+				//contentType: "application/json;",
+				url: domain + "api/role/authMenuToRole/" + GetQueryString("roleId"),
+				data: {menuIds: menuIds},
+				success: function(result){
+					if(result.code == 0){
+						layer.msg(result.msg);
+						var index = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(index);
+					} else {
+						layer.alert(result.msg);
+					}
+				},
+				error: function () {
+					console.log("网络错误！");
+				}
+			});
+		  return false;
+		});
+
+	});
+
+  </script>
+</body>
+</html>

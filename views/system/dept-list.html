@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>数据表格的重载 - 数据表格</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/global.css" media="all">
+</head>
+<body>
+  <div class="layui-fluid" id="LAY-component-grid-all">
+    <div class="layui-row layui-col-space10">
+      <div class="layui-col-xs6 layui-col-sm5 layui-col-md3">
+        <div class="layui-card">
+          <div class="layui-card-header">
+			部门
+		  </div>
+          <div class="layui-card-body">
+			<ul id="dept-table"></ul>
+		  </div>
+        </div>
+      </div>
+      <div class="layui-col-xs6 layui-col-sm7 layui-col-md9">
+        <div class="layui-card">
+          <div class="layui-card-header">
+			操作
+		  </div>
+          <div class="layui-card-body">
+			
+			<div class="layui-card-header">表单组合</div>
+			  <div class="layui-card-body" style="padding: 15px;">
+				<form class="layui-form" action="" lay-filter="component-form-group">
+				  <div class="layui-form-item">
+					<label class="layui-form-label">父部门</label>
+					<div class="layui-input-block">
+					  <input type="text" name="pId" lay-verify="title" autocomplete="off" class="layui-hide" readonly>
+					  <input type="text" name="pName" lay-verify="title" autocomplete="off" class="layui-input" readonly>
+					</div>
+				  </div>
+
+				  <div class="layui-form-item">
+					  <label class="layui-form-label">部门名称</label>
+					  <div class="layui-input-block">
+						<input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
+					  </div>
+				  </div>
+				  
+				  <div class="layui-form-item">
+					  <label class="layui-form-label">部门CODE</label>
+					  <div class="layui-input-block">
+						<input type="text" name="code" lay-verify="required" autocomplete="off" placeholder="请输入部门CODE" class="layui-input">
+					  </div>
+				  </div>
+				       
+				  <div class="layui-form-item">
+					<div class="layui-input-block">
+					  <div class="layui-footer" style="left: 0;">
+						<button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">新增部门</button>
+						<button type="button" class="layui-btn layui-btn-primary" data-type="del">删除</button>
+					  </div>
+					</div>
+				  </div>
+				</form>
+			  </div>
+
+		  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../layuiadmin/layui/layui.js"></script>  
+  <script src="../../layuiadmin/commons.js"></script>
+  <script>
+	layui.use(['form', 'tree', 'layer'], function() {
+		var layer = layui.layer;
+		var $ = layui.$;
+		var form = layui.form;
+
+		function reload(){
+			$(".layui-tree").find("li").remove();
+			$.ajax({
+				type: 'GET',
+				contentType: "application/json;",
+				url: domain + "api/dept/findDeptTree",
+				success: function(result){
+					if(result.code == 0){
+						nodes = result.data;
+						var tree = layui.tree({  
+						  elem: '#dept-table',  
+						  nodes: nodes,
+						  click: function(item){ //点击节点回调
+							  $("input[name='pId']").val(item.id);
+							  $("input[name='pName']").val(item.name);
+							}
+						});
+					} else {
+						layer.alert(result.msg);
+					}
+				},
+				error: function () {
+					console.log("网络错误！");
+				}
+			});
+		}
+
+		reload();
+
+		form.on('submit(component-form-demo1)', function(data){
+			  $.ajax({
+					type: 'POST',
+					contentType: "application/json;",
+					url: domain + "api/dept/insertDept",
+					data: JSON.stringify(data.field),
+					success: function(result){
+						if(result.code == 0){
+							layer.msg(result.msg);
+							reload();
+						} else {
+							layer.alert(result.msg);
+						}
+					},
+					error: function () {
+						console.log("网络错误！");
+					}
+				});
+			  return false;
+			});
+
+		/* 触发弹层 */
+    var active = {
+	  del: function(){
+		  var id = $("input[name='pId']").val();
+		  if(undefined == id || "" == id || null == id){
+			  layer.alert("请先选择一个部门");
+			  return false;
+		  }
+		  layer.confirm('真的删除？', function(index){
+			$.ajax({
+				type: 'DELETE',
+				contentType: "application/json;",
+				url: domain + "api/dept/deleteDept/" + id,
+				success: function(result){
+					if(result.code == 0){
+						layer.msg(result.msg);
+						reload();
+					} else {
+						layer.alert(result.msg);
+					}
+				},
+				error: function () {
+					console.log("网络错误！");
+				}
+			});
+        });
+			return false;
+		}
+	 };
+
+	$('.layui-footer .layui-btn').on('click', function(){
+      var type = $(this).data('type');
+      active[type] && active[type].call(this);
+    });
+
+
+	});
+
+  </script>
+</body>
+</html>
