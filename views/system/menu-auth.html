@@ -42,13 +42,6 @@
 		var $ = layui.$;
 		var form = layui.form;
 
-		function GetQueryString(name)
-		{
-			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-			 var r = window.location.search.substr(1).match(reg);
-			 if(r!=null)return  unescape(r[2]); return null;
-		}
-
 		var xtree3 = new layuiXtree({
 			   elem: 'xtree3'                  //必填
 			   , form: form                    //必填
@@ -85,7 +78,7 @@
 			
 		  $.ajax({
 				type: 'POST',
-				//contentType: "application/json;",
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				url: domain + "api/role/authMenuToRole/" + GetQueryString("roleId"),
 				data: {menuIds: menuIds},
 				success: function(result){

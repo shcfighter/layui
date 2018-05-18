@@ -8,7 +8,16 @@ if(undefined == sessionLoginUser ||
 	//return false;
 }
 var loginUser = JSON.parse(sessionLoginUser);
-document.getElementById("login_user").innerHTML = loginUser.loginName;
+var login_user = document.getElementById("login_user");
+if(login_user){
+	login_user.innerHTML = loginUser.loginName;
+}
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
 
 layui.config({
     base: '../layuiadmin/' //静态资源所在路径
@@ -38,20 +47,5 @@ layui.config({
 		}
 	});
 
-	$.ajax({
-		type: 'GET',
-		contentType: "application/json;",
-		url: domain + "api/user/auth",
-		success: function(result){
-			if(result.code == 0){
-				
-			} else {
-				layer.alert(result.msg);
-				window.location.href = "/layuiAdmin/views/login.html";
-			}
-		},
-		error: function () {
-			console.log("网络错误！");
-		}
-	});
+
 });

@@ -81,6 +81,12 @@
 
     form.render();
 
+      $("input[name='pwd']").bind('keypress', function(event){
+          if(event.keyCode == 13){
+              $(".layui-btn-fluid").click();
+          }
+      });
+
     //提交
     form.on('submit(LAY-user-login-submit)', function(obj){
       //请求登入接口

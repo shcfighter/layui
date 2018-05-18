@@ -24,11 +24,11 @@
               <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
             </a>
           </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
+          <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
             <a href="http://www.layui.com/admin/" target="_blank" title="前台">
               <i class="layui-icon layui-icon-website"></i>
             </a>
-          </li>
+          </li>-->
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;" layadmin-event="refresh" title="刷新">
               <i class="layui-icon layui-icon-refresh-3"></i>
@@ -45,7 +45,7 @@
               <span class="layui-badge-dot"></span>
             </a>
           </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
+          <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
             <a href="javascript:;" layadmin-event="theme">
               <i class="layui-icon layui-icon-theme"></i>
             </a>
@@ -54,7 +54,7 @@
             <a href="javascript:;" layadmin-event="note">
               <i class="layui-icon layui-icon-note"></i>
             </a>
-          </li>
+          </li>-->
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;">
               <cite id="login_user">贤心</cite>
@@ -68,7 +68,7 @@
           </li>
           
           <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+            <a href="javascript:;" layadmin-event=""><i class="layui-icon layui-icon-more-vertical"></i></a>
           </li>
           <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
             <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
@@ -88,12 +88,13 @@
 				{{#  layui.each(d.data, function(index, item){ }}
 					<li data-name="home" class="layui-nav-item">
 					  <a href="javascript:;" lay-tips="{{item.title}}" lay-direction="2">
-						<i class="layui-icon layui-icon-home"></i>
+						<i class="layui-icon {{item.menuIcon}}"></i>
 						<cite>{{item.title}}</cite>
 					  </a>
 					  {{#  layui.each(item.data, function(index2, item2){ }}
 						  <dl class="layui-nav-child">
 							<dd data-name="console">
+                              <i class="layui-icon {{item2.menuIcon}}"></i>
 							  <a lay-href="{{item2.menuUrl}}">{{item2.title}}</a>
 							</dd>
 						  </dl>
@@ -157,9 +158,25 @@
 	var laytpl = layui.laytpl;
 	var $ = layui.$
     ,admin = layui.admin
-    ,layer = layui.layer;
-
+    ,layer = layui.layer
 	element = layui.element;
+
+      $.ajax({
+          type: 'GET',
+          contentType: "application/json;",
+          url: domain + "api/user/auth",
+          success: function(result){
+              if(result.code == 0){
+
+              } else {
+                  layer.alert(result.msg);
+                  window.location.href = "/layuiAdmin/views/login.html";
+              }
+          },
+          error: function () {
+              console.log("网络错误！");
+          }
+      });
 
 	$.ajax({
 		type: 'GET',

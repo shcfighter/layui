@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">订单列表</div>
+                <div class="layui-card-body">
+                    <div class="layui-btn-group" style="margin-bottom: 10px;">
+                        <button class="layui-btn layui-btn-sm" data-type="add"><i class="layui-icon">&#xe654;</i>
+                        </button>
+                    </div>
+                    <div class="demoTable" style="margin-bottom: 10px;">
+                        产品名称：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="productName" id="productName" autocomplete="off">
+                        </div>
+                        合作公司：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="cooperationCompany" id="cooperationCompany" autocomplete="off">
+                        </div>
+                        状态：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="status" id="status" autocomplete="off">
+                        </div>
+                        <button class="layui-btn" data-type="reload">搜索</button>
+                    </div>
+
+                    <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
+
+                    <script type="text/html" id="user-table-barDemo">
+                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="proofing">打样</a>
+                        <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script src="../../layuiadmin/commons.js"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table'], function () {
+        var $ = layui.$
+            , element = layui.element
+            , layer = layui.layer
+            , table = layui.table;
+
+        //方法级渲染
+        table.render({
+            elem: '#order-table'
+            , url: domain + 'api/order/findOrderPage'
+            , cols: [[
+                {field: 'productName', title: '产品名称', width: 120, sort: true}
+                , {field: 'orderNum', title: '产品数量', width: 100}
+                , {field: 'productUnit', title: '单位', width: 80, sort: true}
+                , {field: 'deliverDate', title: '交付时间', width: 110}
+                , {field: 'cooperationCompany', title: '合作公司', width: 120}
+                , {field: 'contactPhone', title: '联系方式', width: 115}
+                , {field: 'createTime', title: '创建时间'}
+                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
+            ]]
+            , id: 'orderTable'
+            , page: true
+            , height: 600
+        });
+
+        element.render();
+
+
+        //监听工具条
+        table.on('tool(order-table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'detail') {
+                var index = layer.open({
+                    type: 2,
+                    title: "查看订单",
+                    content: 'order-look.html',
+                    area: ['300px', '300px'],
+                    maxmin: true,
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                        body.find('input[name="productName"]').val(data.productName);
+                        body.find('input[name="orderNum"]').val(data.orderNum);
+                        body.find('input[name="productUnit"]').val(data.productUnit);
+                        body.find('input[name="unitPrice"]').val(data.unitPrice);
+                        body.find('input[name="totalPrice"]').val(data.totalPrice);
+                        body.find('input[name="deliverDate"]').val(data.deliverDate);
+                        body.find('input[name="cooperationCompany"]').val(data.cooperationCompany);
+                        body.find('input[name="contactName"]').val(data.contactName);
+                        body.find('input[name="contactPhone"]').val(data.contactPhone);
+                        if (data.remarks){
+                            body.find('textarea[name="remarks"]').text(data.remarks);
+                        }
+
+                    }
+                });
+                layer.full(index);
+            } else if (obj.event === 'proofing') {
+                var index = layer.open({
+                    type: 2,
+                    title: "打样",
+                    content: 'order-proofing.html?orderId=' + data.id,
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            }
+        });
+
+
+        /* 触发弹层 */
+        var active = {
+            add: function () {
+                var index = layer.open({
+                    type: 2,
+                    title: "录入订单",
+                    content: 'order-add.html',
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            },
+            reload: function () {
+                //执行重载
+                table.reload('orderTable', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        productName: $('#productName').val(),
+                        cooperationCompany: $('#cooperationCompany').val(),
+                        status: $('#status').val()
+                    }
+                });
+            }
+        };
+
+        $('.layui-btn-group .layui-btn, .demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] && active[type].call(this);
+        });
+
+    });
+
+</script>
+</body>
+</html>
