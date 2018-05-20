@@ -76,12 +76,13 @@
                 , {field: 'deliverDate', title: '交付时间', width: 110}
                 , {field: 'cooperationCompany', title: '合作公司', width: 120}
                 , {field: 'contactPhone', title: '联系方式', width: 115}
+                , {field: 'status', title: '状态', width: 80}
                 , {field: 'createTime', title: '创建时间'}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
             ]]
             , id: 'orderTable'
             , page: true
-            , height: 600
+            ,height: 'full-100'
         });
 
         element.render();
@@ -94,7 +95,7 @@
                 var index = layer.open({
                     type: 2,
                     title: "查看订单",
-                    content: 'order-look.html',
+                    content: 'goods-look.html',
                     area: ['300px', '300px'],
                     maxmin: true,
                     success: function (layero, index) {
@@ -122,7 +123,14 @@
                     title: "打样",
                     content: 'order-proofing.html?orderId=' + data.id,
                     area: ['300px', '300px'],
-                    maxmin: true
+                    maxmin: true,
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        if(data.status != 0){
+                            body.find(".layui-layout-admin").remove();
+                        }
+
+                    }
                 });
                 layer.full(index);
             }
