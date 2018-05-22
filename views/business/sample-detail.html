@@ -47,26 +47,21 @@
                     <input type="text" name="deliverDate" lay-verify="" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <!--<div class="layui-col-md12">
-                <div class="layui-card">
-                    样品预览
-                    <div class="layui-card-body">
-                        <div class="layui-upload">
-                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                                <div class="layui-upload-list" id="upload-more-list"></div>
-                            </blockquote>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
 
             <div class="layui-form-item">
-                <label class="layui-form-label">样品详情</label>
+                <label class="layui-form-label">样品照片</label>
                 <div class="layui-input-block">
-                    <div class="layui-carousel" id="test-carousel-img">
+                    <!--<div class="layui-carousel" id="test-carousel-img">
                         <div carousel-item="" id="carousel-img">
                         </div>
-                    </div>
+                    </div>-->
+                    <button class="layui-btn layui-btn-primary images" data-type="sampleImages">样品</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">原材料</label>
+                <div class="layui-input-block">
+                    <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
                 </div>
             </div>
 
@@ -86,20 +81,39 @@
 <script>
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
-    }).use(['form', 'layedit', 'upload', 'carousel'], function () {
+    }).use(['form', 'layedit', 'upload', 'carousel', 'table'], function () {
         var $ = layui.$
             , layer = layui.layer
             , form = layui.form
             , layedit = layui.layedit
-            ,carousel = layui.carousel;
+            ,carousel = layui.carousel
+            , table = layui.table;
 
+        var images_data = [];
+        var json = {
+            "code": 0,
+            "msg": "",
+            "start": 0
+        }
         $.ajax({
             type: 'GET',
-            //contentType: "application/json;",
             url: domain + "api/sample/findSampleDetail/" + GetQueryString("sampleId"),
             success: function (result) {
                 if (result.code == 0) {
                     var data = result.data;
+                    table.render({
+                        elem: '#order-table'
+                        , url: domain + 'api/material/findMaterial/' + data.id
+                        , cols: [[
+                            {field: 'goodsName', title: '名称', width: 180, sort: true}
+                            , {field: 'goodsModel', title: '型号', width: 150, sort: true}
+                            , {field: 'color', title: '颜色', width: 100}
+                            , {field: 'num', title: '数量', width: 100, sort: true}
+                            , {field: 'unit', title: '单位', width: 80}
+                            , {field: 'remarks', title: '备注'}
+                        ]]
+                        , id: 'orderTable'
+                    });
                     if(undefined != data && null != data && "" != data && "null" != data){
                         $("input[name='company']").val(data.cooperation_company);
                         $("input[name='sampleName']").val(data.sample_name);
@@ -110,6 +124,10 @@
                             $.each(images, function (index, image) {
                                 //$('#upload-more-list').append('<img src="'+ image +'" class="layui-upload-img">');
                                 $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
+                                var image_data = {};
+                                image_data.src = image;
+                                images_data.push(image_data);
+                                json.data = images_data;
                             });
                             //图片轮播
                             carousel.render({
@@ -147,6 +165,22 @@
             ,height: 100
         });
         form.render(null, 'component-form-group');
+
+
+        console.log(json)
+
+        var active = {
+            sampleImages: function () {
+                layer.photos({
+                    photos: json //格式见API文档手册页
+                });
+            }
+        };
+
+        $('.layui-form-item .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] && active[type].call(this);
+        });
     });
 </script>
 

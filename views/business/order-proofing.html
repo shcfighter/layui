@@ -28,7 +28,7 @@
                     <label class="layui-form-label">样品名称</label>
                     <div class="layui-input-block">
                         <input type="hidden" name="id" lay-verify="" autocomplete="off" class="layui-input">
-                        <!--<input type="hidden" name="orderId" lay-verify="required" autocomplete="off" class="layui-input">-->
+                        <input type="hidden" name="orderId" lay-verify="" autocomplete="off" class="layui-input">
                         <input type="text" name="sampleName" lay-verify="required" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
                     </div>
                 </div>
@@ -40,20 +40,51 @@
                     </div>
                 </div>
 
-                <div class="layui-col-md12">
-                    <div class="layui-card">
-                        <div class="layui-card-header">上传多张图片
-                            <button type="button" class="layui-btn" id="upload-more">多图片上传</button>
-                        </div>
-                        <div class="layui-card-body">
-                            <div class="layui-upload">
-                                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                                    预览图：
-                                    <div class="layui-upload-list" id="upload-more-list"></div>
-                                </blockquote>
-                            </div>
-                        </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上传多张图片</label>
+                    <div class="layui-input-block">
+                        <button type="button" class="layui-btn" id="upload-more">多图片上传</button>
                     </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">预览图：</label>
+                    <div class="layui-input-block">
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            <div class="layui-upload-list" id="upload-more-list"></div>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">原材料：</label>
+                    <div class="layui-input-block">
+                        <button type="button" class="layui-btn" id="material-more">新增原材料</button>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="200">
+                            <col width="200">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col>
+                            <col width="50">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>物品名称</th>
+                            <th>物品型号</th>
+                            <th>颜色</th>
+                            <th>数量</th>
+                            <th>单位</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="layui-form-item">
@@ -97,36 +128,32 @@
             success: function (result) {
                 if (result.code == 0) {
                     var data = result.data;
-                    console.log(data);
-                    if(undefined != data && null != data && "" != data && "null" != data){
-                        $("input[name='id']").val(data.id);
-                        $("input[name='orderId']").val(data.orderId);
-                        $("input[name='sampleName']").val(data.sampleName);
-                        $("input[name='sampleCode']").val(data.sampleCode);
-                        var images = data.photoUrl.split(",");
-                        $.each(images, function (index, image) {
-                            $('#upload-more-list').append('<img src="'+ image +'" class="layui-upload-img">');
-                            $('#upload-more-list').after('<input type="hidden" name="photoUrls[]" value="' + image + '" class="layui-input">');
-                        });
-                        if(data.remarks){
-                            $('.layui-textarea').text(data.remarks);
+                    var sample = data.sample;
+                    if(undefined != sample && null != sample && "" != sample && "null" != sample){
+                        $("input[name='id']").val(sample.id);
+                        $("input[name='orderId']").val(GetQueryString("orderId"));
+                        $("input[name='sampleName']").val(sample.sampleName);
+                        $("input[name='sampleCode']").val(sample.sampleCode);
+                        if(sample.photoUrl){
+                            var images = sample.photoUrl.split(",");
+                            $.each(images, function (index, image) {
+                                $('#upload-more-list').append('<img src="'+ image +'" class="layui-upload-img">');
+                                $('#upload-more-list').after('<input type="hidden" name="photoUrls" value="' + image + '" class="layui-input">');
+                            });
+                        }
+                        if(sample.remarks){
+                            $('.layui-textarea').text(sample.remarks);
                             var indexEdit = layedit.build('LAY_demo1', {
-                                tool: ['strong' //加粗
-                                    ,'italic' //斜体
-                                    ,'underline' //下划线
-                                    ,'del' //删除线
-                                    ,'|' //分割线
-                                    ,'left' //左对齐
-                                    ,'center' //居中对齐
-                                    ,'right' //右对齐
-                                    ,'link' //超链接
-                                    ,'unlink' //清除链接
-                                    ,'face' //表情
-                                ]
+                                tool: ['strong','italic','underline','del','|','left','center','right','link','unlink','face']
                                 ,height: 100
                             });
                         }
                     }
+                    $.each(data.materials, function (index, material) {
+                        $(".layui-table").find("tbody").append("<tr><td style='display: none;' id='id'>" + material.id + "</td><td>" + material.goodsName + "</td>" +
+                            "<td>" + material.goodsModel + "</td><td>" + material.color + "</td><td>" + material.num + "</td>" +
+                            "<td>" + material.unit + "</td><td>" + material.remarks + "</td><td><a href='javascript:void(0);' class='layui-btn layui-btn-xs layui-delete'>删除</a></td></tr>");
+                    });
                 } else {
                     layer.alert(result.msg);
                 }
@@ -136,12 +163,39 @@
             }
         });
 
+        $(".layui-table").on("click", ".layui-delete", function () {
+            layer.confirm('确认删除改原材料？', function (index) {
+                var $tr = $(this).closest("tr");
+                if($($tr).find("td").eq(0).attr("id")){
+                    var id = $($tr).find("td").eq(0).text();
+                    $.ajax({
+                        type: 'GET',
+                        contentType: "application/json;",
+                        url: domain + "api/material/delete/" + id,
+                        success: function (result) {
+                            if (result.code == 0) {
+                                layer.msg(result.msg);
+                                $($tr).remove();
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                }else {
+                    $($tr).remove();
+                }
+            });
+        });
+
         $(".layui-btn-primary").click(function () {
-            layer.confirm('提交之后进入计划科将不可修改，确认提交？', function (index) {
+            layer.confirm('提交之后进入下一个环节将不可修改，确认提交？', function (index) {
                 $.ajax({
                     type: 'POST',
                     contentType: "application/json;",
-                    url: domain + "api/sample/updateFinish/" + $("input[name='id']").val(),
+                    url: domain + "api/sample/updateToPurchase/" + $("input[name='id']").val(),
                     success: function (result) {
                         if (result.code == 0) {
                             layer.msg(result.msg);
@@ -161,18 +215,7 @@
 
         //构建一个默认的编辑器
         var indexEdit = layedit.build('LAY_demo1', {
-            tool: ['strong' //加粗
-                ,'italic' //斜体
-                ,'underline' //下划线
-                ,'del' //删除线
-                ,'|' //分割线
-                ,'left' //左对齐
-                ,'center' //居中对齐
-                ,'right' //右对齐
-                ,'link' //超链接
-                ,'unlink' //清除链接
-                ,'face' //表情
-            ]
+            tool: ['strong','italic','underline','del','|','left','center','right','link','unlink','face']
             ,height: 100
         });
 
@@ -192,12 +235,26 @@
                 if(res.code == 0){
                     $.each(res.data, function (index, image) {
                         $('#upload-more-list').append('<img src="'+ image +'" class="layui-upload-img">');
-                        $('#upload-more-list').after('<input type="hidden" name="photoUrls[]" value="' + image + '" class="layui-input">');
+                        $('#upload-more-list').after('<input type="hidden" name="photoUrls" value="' + image + '" class="layui-input">');
                     })
                 }
             }
         });
+        
+        $("#material-more").click(function () {
+            var index = layer.open({
+                type: 2,
+                title: "原材料",
+                content: 'material-add.html',
+                area: ['300px', '300px'],
+                maxmin: true,
+                success: function (layero, index) {
+                    var body = layer.getChildFrame('body', index);
 
+                }
+            });
+            layer.full(index);
+        });
 
         /*$('.layui-textarea').text("<img src=\"file:///D:/IdeaProjects/layuiAdmin/layuiadmin/layui/images/face/29.gif\" alt=\"[拜拜]\">");
         var index= layedit.build('LAY_demo1');*/
@@ -206,12 +263,45 @@
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
+            var _tr = $(".layui-table").find("tbody").find("tr");
+            var arr = [];
+            $.each(_tr, function (index, tr) {
+                var _td = $(tr).find("td");
+                var goods = {};
+                if($(_td[0]).attr("id")){
+                    goods.id =  $(_td[0]).text();
+                    goods.goodsName =  $(_td[1]).text();
+                    goods.goodsModel =  $(_td[2]).text();
+                    goods.color = $( _td[3]).text();
+                    goods.num =  $(_td[4]).text();
+                    goods.unit =  $(_td[5]).text();
+                    goods.remarks =  $(_td[6]).text();
+                } else {
+                    goods.goodsName =  $(_td[0]).text();
+                    goods.goodsModel =  $(_td[1]).text();
+                    goods.color = $( _td[2]).text();
+                    goods.num =  $(_td[3]).text();
+                    goods.unit =  $(_td[4]).text();
+                    goods.remarks =  $(_td[5]).text();
+                }
+                arr.push(goods);
+            })
             data.field.remarks = layedit.getContent(indexEdit);
+            var photoUrls = [];
+            $.each($("input[name='photoUrls']"), function (index, value) {
+                photoUrls.push($(value).val());
+            })
+            var params ={
+                sample: data.field,
+                materialList: arr,
+                sampleUrls: photoUrls.join(",")
+            }
+            console.log(photoUrls);
             $.ajax({
                 type: 'POST',
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                contentType: "application/json;",
                 url: domain + "api/sample/insertSample",
-                data: data.field,
+                data: JSON.stringify(params),
                 success: function (result) {
                     if (result.code == 0) {
                         layer.msg(result.msg);

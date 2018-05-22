@@ -16,33 +16,30 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">订单列表</div>
+                <div class="layui-card-header">样品列表</div>
                 <div class="layui-card-body">
-                    <div class="layui-btn-group" style="margin-bottom: 10px;">
-                        <button class="layui-btn layui-btn-sm" data-type="add"><i class="layui-icon">&#xe654;</i>
-                        </button>
-                    </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
-                        产品名称：
+                        样品名称：
                         <div class="layui-inline">
-                            <input class="layui-input" name="productName" id="productName" autocomplete="off">
+                            <input class="layui-input" name="sampleName" id="sampleName" autocomplete="off">
+                        </div>
+                        样品型号：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="sampleCode" id="sampleCode" autocomplete="off">
                         </div>
                         合作公司：
                         <div class="layui-inline">
-                            <input class="layui-input" name="cooperationCompany" id="cooperationCompany" autocomplete="off">
-                        </div>
-                        状态：
-                        <div class="layui-inline">
-                            <input class="layui-input" name="status" id="status" autocomplete="off">
+                            <input class="layui-input" name="company" id="company" autocomplete="off">
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
                     </div>
 
                     <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
 
+
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="proofing">打样</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="go_plan">进入生产</a>
                         <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
                     </script>
 
@@ -65,19 +62,16 @@
             , layer = layui.layer
             , table = layui.table;
 
+
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/order/findOrderPage'
+            , url: domain + 'api/sample/findSamplePage'
             , cols: [[
-                {field: 'productName', title: '产品名称', width: 120, sort: true}
-                , {field: 'orderNum', title: '产品数量', width: 100}
-                , {field: 'productUnit', title: '单位', width: 80, sort: true}
-                , {field: 'deliverDate', title: '交付时间', width: 110}
-                , {field: 'cooperationCompany', title: '合作公司', width: 120}
-                , {field: 'contactPhone', title: '联系方式', width: 115}
-                , {field: 'status', title: '状态', width: 80}
-                , {field: 'createTime', title: '创建时间'}
+                {field: 'sample_name', title: '样品名称', width: 180, sort: true}
+                , {field: 'sample_code', title: '样品型号', width: 100}
+                , {field: 'cooperation_company', title: '合作公司', width: 150, sort: true}
+                , {field: 'deliver_date', title: '交付时间', width: 120}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
             ]]
             , id: 'orderTable'
@@ -87,7 +81,6 @@
 
         element.render();
 
-
         //监听工具条
         table.on('tool(order-table)', function (obj) {
             var data = obj.data;
@@ -95,7 +88,7 @@
                 var index = layer.open({
                     type: 2,
                     title: "查看订单",
-                    content: 'order-look.html',
+                    content: 'sample-detail.html?sampleId=' + data.id,
                     area: ['300px', '300px'],
                     maxmin: true,
                     success: function (layero, index) {
@@ -123,34 +116,14 @@
                     title: "打样",
                     content: 'order-proofing.html?orderId=' + data.id,
                     area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                        var body = layer.getChildFrame('body', index);
-                        body.find("input[name='orderId']").val(data.id);
-                        if(data.status != 0 && data.status != 1){
-                            body.find(".layui-layout-admin").remove();
-                            body.find("#material-more").remove();
-                        }
-
-                    }
+                    maxmin: true
                 });
                 layer.full(index);
             }
         });
 
-
         /* 触发弹层 */
         var active = {
-            add: function () {
-                var index = layer.open({
-                    type: 2,
-                    title: "录入订单",
-                    content: 'order-add.html',
-                    area: ['300px', '300px'],
-                    maxmin: true
-                });
-                layer.full(index);
-            },
             reload: function () {
                 //执行重载
                 table.reload('orderTable', {
@@ -158,9 +131,9 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     , where: {
-                        productName: $('#productName').val(),
-                        cooperationCompany: $('#cooperationCompany').val(),
-                        status: $('#status').val()
+                        sampleName: $('#sampleName').val(),
+                        sampleCode: $('#sampleCode').val(),
+                        company: $('#company').val()
                     }
                 });
             }
