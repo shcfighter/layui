@@ -39,7 +39,8 @@
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="go_plan">采购完成</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="plan">创建生产计划</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="go_produce">进入生产</a>
                         <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
                     </script>
 
@@ -66,7 +67,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/sample/findSamplePage?status=2'
+            , url: domain + 'api/sample/findSamplePage?status=3'
             , cols: [[
                 {field: 'sample_name', title: '样品名称', width: 180, sort: true}
                 , {field: 'sample_code', title: '样品型号', width: 100}
@@ -110,7 +111,20 @@
                     }
                 });
                 layer.full(index);
-            } else if (obj.event === 'go_plan') {
+            } else if (obj.event === 'plan') {
+                var index = layer.open({
+                    type: 2,
+                    title: "创建生产计划",
+                    content: 'plan-add.html?orderId=' + data.order_id,
+                    area: ['300px', '300px'],
+                    maxmin: true,
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        body.find('input[name="orderId"]').val(data.order_id);
+                    }
+                });
+                layer.full(index);
+            } else if (obj.event === 'go_produce') {
                 layer.confirm('原材料都准备齐全了吗？', function (index) {
                     $.ajax({
                         type: 'POST',
@@ -141,7 +155,7 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     , where: {
-                        status: 2,
+                        status: 3,
                         sampleName: $('#sampleName').val(),
                         sampleCode: $('#sampleCode').val(),
                         company: $('#company').val()
