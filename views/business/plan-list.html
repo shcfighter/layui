@@ -39,7 +39,9 @@
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="go_plan">进入生产</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="plan">创建生产计划</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="plan_detail">查看生产计划</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="go_produce">进入生产</a>
                         <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
                     </script>
 
@@ -66,10 +68,12 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/sample/findSamplePage'
+            , url: domain + 'api/sample/findSamplePage?status=3'
             , cols: [[
                 {field: 'sample_name', title: '样品名称', width: 180, sort: true}
                 , {field: 'sample_code', title: '样品型号', width: 100}
+                , {field: 'order_num', title: '订单数量', width: 100}
+                , {field: 'product_unit', title: '单位', width: 100}
                 , {field: 'cooperation_company', title: '合作公司', width: 150, sort: true}
                 , {field: 'deliver_date', title: '交付时间', width: 120}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
@@ -94,10 +98,10 @@
                     success: function (layero, index) {
                         var body = layer.getChildFrame('body', index);
                         var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-                        body.find('input[name="productName"]').val(data.productName);
-                        body.find('input[name="orderNum"]').val(data.orderNum);
-                        body.find('input[name="productUnit"]').val(data.productUnit);
-                        body.find('input[name="unitPrice"]').val(data.unitPrice);
+                        //body.find('input[name="productName"]').val(data.productName);
+                        body.find('input[name="orderNum"]').val(data.order_num);
+                        body.find('input[name="productUnit"]').val(data.product_unit);
+                        /*body.find('input[name="unitPrice"]').val(data.unitPrice);
                         body.find('input[name="totalPrice"]').val(data.totalPrice);
                         body.find('input[name="deliverDate"]').val(data.deliverDate);
                         body.find('input[name="cooperationCompany"]').val(data.cooperationCompany);
@@ -105,20 +109,54 @@
                         body.find('input[name="contactPhone"]').val(data.contactPhone);
                         if (data.remarks){
                             body.find('textarea[name="remarks"]').text(data.remarks);
-                        }
+                        }*/
 
                     }
                 });
                 layer.full(index);
-            } else if (obj.event === 'proofing') {
+            } else if (obj.event === 'plan') {
                 var index = layer.open({
                     type: 2,
-                    title: "打样",
-                    content: 'order-proofing.html?orderId=' + data.id,
+                    title: "创建生产计划",
+                    content: 'plan-add.html?orderId=' + data.order_id,
                     area: ['300px', '300px'],
-                    maxmin: true
+                    maxmin: true,
+                    success: function (layero, index) {
+                        var body = layer.getChildFrame('body', index);
+                        body.find('input[name="orderId"]').val(data.order_id);
+                    }
                 });
                 layer.full(index);
+            } else if (obj.event === 'plan_detail') {
+                var index = layer.open({
+                    type: 2,
+                    title: "查看生产计划",
+                    content: 'plan-list2.html?orderId=' + data.order_id,
+                    area: ['300px', '300px'],
+                    maxmin: true,
+                    success: function (layero, index) {
+                    }
+                });
+                layer.full(index);
+            } else if (obj.event === 'go_produce') {
+                layer.confirm('确定此操作吗？', function (index) {
+                    $.ajax({
+                        type: 'PUT',
+                        contentType: "application/json;",
+                        url: domain + "api/plan/updateToProduce/"+ data.order_id,
+                        success: function (result) {
+                            if (result.code == 0) {
+                                layer.msg(result.msg);
+                                layui.table.reload('orderTable');
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
             }
         });
 
@@ -131,6 +169,7 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     , where: {
+                        status: 3,
                         sampleName: $('#sampleName').val(),
                         sampleCode: $('#sampleCode').val(),
                         company: $('#company').val()

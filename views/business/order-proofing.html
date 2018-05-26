@@ -164,8 +164,8 @@
         });
 
         $(".layui-table").on("click", ".layui-delete", function () {
+            var $tr = $(this).closest("tr");
             layer.confirm('确认删除改原材料？', function (index) {
-                var $tr = $(this).closest("tr");
                 if($($tr).find("td").eq(0).attr("id")){
                     var id = $($tr).find("td").eq(0).text();
                     $.ajax({
@@ -186,6 +186,7 @@
                     });
                 }else {
                     $($tr).remove();
+                    layer.close(index);
                 }
             });
         });

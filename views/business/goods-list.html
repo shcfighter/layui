@@ -33,15 +33,21 @@
                         </div>
                         类型：
                         <div class="layui-inline">
-                            <select name="type" lay-filter="typeSelect">
-                                <option value="0">原材料</option>
-                                <option value="1">成品</option>
-                            </select>
+                            <div class="layui-form">
+                                <select name="type" id="type" lay-filter="typeSelect">
+                                    <option value="1">原材料</option>
+                                    <option value="2">成品</option>
+                                </select>
+                            </div>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
+                        <button class="layui-btn" data-type="download">下载</button>
+                        <button class="layui-btn" data-type="print">打印</button>
                     </div>
 
+                    <div class="my_show">
                     <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
+                    </div>
 
                     <script type="text/html" id="typeTpl">
                         {{#  if(d.type === 1){ }}
@@ -65,6 +71,8 @@
 
 <script src="../../layuiadmin/layui/layui.js"></script>
 <script src="../../layuiadmin/commons.js"></script>
+<script src="../../layuiadmin/jquery-2.1.4.min.js"></script>
+<script src="../../layuiadmin/jquery.jqprint-0.3.js"></script>
 <script>
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
@@ -89,7 +97,7 @@
                 /*, {field: 'unitPrice', title: '单价', width: 80, sort: true}*/
                 , {field: 'color', title: '颜色', width: 60}
                 , {field: 'produceDate', title: '生产时间', width: 110}
-                , {field: 'type', title: '类型', width: 60, templet: '#typeTpl', width: 80, unresize: true}
+                , {field: 'type', title: '类型', templet: '#typeTpl', width: 80, unresize: true}
                 , {field: 'createTime', title: '创建时间'}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width:180}
             ]]
@@ -190,6 +198,29 @@
                         batchNo: $('#batchNo').val(),
                         type: $('#type').val()
                     }
+                });
+            },
+            download: function () {
+                const a = document.createElement('a');
+                var href = domain + 'api/goods/goodsExport?1=1';
+                if($('#goodsName').val()){
+                    href += '&goodsName=' + $('#goodsName').val();
+                }
+                if($('#batchNo').val()){
+                    href += '&batchNo=' + $('#batchNo').val();
+                }
+                if($('#type').val()){
+                    href += '&type=' + $('#type').val();
+                }
+                a.setAttribute('href', href);
+                a.click();
+            },
+            print: function () {
+                $(".my_show").jqprint({
+                    debug: false,
+                    importCSS: true,
+                    printContainer: true,
+                    operaSupport: false
                 });
             }
         };

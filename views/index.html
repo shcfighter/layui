@@ -87,10 +87,16 @@
 			<ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
 				{{#  layui.each(d.data, function(index, item){ }}
 					<li data-name="home" class="layui-nav-item">
-					  <a href="javascript:;" lay-tips="{{item.title}}" lay-direction="2">
-						<i class="layui-icon {{item.menuIcon}}"></i>
-						<cite>{{item.title}}</cite>
-					  </a>
+                      {{#  if(item.data.length !== 0){ }}
+                        <a href="javascript:;" lay-tips="{{item.title}}" lay-direction="2">
+                          <i class="layui-icon {{item.menuIcon}}"></i>
+                            <cite>{{item.title}}</cite>
+                        </a>
+                      {{#  } else if(item.data.length === 0){ }}
+                      <i class="layui-icon {{item.menuIcon}}"></i>
+                      <a lay-href="{{item.menuUrl}}">{{item.title}}</a>
+                      {{#  } }}
+
 					  {{#  layui.each(item.data, function(index2, item2){ }}
 						  <dl class="layui-nav-child">
 							<dd data-name="console">

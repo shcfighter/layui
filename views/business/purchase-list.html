@@ -70,6 +70,8 @@
             , cols: [[
                 {field: 'sample_name', title: '样品名称', width: 180, sort: true}
                 , {field: 'sample_code', title: '样品型号', width: 100}
+                , {field: 'order_num', title: '订单数量', width: 100}
+                , {field: 'product_unit', title: '单位', width: 100}
                 , {field: 'cooperation_company', title: '合作公司', width: 150, sort: true}
                 , {field: 'deliver_date', title: '交付时间', width: 120}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
@@ -94,10 +96,10 @@
                     success: function (layero, index) {
                         var body = layer.getChildFrame('body', index);
                         var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-                        body.find('input[name="productName"]').val(data.productName);
-                        body.find('input[name="orderNum"]').val(data.orderNum);
-                        body.find('input[name="productUnit"]').val(data.productUnit);
-                        body.find('input[name="unitPrice"]').val(data.unitPrice);
+                        //body.find('input[name="productName"]').val(data.productName);
+                        body.find('input[name="orderNum"]').val(data.order_num);
+                        body.find('input[name="productUnit"]').val(data.product_unit);
+                        /*body.find('input[name="unitPrice"]').val(data.unitPrice);
                         body.find('input[name="totalPrice"]').val(data.totalPrice);
                         body.find('input[name="deliverDate"]').val(data.deliverDate);
                         body.find('input[name="cooperationCompany"]').val(data.cooperationCompany);
@@ -105,7 +107,7 @@
                         body.find('input[name="contactPhone"]').val(data.contactPhone);
                         if (data.remarks){
                             body.find('textarea[name="remarks"]').text(data.remarks);
-                        }
+                        }*/
 
                     }
                 });

@@ -1,18 +1,22 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<title>多级分类管理</title>  
-<meta name="renderer" content="webkit">  
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
-<meta name="format-detection" content="telephone=no">  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>多级分类管理</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
   <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
   <link rel="stylesheet" href="../../layuiadmin/style/global.css" media="all">
-  
-</head>  
-  
-<body style="height:100%;">  
+	<style>
+		.tree-btn {
+			position: relative; top: 8px; margin: 0px 5px 0px 0px; font-size: 18px; color: rgb(51, 51, 51);
+		}
+	</style>
+</head>
+
+<body style="height:100%;">
 	<div class="layui-fluid">
 		<div class="layui-row layui-col-space15">
 			<div class="layui-col-md12">
@@ -25,7 +29,9 @@
 						<div class="layui-main site-inline site-fix">
 							部门：
 							<div style="display: inline-block; width: 200px; height: auto; padding: 10px; border: 1px solid #ddd; overflow: auto;">
-							  <ul id="demo"></ul>
+								<form class="layui-form">
+								<div id="xtree3" ></div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -33,36 +39,69 @@
 			</div>
 		</div>
 	</div>
-  
-  
- 
-  
-  
-    <script src="../../layuiadmin/layui/layui.js"></script> 
+
+
+
+
+
+    <script src="../../layuiadmin/layui/layui.js"></script>
 	<script src="../../layuiadmin/commons.js"></script>
-    <script type="text/javascript">  
-    layui.use(['jquery','layer','element','form','tree'],function(){  
-          window.jQuery = window.$ = layui.jquery;  
-          window.layer = layui.layer;  
-          var form  =  layui.form;  
-          var elem = layui.element;  
-          var topcateid=0;  //为模拟顶级分类id用  
-		  $.ajax({
+	<script src="../../layuiadmin/layui/lay/modules/layui-xtree.js"></script>
+	<script type="text/javascript">
+    layui.use(['jquery','layer','element','form'],function(){
+        var $ = layui.$;
+		window.jQuery = window.$ = layui.jquery;
+		window.layer = layui.layer;
+		var form  =  layui.form;
+		var elem = layui.element;
+
+        var xtree3 = new layuiXtree({
+            elem: 'xtree3'                  //必填
+            , form: form                    //必填
+            , data: domain + 'api/dept/findDeptTree2' //必填
+            , isopen: true  //加载完毕后的展开状态，默认值：true
+            , ckall: false    //启用全选功能，默认值：false
+			, check: false
+            , ckallback: function () { } //全选框状态改变后执行的回调函数
+            , icon: {        //三种图标样式，更改几个都可以，用的是layui的图标
+                open: "&#xe624;"       //节点打开的图标
+                , close: "&#xe622;"    //节点关闭的图标
+                , end: "&#xe621;"      //末尾节点的图标
+            }
+            , color: {       //三种图标颜色，独立配色，更改几个都可以
+                open: "#333"        //节点图标打开的颜色
+                , close: "#333"     //节点图标关闭的颜色
+                , end: "#333"       //末级节点图标的颜色
+            }
+            , click: function (data) {  //节点选中状态改变事件监听，全选框有自己的监听事件
+                console.log(data.elem); //得到checkbox原始DOM对象
+                console.log(data.elem.checked); //开关是否开启，true或者false
+                console.log(data.value); //开关value值，也可以通过data.elem.value得到
+                console.log(data.othis); //得到美化后的DOM对象
+            }
+        });
+        /*$("div#xtree3").find(".layui-xtree-item").after("<i class='layui-icon add select hide tree-btn'></i>"+
+            "<i class='layui-icon edit select hide tree-btn'></i>"+
+            "<i class='layui-icon del select hide tree-btn'></i>");*/
+
+
+          var topcateid=0;  //为模拟顶级分类id用
+		  /*$.ajax({
 			type: 'GET',
 			contentType: "application/json;",
 			url: domain + "api/dept/findDeptTree",
 			success: function(result){
 				if(result.code == 0){
 					nodes = result.data;
-					var tree = layui.tree({  
-					  elem: '#demo',  
+					var tree = layui.tree({
+					  elem: '#demo',
 					  nodes: nodes,
 					  click: function(item){ //点击节点回调
 						  layer.msg('当前节名称：'+ item.name + '<br>全部参数：'+ JSON.stringify(item));
 						}
 					});
-					$("ul#demo").find("a").after("<i class='layui-icon add select hide'></i>"+  
-                                               "<i class='layui-icon edit select hide'></i>"+  
+					$("ul#demo").find("a").after("<i class='layui-icon add select hide'></i>"+
+                                               "<i class='layui-icon edit select hide'></i>"+
                                                "<i class='layui-icon del select hide'></i>");
 				} else {
 					layer.alert(result.msg);
@@ -71,47 +110,47 @@
 			error: function () {
 				console.log("网络错误！");
 			}
-		});
-  
-	//添加顶级分类  
+		});*/
+
+	//添加顶级分类
     $("#addcate").on("click",function(){
-        layer.prompt({title: '输入分类名称，并确认', formType:0}, function(text, index){  
-              layer.close(index);  
-           //TODO 可以ajax到后台操作，这里只做模拟  
-           layer.load(2);  
-           setTimeout(function(){     
-			   layer.closeAll("loading");  
-			   //手动添加节点，肯定有更好的方法=.=！这里的方法感觉有点LOW  
-			   // li里面的pid属性为父级类目的id,顶级分类的pid为0  
-			   topcateid= topcateid+1;  
-				$("ul#demo").append("<li pid='0' id="+(topcateid)+">"+  
-									"<i class='layui-icon layui-tree-leaf'></i>"+  
-								   "<a ><cite>"+text+"</cite> </a>"+  
-								   "<i class='layui-icon select hide add'></i>"+  
-								   "<i class='layui-icon edit select hide'></i>"+  
-								   "<i class='layui-icon del select hide'></i>"+  
-								   "</li>");  
-           },1000)  
-            });   
-	})  
-      
-	//显示/隐藏 分类的操作栏  
-	$("ul#demo").on({  
-		mouseover: function(event) {  
-		  event.stopPropagation();  
-		  $(this).children(".select").removeClass("hide")  
-		},  
-		  
-		mouseout: function(event) {   
-		 event.stopPropagation();   
-		 $(this).children(".select").addClass("hide")  
-		},   
-	  
-	},"li","a")  
-  
-	//添加子分类  
+        layer.prompt({title: '输入分类名称，并确认', formType:0}, function(text, index){
+              layer.close(index);
+           //TODO 可以ajax到后台操作，这里只做模拟
+           layer.load(2);
+           setTimeout(function(){
+			   layer.closeAll("loading");
+			   //手动添加节点，肯定有更好的方法=.=！这里的方法感觉有点LOW
+			   // li里面的pid属性为父级类目的id,顶级分类的pid为0
+			   topcateid= topcateid+1;
+				$("ul#demo").append("<li pid='0' id="+(topcateid)+">"+
+									"<i class='layui-icon layui-tree-leaf'></i>"+
+								   "<a ><cite>"+text+"</cite> </a>"+
+								   "<i class='layui-icon select hide add'></i>"+
+								   "<i class='layui-icon edit select hide'></i>"+
+								   "<i class='layui-icon del select hide'></i>"+
+								   "</li>");
+           },1000)
+            });
+	})
+
+	//显示/隐藏 分类的操作栏
+	$("ul#demo").on({
+		mouseover: function(event) {
+		  event.stopPropagation();
+		  $(this).children(".select").removeClass("hide")
+		},
+
+		mouseout: function(event) {
+		 event.stopPropagation();
+		 $(this).children(".select").addClass("hide")
+		},
+
+	},"li","a")
+
+	//添加子分类
 	$("ul#demo ").on("click","li .add",function(item){
-		//var that= $(this).closest("ul");  
+		//var that= $(this).closest("ul");
 		//$(this).closest("ul").find(".layui-icon").click();
 		//var id=$(this).parent().attr("id")
 		 /**var index = layer.open({
@@ -132,82 +171,78 @@
 			});*/
 	});
 
-	//重命名  
-	$("ul#demo ").on("click","li .edit",function(){  
-	   var node=$(this).parent().children("a").children("cite");  
-	   var id=$(this).parent().attr("id")  
-	   var that= $(this).closest("li");  
-		layer.prompt({title: '输入新的分类名称，并确认',value:node.text(), formType:0}, function(text, index){  
-			  layer.close(index);  
-				
-			 //TODO 可以ajax到后台操作，这里只做模拟  
-			   layer.load(2);  
-			   setTimeout(function(){     
-			   layer.closeAll("loading");  
-				node.text(text);  
-			   },1000)  
-				});   
-				
-			  
-	})  
-	//删除分类  
-	$("ul#demo ").on("click","li .del",function(){  
-		  
-		  var that= $(this).closest("li");  
-		if(that.children("ul").length > 0){  
-			layer.msg("该分类下含有子分类不能删除")  
-			return;  
-		}  
+	//重命名
+	$("ul#demo ").on("click","li .edit",function(){
+	   var node=$(this).parent().children("a").children("cite");
 	   var id=$(this).parent().attr("id")
-	  
-	 layer.confirm('确定要删除？该分类下的课程亦将删除！', {  
-	  btn: ['删除','取消']   
-	}, function(){  
-		  
-			 //TODO 可以ajax到后台操作，这里只做模拟  
-			   layer.load(2);  
-			   setTimeout(function(){     
-			   layer.closeAll("loading");  
-				if((that.parent("ul").children("li").length == 1)&&(that.parent("ul").parent("li").children("i.layui-tree-spread").length=1)){  
-					   //要把分类名前的三角符号和ul标签删除  
-						that.parent("ul").parent("li").children("i.layui-tree-spread").remove();             
-				   }  
-				  that.remove()  
-			   },1000)  
-				});   
-	  
-	  
-	})  
+	   var that= $(this).closest("li");
+		layer.prompt({title: '输入新的分类名称，并确认',value:node.text(), formType:0}, function(text, index){
+			  layer.close(index);
+
+			 //TODO 可以ajax到后台操作，这里只做模拟
+			   layer.load(2);
+			   setTimeout(function(){
+			   layer.closeAll("loading");
+				node.text(text);
+			   },1000)
+				});
+
+
+	})
+	//删除分类
+	$("ul#demo ").on("click","li .del",function(){
+
+		  var that= $(this).closest("li");
+		if(that.children("ul").length > 0){
+			layer.msg("该分类下含有子分类不能删除")
+			return;
+		}
+	   var id=$(this).parent().attr("id")
+
+	 layer.confirm('确定要删除？该分类下的课程亦将删除！', {
+	  btn: ['删除','取消']
+	}, function(){
+
+			 //TODO 可以ajax到后台操作，这里只做模拟
+			   layer.load(2);
+			   setTimeout(function(){
+			   layer.closeAll("loading");
+				if((that.parent("ul").children("li").length == 1)&&(that.parent("ul").parent("li").children("i.layui-tree-spread").length=1)){
+					   //要把分类名前的三角符号和ul标签删除
+						that.parent("ul").parent("li").children("i.layui-tree-spread").remove();
+				   }
+				  that.remove()
+			   },1000)
+				});
+
+
+	})
 	//打开/关闭菜单
-    $("ul#demo").on({  
-      
-		click:function(event){  
-			event.stopPropagation();  
-			event.preventDefault();  
-			if( $(this).parent().children("ul").hasClass("layui-show")){  
-				  
-		  
-				  $(this).html("");  
-				  $(this).parent().children("ul").removeClass("layui-show");  
-				  return;  
-			}else{    
-				  
-			  
-			 $(this).html("");  
-			 $(this).parent().children("ul").addClass("layui-show");   
-			return;  
-			}   
-		   return;  
-		}     
-	}, 'i.layui-tree-spread');    
-	  
-				  
-	 });   
-  
-</script>  
-  
-  
-  
-</body>  
-  
-</html>  
+    $("ul#demo").on({
+
+		click:function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			if( $(this).parent().children("ul").hasClass("layui-show")){
+
+
+				  $(this).html("");
+				  $(this).parent().children("ul").removeClass("layui-show");
+				  return;
+			}else{
+
+
+			 $(this).html("");
+			 $(this).parent().children("ul").addClass("layui-show");
+			return;
+			}
+		   return;
+		}
+	}, 'i.layui-tree-spread');
+
+
+	 });
+
+</script>
+</body>
+</html>

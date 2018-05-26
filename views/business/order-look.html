@@ -81,7 +81,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">备注</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" id="LAY_demo1" name="remarks" style="display: none" readonly>
+                        <textarea class="layui-textarea" id="LAY_demo1" name="remarks" style="display: none" disabled>
                         </textarea>
                     </div>
                 </div>
@@ -129,12 +129,10 @@
             ]
             ,height: 100
         });
-        /*$('.layui-textarea').text("<img src=\"file:///D:/IdeaProjects/layuiAdmin/layuiadmin/layui/images/face/29.gif\" alt=\"[拜拜]\">");
-        var index= layedit.build('LAY_demo1');*/
         form.render(null, 'component-form-group');
-        laydate.render({
+        /*laydate.render({
             elem: '#LAY-component-form-group-date'
-        });
+        });*/
 
 
         /* 监听提交 */

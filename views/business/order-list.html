@@ -33,12 +33,44 @@
                         </div>
                         状态：
                         <div class="layui-inline">
-                            <input class="layui-input" name="status" id="status" autocomplete="off">
+                            <div class="layui-form">
+                                <select name="type" id="status" lay-filter="typeSelect">
+                                    <option value="0">接单</option>
+                                    <option value="1">打样</option>
+                                    <option value="2">采购</option>
+                                    <option value="3">排单</option>
+                                    <option value="4">生产</option>
+                                    <option value="5">入库</option>
+                                    <option value="-1">作废</option>
+                                </select>
+                            </div>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
+                        <button class="layui-btn" data-type="download">下载</button>
+                        <button class="layui-btn" data-type="print">打印</button>
                     </div>
 
+                    <div class="my_show">
                     <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
+                    </div>
+
+                    <script type="text/html" id="statusTpl">
+                        {{#  if(d.status === 0){ }}
+                        <span style="color: #F581B1;">接单</span>
+                        {{#  } else if(d.status === 1) { }}
+                        <span style="color: #F581B1;">打样</span>
+                        {{#  } else if(d.status === 2) { }}
+                        <span style="color: #F581B1;">采购</span>
+                        {{#  } else if(d.status === 3) { }}
+                        <span style="color: #F581B1;">排单</span>
+                        {{#  } else if(d.status === 4) { }}
+                        <span style="color: #F581B1;">生产</span>
+                        {{#  } else if(d.status === 5) { }}
+                        <span style="color: #F581B1;">入库</span>
+                        {{#  } else if(d.status === -1) { }}
+                        <span style="color: #F581B1;">作废</span>
+                        {{#  } }}
+                    </script>
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -54,6 +86,9 @@
 
 <script src="../../layuiadmin/layui/layui.js"></script>
 <script src="../../layuiadmin/commons.js"></script>
+<script src="../../layuiadmin/jquery-2.1.4.min.js"></script>
+<script src="../../layuiadmin/jquery.jqprint-0.3.js"></script>
+<!--<script src="../../layuiadmin/jQuery.print.js"></script>-->
 <script>
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
@@ -71,12 +106,12 @@
             , url: domain + 'api/order/findOrderPage'
             , cols: [[
                 {field: 'productName', title: '产品名称', width: 120, sort: true}
-                , {field: 'orderNum', title: '产品数量', width: 100}
-                , {field: 'productUnit', title: '单位', width: 80, sort: true}
-                , {field: 'deliverDate', title: '交付时间', width: 110}
+                , {field: 'orderNum', title: '产品数量', width: 100, sort: true}
+                , {field: 'productUnit', title: '单位', width: 60}
+                , {field: 'deliverDate', title: '交付时间', width: 110, sort: true}
                 , {field: 'cooperationCompany', title: '合作公司', width: 120}
-                , {field: 'contactPhone', title: '联系方式', width: 115}
-                , {field: 'status', title: '状态', width: 80}
+                , {field: 'contactPhone', title: '联系方式', width: 120}
+                , {field: 'status', title: '状态', width: 80, templet: '#statusTpl', unresize: true}
                 , {field: 'createTime', title: '创建时间'}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
             ]]
@@ -130,6 +165,8 @@
                         if(data.status != 0 && data.status != 1){
                             body.find(".layui-layout-admin").remove();
                             body.find("#material-more").remove();
+                            body.find("#upload-more").remove();
+                            body.find(".layui-delete").remove();
                         }
 
                     }
@@ -163,6 +200,43 @@
                         status: $('#status').val()
                     }
                 });
+            },
+            download: function () {
+                const a = document.createElement('a');
+                var href = domain + 'api/order/orderExport?1=1';
+                if($('#productName').val()){
+                    href += '&productName=' + $('#productName').val();
+                }
+                if($('#cooperationCompany').val()){
+                    href += '&cooperationCompany=' + $('#cooperationCompany').val();
+                }
+                if($('#status').val()){
+                    href += '&status=' + $('#status').val();
+                }
+                a.setAttribute('href', href);
+                a.click();
+            },
+            print: function () {
+                $(".my_show").jqprint({
+                    debug: false,
+                    importCSS: true,
+                    printContainer: true,
+                    operaSupport: false
+                });
+                /*$(".my_show").print({
+                    globalStyles: true,
+                    mediaPrint: false,
+                    stylesheet: null,
+                    noPrintSelector: ".no-print",
+                    iframe: true,
+                    append: null,
+                    prepend: null,
+                    manuallyCopyFormValues: true,
+                    deferred: $.Deferred(),
+                    timeout: 750,
+                    title: null,
+                    doctype: '<!doctype html>'
+                });*/
             }
         };
 
