@@ -18,9 +18,6 @@
             <div class="layui-card">
                 <div class="layui-card-header">生产计划</div>
                 <div class="layui-card-body">
-                    <div class="layui-btn-group" style="margin-bottom: 10px;">
-                        <button class="layui-btn" data-type="add">新增</button>
-                    </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
                         产品名称：
                         <div class="layui-inline">
@@ -58,9 +55,7 @@
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="to_produce">投入生产</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="to_finish">生产完成</a>
                     </script>
 
                 </div>
@@ -85,7 +80,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/plan/findPlanPage'
+            , url: domain + 'api/plan/findPlanPage?status=1'
             , cols: [[
                 {field: 'planName', title: '生产代号', width: 120, sort: true}
                 , {field: 'productName', title: '产品名称', width: 120, sort: true}
@@ -140,32 +135,8 @@
                     }
                 });
                 layer.full(index);
-            } else if (obj.event === 'edit') {
-                var index = layer.open({
-                    type: 2,
-                    title: "编辑生产计划",
-                    content: 'plan-edit.html?sampleId=' + data.orderId,
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                        var body = layer.getChildFrame('body', index);
-                        body.find('input[name="id"]').val(data.id);
-                        body.find('input[name="productName"]').val(data.productName);
-                        body.find('input[name="num"]').val(data.num);
-                        body.find('input[name="planName"]').val(data.planName);
-                        body.find('input[name="deptName"]').val(data.deptName);
-                        body.find('input[name="batchNo"]').val(data.batchNo);
-                        body.find('input[name="beginDate"]').val(data.beginDate);
-                        body.find('input[name="endDate"]').val(data.endDate);
-                        if (data.remarks){
-                            body.find('textarea[name="remarks"]').text(data.remarks);
-                        }
-
-                    }
-                });
-                layer.full(index);
             } else if (obj.event === 'to_produce') {
-                layer.confirm('确定投入生产？', function (index) {
+                layer.confirm('确定生产完成？', function (index) {
                     $.ajax({
                         type: 'PUT',
                         contentType: "application/json;",

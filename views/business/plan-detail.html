@@ -20,7 +20,6 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">生产代号</label>
                         <div class="layui-input-inline">
-                            <input type="hidden" name="id" lay-verify="required" autocomplete="off" class="layui-input">
                             <input type="text" name="planName" lay-verify="required" autocomplete="off" placeholder="请输入代号" class="layui-input">
                         </div>
                     </div>
@@ -29,7 +28,6 @@
                         <div class="layui-input-inline">
                             <input type="hidden" name="orderId" id = "sampleId" lay-verify="" autocomplete="off" placeholder="" class="layui-input">
                             <button type="button" id="sample" class="layui-btn">样品</button>
-                            <button type="button" class="layui-btn" id = "select_sample">选择样品</button>
                         </div>
                     </div>
                 </div>
@@ -80,15 +78,6 @@
                     <label class="layui-form-label">备注</label>
                     <div class="layui-input-block">
                         <textarea placeholder="请输入内容" class="layui-textarea" name="remarks"></textarea>
-                    </div>
-                </div>
-
-                <div class="layui-form-item layui-layout-admin">
-                    <div class="layui-input-block">
-                        <div class="layui-footer" style="left: 0;">
-                            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        </div>
                     </div>
                 </div>
             </form>
@@ -142,9 +131,6 @@
                                 json.data = images_data;
                             });
                         }
-                        if(order.remarks){
-                            $('.layui-textarea').text(order.remarks);
-                        }
                     }
                 } else {
                     layer.alert(result.msg);
@@ -155,19 +141,6 @@
             }
         });
 
-        $("#select_sample").click(function () {
-            var index = layer.open({
-                type: 2,
-                title: "样品列表",
-                content: 'sample-order-list.html',
-                area: ['300px', '300px'],
-                maxmin: true,
-                success: function (layero, index) {
-                }
-            });
-            layer.full(index);
-        });
-
         $("#sample").click(function () {
             console.log(json);
             layer.photos({
@@ -175,31 +148,6 @@
             });
         });
 
-        /* 监听提交 */
-        form.on('submit(component-form-demo1)', function (data) {
-            data.field.beginDate = data.field.beginDate + " 00:00:00";
-            data.field.endDate = data.field.endDate + " 00:00:00";
-            $.ajax({
-                type: 'POST',
-                contentType: "application/json;",
-                url: domain + "api/plan/updatePlan",
-                data: JSON.stringify(data.field),
-                success: function (result) {
-                    if (result.code == 0) {
-                        layer.msg(result.msg);
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layui.table.reload('orderTable');
-                        parent.layer.close(index);
-                    } else {
-                        layer.alert(result.msg);
-                    }
-                },
-                error: function () {
-                    console.log("网络错误！");
-                }
-            });
-            return false;
-        });
     });
 </script>
 
