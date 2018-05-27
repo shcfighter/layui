@@ -69,7 +69,6 @@
 
 		/* 监听提交 */
 		form.on('submit(component-form-demo1)', function(data){
-			layer.msg(JSON.stringify(data.field));
 			var checked = xtree3.GetChecked();
 			var menuIds = [];
 			for(var i = 0; i < checked.length; i++){

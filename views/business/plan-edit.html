@@ -20,6 +20,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">生产代号</label>
                         <div class="layui-input-inline">
+                            <input type="text" name="id" lay-verify="required" autocomplete="off" class="layui-input">
                             <input type="text" name="planName" lay-verify="required" autocomplete="off" placeholder="请输入代号" class="layui-input">
                         </div>
                     </div>
@@ -97,6 +98,11 @@
 <script src="../../layuiadmin/layui/layui.js"></script>
 <script src="../../layuiadmin/commons.js"></script>
 <script>
+    var json = {
+        "code": 0,
+        "msg": "",
+        "start": 0
+    };
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
@@ -114,6 +120,38 @@
         });
         laydate.render({
             elem: '#endDate'
+        });
+
+        $.ajax({
+            type: 'GET',
+            //contentType: "application/json;",
+            url: domain + "api/sample/findSample/" + GetQueryString("id"),
+            success: function (result) {
+                if (result.code == 0) {
+                    var data = result.data.sample;
+                    if(undefined != data && null != data && "" != data && "null" != data){
+                        if(data.sample.photoUrl){
+                            var images_data = [];
+                            var images = data.sample.photoUrl.split(",");
+                            $.each(images, function (index, image) {
+                                $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
+                                var image_data = {};
+                                image_data.src = image;
+                                images_data.push(image_data);
+                                json.data = images_data;
+                            });
+                        }
+                        if(order.remarks){
+                            $('.layui-textarea').text(order.remarks);
+                        }
+                    }
+                } else {
+                    layer.alert(result.msg);
+                }
+            },
+            error: function () {
+                console.log("网络错误！");
+            }
         });
 
         $("#select_sample").click(function () {

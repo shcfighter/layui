@@ -25,40 +25,13 @@
         <div class="layui-card-body" style="padding: 15px;">
             <div class="layui-form-item">
                 <label class="layui-form-label">样品名称</label>
-                <div class="layui-input-block">
+                <div class="layui-input-inline">
+                    <input type="hidden" name="id" lay-verify="" autocomplete="off" class="layui-input">
                     <input type="text" name="sampleName" lay-verify="required" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
                 </div>
-            </div>
-            <div class="layui-form-item">
                 <label class="layui-form-label">样品型号</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="sampleCode" lay-verify="" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">合作公司</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="company" lay-verify="" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">交付日期</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="deliverDate" lay-verify="" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">订单数量</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="orderNum" id="orderNum" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">单位</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="productUnit" id="productUnit" autocomplete="off" class="layui-input">
-                    </div>
+                    <input type="text" name="sampleCode" lay-verify="" autocomplete="off" placeholder="请输入样品型号" class="layui-input">
                 </div>
             </div>
 
@@ -111,10 +84,10 @@
         }
         $.ajax({
             type: 'GET',
-            url: domain + "api/sample/findSampleDetail/" + GetQueryString("sampleId"),
+            url: domain + "api/sample/findSample/" + GetQueryString("id"),
             success: function (result) {
                 if (result.code == 0) {
-                    var data = result.data;
+                    var data = result.data.sample;
                     table.render({
                         elem: '#order-table'
                         , url: domain + 'api/material/findMaterial/' + data.id
@@ -129,12 +102,10 @@
                         , id: 'orderTable'
                     });
                     if(undefined != data && null != data && "" != data && "null" != data){
-                        $("input[name='company']").val(data.cooperation_company);
-                        $("input[name='sampleName']").val(data.sample_name);
-                        $("input[name='sampleCode']").val(data.sample_code);
-                        $("input[name='deliverDate']").val(data.deliver_date);
-                        if (data.photo_url) {
-                            var images = data.photo_url.split(",");
+                        $("input[name='sampleName']").val(data.sampleName);
+                        $("input[name='sampleCode']").val(data.sampleCode);
+                        if (data.photoUrl) {
+                            var images = data.photoUrl.split(",");
                             $.each(images, function (index, image) {
                                 //$('#upload-more-list').append('<img src="'+ image +'" class="layui-upload-img">');
                                 $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");

@@ -18,9 +18,6 @@
             <div class="layui-card">
                 <div class="layui-card-header">订单列表</div>
                 <div class="layui-card-body">
-                    <div class="layui-btn-group" style="margin-bottom: 10px;">
-                        <button class="layui-btn" data-type="add">新增</button>
-                    </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
                         产品名称：
                         <div class="layui-inline">
@@ -46,8 +43,8 @@
                             </div>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
-                        <button class="layui-btn" data-type="download">下载</button>
-                        <button class="layui-btn" data-type="print">打印</button>
+                        <!--<button class="layui-btn" data-type="download">下载</button>
+                        <button class="layui-btn" data-type="print">打印</button>-->
                     </div>
 
                     <div class="my_show">
@@ -74,8 +71,6 @@
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">作废</a>
                     </script>
 
                 </div>
@@ -103,22 +98,22 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/order/findOrderPage'
+            , url: domain + 'api/order/findOrderPage?status=1'
             , cols: [[
                 {field: 'id', title: '编号', width: 80, sort: true}
-                , {field: 'productName', title: '产品名称', width: 180, sort: true}
+                , {field: 'productName', title: '产品名称', width: 120, sort: true}
                 , {field: 'orderNum', title: '数量', width: 100, sort: true}
                 , {field: 'productUnit', title: '单位', width: 60}
-                , {field: 'unitPrice', title: '单价', width: 100}
-                , {field: 'totalPrice', title: '总价', width: 100}
+                , {field: 'unitPrice', title: '单价', width: 60}
+                , {field: 'totalPrice', title: '总价', width: 60}
                 , {field: 'deliverDate', title: '交付时间', width: 110, sort: true}
                 , {field: 'orderTime', title: '下单时间', width: 120}
                 , {field: 'cooperationCompany', title: '合作公司', width: 120}
                 , {field: 'contactPhone', title: '联系方式', width: 120}
                 , {field: 'status', title: '状态', width: 80, templet: '#statusTpl', unresize: true}
-                , {field: 'createTime', title: '创建时间', width: 120}
-                , {field: 'remarks', title: '备注', width: 200}
-                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width: 180}
+                , {field: 'createTime', title: '创建时间'}
+                , {field: 'remarks', title: '备注'}
+                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width: 80}
             ]]
             , id: 'orderTable'
             , page: true
@@ -142,34 +137,12 @@
                     }
                 });
                 layer.full(index);
-            } else if (obj.event === 'edit') {
-                var index = layer.open({
-                    type: 2,
-                    title: "编辑样品",
-                    content: 'order-edit.html?id=' + data.id,
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-
-                    }
-                });
-                layer.full(index);
             }
         });
 
 
         /* 触发弹层 */
         var active = {
-            add: function () {
-                var index = layer.open({
-                    type: 2,
-                    title: "录入订单",
-                    content: 'order-add.html',
-                    area: ['300px', '300px'],
-                    maxmin: true
-                });
-                layer.full(index);
-            },
             reload: function () {
                 //执行重载
                 table.reload('orderTable', {
@@ -205,20 +178,6 @@
                     printContainer: true,
                     operaSupport: false
                 });
-                /*$(".my_show").print({
-                    globalStyles: true,
-                    mediaPrint: false,
-                    stylesheet: null,
-                    noPrintSelector: ".no-print",
-                    iframe: true,
-                    append: null,
-                    prepend: null,
-                    manuallyCopyFormValues: true,
-                    deferred: $.Deferred(),
-                    timeout: 750,
-                    title: null,
-                    doctype: '<!doctype html>'
-                });*/
             }
         };
 

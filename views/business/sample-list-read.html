@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">样品列表</div>
+                <div class="layui-card-body">
+                    <div class="demoTable" style="margin-bottom: 10px;">
+                        样品名称：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="sampleName" id="sampleName" autocomplete="off">
+                        </div>
+                        样品型号：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="sampleCode" id="sampleCode" autocomplete="off">
+                        </div>
+                        <button class="layui-btn" data-type="reload">搜索</button>
+                    </div>
+
+                    <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
+
+                    <script type="text/html" id="imagesTpl">
+                        {{#  if(d.photoUrl){ }}
+                            <button class="layui-btn layui-btn-primary images" lay-event="sampleImages">样品</button>
+                        {{#  } }}
+                    </script>
+
+                    <script type="text/html" id="user-table-barDemo">
+                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script src="../../layuiadmin/commons.js"></script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'table', 'carousel'], function () {
+        var $ = layui.$
+            , element = layui.element
+            , layer = layui.layer
+            ,carousel = layui.carousel
+            , table = layui.table;
+
+
+        //方法级渲染
+        table.render({
+            elem: '#order-table'
+            , url: domain + 'api/sample/findSamplePage?status=1'
+            , cols: [[
+                {field: 'sampleName', title: '样品名称', width: 250, sort: true}
+                , {field: 'sampleCode', title: '样品型号', width: 150}
+                , {field: 'photoUrl', title: '样品', width: 100, templet: '#imagesTpl', unresize: true}
+                , {field: 'status', title: '状态', width: 80}
+                , {field: 'createTime', title: '创建时间', width: 180}
+                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
+            ]]
+            , id: 'orderTable'
+            , page: true
+            ,height: 'full-100'
+        });
+
+        element.render();
+
+        //监听工具条
+        table.on('tool(order-table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'detail') {
+                var index = layer.open({
+                    type: 2,
+                    title: "查看订单",
+                    content: 'sample-detail.html?id=' + data.id,
+                    area: ['300px', '300px'],
+                    maxmin: true,
+                    success: function (layero, index) {
+                    }
+                });
+                layer.full(index);
+            } else if (obj.event === 'edit') {
+                var index = layer.open({
+                    type: 2,
+                    title: "查看订单",
+                    content: 'sample-edit.html?id=' + data.id,
+                    area: ['300px', '300px'],
+                    maxmin: true,
+                    success: function (layero, index) {
+                    }
+                });
+                layer.full(index);
+            } else if (obj.event === 'del') {
+                layer.confirm('确定删除该样品吗？', function (index) {
+                    $.ajax({
+                        type: 'DELETE',
+                        contentType: "application/json;",
+                        url: domain + "api/sample/delete/"+ data.id,
+                        success: function (result) {
+                            if (result.code == 0) {
+                                layer.msg(result.msg);
+                                layui.table.reload('orderTable');
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
+            } else if (obj.event === 'sampleImages') {
+                var json = {
+                    "code": 0,
+                    "msg": "",
+                    "start": 0
+                }
+                var images_data = [];
+                var images = data.photoUrl.split(",");
+                $.each(images, function (index, image) {
+                    $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
+                    var image_data = {};
+                    image_data.src = image;
+                    images_data.push(image_data);
+                    json.data = images_data;
+                });
+                layer.photos({
+                 photos: json //格式见API文档手册页
+                 });
+            }
+        });
+
+        /* 触发弹层 */
+        var active = {
+            add: function () {
+                var index = layer.open({
+                    type: 2,
+                    title: "新增样品",
+                    content: 'sample-add.html',
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            },
+            reload: function () {
+                //执行重载
+                table.reload('orderTable', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        sampleName: $('#sampleName').val(),
+                        sampleCode: $('#sampleCode').val()
+                    }
+                });
+            }
+        };
+
+        $('.layui-btn-group .layui-btn, .demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] && active[type].call(this);
+        });
+
+    });
+
+</script>
+</body>
+</html>

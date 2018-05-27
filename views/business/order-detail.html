@@ -37,7 +37,21 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">选择样品</label>
+                        <div class="layui-input-inline">
+                            <input type="hidden" name="sampleId" lay-verify="" autocomplete="off" placeholder="请选择样品" class="layui-input">
+                            <button type="button" id="sample" class="layui-btn">样品</button>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">下单时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="orderDate" id="order-date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">产品单价</label>
@@ -81,19 +95,9 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">备注</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" id="LAY_demo1" name="remarks" style="display: none" disabled>
-                        </textarea>
+                        <textarea placeholder="请输入内容" class="layui-textarea" name="remarks"></textarea>
                     </div>
                 </div>
-
-                <!--<div class="layui-form-item layui-layout-admin">
-                    <div class="layui-input-block">
-                        <div class="layui-footer" style="left: 0;">
-                            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        </div>
-                    </div>
-                </div>-->
             </form>
         </div>
     </div>
@@ -106,60 +110,70 @@
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'form', 'laydate', 'layedit'], function () {
+    }).use(['index', 'form', 'carousel', 'layedit'], function () {
         var $ = layui.$
             , layer = layui.layer
-            , laydate = layui.laydate
             , form = layui.form
+            ,carousel = layui.carousel
             , layedit = layui.layedit;
 
-        //构建一个默认的编辑器
-        var indexEdit = layedit.build('LAY_demo1', {
-            tool: ['strong' //加粗
-                ,'italic' //斜体
-                ,'underline' //下划线
-                ,'del' //删除线
-                ,'|' //分割线
-                ,'left' //左对齐
-                ,'center' //居中对齐
-                ,'right' //右对齐
-                ,'link' //超链接
-                ,'unlink' //清除链接
-                ,'face' //表情
-            ]
-            ,height: 100
-        });
         form.render(null, 'component-form-group');
-        /*laydate.render({
-            elem: '#LAY-component-form-group-date'
-        });*/
 
+        var json = {
+            "code": 0,
+            "msg": "",
+            "start": 0
+        }
 
-        /* 监听提交 */
-        form.on('submit(component-form-demo1)', function (data) {
-            data.field.deliverDate = data.field.deliverDate + " 00:00:00";
-            data.field.remarks = layedit.getContent(indexEdit);
-            $.ajax({
-                type: 'POST',
-                contentType: "application/json;",
-                url: domain + "api/order/insertOrder",
-                data: JSON.stringify(data.field),
-                success: function (result) {
-                    if (result.code == 0) {
-                        layer.msg(result.msg);
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layui.table.reload('orderTable');
-                        parent.layer.close(index);
-                    } else {
-                        layer.alert(result.msg);
+        $.ajax({
+            type: 'GET',
+            //contentType: "application/json;",
+            url: domain + "api/order/getOrder/" + GetQueryString("id"),
+            success: function (result) {
+                if (result.code == 0) {
+                    var data = result.data;
+                    var order = data.order;
+                    if(undefined != order && null != order && "" != order && "null" != order){
+                        $("input[name='productName']").val(order.productName);
+                        $("input[name='orderNum']").val(order.orderNum);
+                        $("input[name='productUnit']").val(order.productUnit);
+                        $("input[name='orderDate']").val(order.orderTime);
+                        $("input[name='unitPrice']").val(order.unitPrice);
+                        $("input[name='totalPrice']").val(order.totalPrice);
+                        $("input[name='deliverDate']").val(order.deliverDate);
+                        $("input[name='cooperationCompany']").val(order.cooperationCompany);
+                        $("input[name='contactName']").val(order.contactName);
+                        $("input[name='contactPhone']").val(order.contactPhone);
+                        if(data.sample.photoUrl){
+
+                            var images_data = [];
+                            var images = data.sample.photoUrl.split(",");
+                            $.each(images, function (index, image) {
+                                $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
+                                var image_data = {};
+                                image_data.src = image;
+                                images_data.push(image_data);
+                                json.data = images_data;
+                            });
+                        }
+                        if(order.remarks){
+                            $('.layui-textarea').text(order.remarks);
+                        }
                     }
-                },
-                error: function () {
-                    console.log("网络错误！");
+                } else {
+                    layer.alert(result.msg);
                 }
-            });
-            return false;
+            },
+            error: function () {
+                console.log("网络错误！");
+            }
         });
+
+        $("#sample").click(function () {
+            layer.photos({
+                photos: json //格式见API文档手册页
+            });
+        })
     });
 </script>
 

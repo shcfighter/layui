@@ -26,18 +26,18 @@
             <form class="layui-form" action="" lay-filter="component-form-group">
                 <div class="layui-form-item">
                     <label class="layui-form-label">样品名称</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline">
                         <input type="hidden" name="id" lay-verify="" autocomplete="off" class="layui-input">
-                        <input type="hidden" name="orderId" lay-verify="" autocomplete="off" class="layui-input">
                         <input type="text" name="sampleName" lay-verify="required" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">样品型号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sampleCode" lay-verify="" autocomplete="off" placeholder="请输入样品型号" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
-                    <label class="layui-form-label">样品型号</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="sampleCode" lay-verify="" autocomplete="off" placeholder="请输入产品数量" class="layui-input">
-                    </div>
+
                 </div>
 
                 <div class="layui-form-item">
@@ -124,7 +124,7 @@
         $.ajax({
             type: 'GET',
             //contentType: "application/json;",
-            url: domain + "api/sample/findSample/" + GetQueryString("orderId"),
+            url: domain + "api/sample/findSample/" + GetQueryString("id"),
             success: function (result) {
                 if (result.code == 0) {
                     var data = result.data;
@@ -150,9 +150,15 @@
                         }
                     }
                     $.each(data.materials, function (index, material) {
-                        $(".layui-table").find("tbody").append("<tr><td style='display: none;' id='id'>" + material.id + "</td><td>" + material.goodsName + "</td>" +
-                            "<td>" + material.goodsModel + "</td><td>" + material.color + "</td><td>" + material.num + "</td>" +
-                            "<td>" + material.unit + "</td><td>" + material.remarks + "</td><td><a href='javascript:void(0);' class='layui-btn layui-btn-xs layui-delete'>删除</a></td></tr>");
+                        if(sample.status === 1){
+                            $(".layui-table").find("tbody").append("<tr><td style='display: none;' id='id'>" + material.id + "</td><td>" + material.goodsName + "</td>" +
+                                "<td>" + material.goodsModel + "</td><td>" + material.color + "</td><td>" + material.num + "</td>" +
+                                "<td>" + material.unit + "</td><td>" + material.remarks + "</td><td></td></tr>");
+                        }else {
+                            $(".layui-table").find("tbody").append("<tr><td style='display: none;' id='id'>" + material.id + "</td><td>" + material.goodsName + "</td>" +
+                                "<td>" + material.goodsModel + "</td><td>" + material.color + "</td><td>" + material.num + "</td>" +
+                                "<td>" + material.unit + "</td><td>" + material.remarks + "</td><td><a href='javascript:void(0);' class='layui-btn layui-btn-xs layui-delete'>删除</a></td></tr>");
+                        }
                     });
                 } else {
                     layer.alert(result.msg);
@@ -193,10 +199,53 @@
 
         $(".layui-btn-primary").click(function () {
             layer.confirm('提交之后进入下一个环节将不可修改，确认提交？', function (index) {
+                var data = {
+                    id: $("input[name='id']").val(),
+                    sampleName: $("input[name='sampleName']").val(),
+                    sampleCode: $("input[name='sampleCode']").val(),
+                    status: 1,
+                    remarks: layedit.getContent(indexEdit)
+                };
+
+                var _tr = $(".layui-table").find("tbody").find("tr");
+                var arr = [];
+                $.each(_tr, function (index, tr) {
+                    var _td = $(tr).find("td");
+                    var goods = {};
+                    if($(_td[0]).attr("id")){
+                        goods.id =  $(_td[0]).text();
+                        goods.goodsName =  $(_td[1]).text();
+                        goods.goodsModel =  $(_td[2]).text();
+                        goods.color = $( _td[3]).text();
+                        goods.num =  $(_td[4]).text();
+                        goods.unit =  $(_td[5]).text();
+                        goods.remarks =  $(_td[6]).text();
+                    } else {
+                        goods.goodsName =  $(_td[0]).text();
+                        goods.goodsModel =  $(_td[1]).text();
+                        goods.color = $( _td[2]).text();
+                        goods.num =  $(_td[3]).text();
+                        goods.unit =  $(_td[4]).text();
+                        goods.remarks =  $(_td[5]).text();
+                    }
+                    arr.push(goods);
+                })
+
+                var photoUrls = [];
+                $.each($("input[name='photoUrls']"), function (index, value) {
+                    photoUrls.push($(value).val());
+                })
+                var params ={
+                    sample: data,
+                    materialList: arr,
+                    sampleUrls: photoUrls.join(",")
+                }
+                console.log(photoUrls);
                 $.ajax({
                     type: 'POST',
                     contentType: "application/json;",
-                    url: domain + "api/sample/updateToPurchase/" + $("input[name='id']").val(),
+                    url: domain + "api/sample/insertSample",
+                    data: JSON.stringify(params),
                     success: function (result) {
                         if (result.code == 0) {
                             layer.msg(result.msg);
