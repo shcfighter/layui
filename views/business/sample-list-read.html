@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>订单管理</title>
+    <title>煜凯服饰</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -34,7 +34,14 @@
 
                     <script type="text/html" id="imagesTpl">
                         {{#  if(d.photoUrl){ }}
-                            <button class="layui-btn layui-btn-primary images" lay-event="sampleImages">样品</button>
+                            <button class="layui-btn images" lay-event="sampleImages">样品</button>
+                        {{#  } }}
+                    </script>
+                    <script type="text/html" id="statusTpl">
+                        {{#  if(d.status === 0){ }}
+                        <span style="color: #F581B1;">新建</span>
+                        {{#  } else if(d.status === 1) { }}
+                        <span style="color: #F581B1;">完成</span>
                         {{#  } }}
                     </script>
 
@@ -70,8 +77,8 @@
             , cols: [[
                 {field: 'sampleName', title: '样品名称', width: 250, sort: true}
                 , {field: 'sampleCode', title: '样品型号', width: 150}
-                , {field: 'photoUrl', title: '样品', width: 100, templet: '#imagesTpl', unresize: true}
-                , {field: 'status', title: '状态', width: 80}
+                , {field: 'photoUrl', title: '样品', width: 150, templet: '#imagesTpl', unresize: true}
+                , {field: 'status', title: '状态', width: 100, templet: '#statusTpl', unresize: true}
                 , {field: 'createTime', title: '创建时间', width: 180}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
             ]]

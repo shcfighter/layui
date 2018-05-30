@@ -55,13 +55,7 @@
                         {{#  if(d.status === 0){ }}
                         <span style="color: #F581B1;">接单</span>
                         {{#  } else if(d.status === 1) { }}
-                        <span style="color: #F581B1;">打样</span>
-                        {{#  } else if(d.status === 2) { }}
-                        <span style="color: #F581B1;">采购</span>
-                        {{#  } else if(d.status === 3) { }}
-                        <span style="color: #F581B1;">排单</span>
-                        {{#  } else if(d.status === 4) { }}
-                        <span style="color: #F581B1;">生产</span>
+                        <span style="color: #F581B1;">生产阶段</span>
                         {{#  } else if(d.status === 5) { }}
                         <span style="color: #F581B1;">入库</span>
                         {{#  } else if(d.status === -1) { }}
@@ -101,19 +95,19 @@
             , url: domain + 'api/order/findOrderPage?status=1'
             , cols: [[
                 {field: 'id', title: '编号', width: 80, sort: true}
-                , {field: 'productName', title: '产品名称', width: 120, sort: true}
+                , {field: 'productName', title: '产品名称', width: 180, sort: true}
                 , {field: 'orderNum', title: '数量', width: 100, sort: true}
                 , {field: 'productUnit', title: '单位', width: 60}
-                , {field: 'unitPrice', title: '单价', width: 60}
-                , {field: 'totalPrice', title: '总价', width: 60}
+                , {field: 'unitPrice', title: '单价', width: 100}
+                , {field: 'totalPrice', title: '总价', width: 100}
                 , {field: 'deliverDate', title: '交付时间', width: 110, sort: true}
                 , {field: 'orderTime', title: '下单时间', width: 120}
                 , {field: 'cooperationCompany', title: '合作公司', width: 120}
                 , {field: 'contactPhone', title: '联系方式', width: 120}
                 , {field: 'status', title: '状态', width: 80, templet: '#statusTpl', unresize: true}
-                , {field: 'createTime', title: '创建时间'}
-                , {field: 'remarks', title: '备注'}
-                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width: 80}
+                , {field: 'createTime', title: '创建时间', width: 120}
+                , {field: 'remarks', title: '备注', width: 200}
+                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width: 250}
             ]]
             , id: 'orderTable'
             , page: true

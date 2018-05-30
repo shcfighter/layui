@@ -58,13 +58,7 @@
                         {{#  if(d.status === 0){ }}
                         <span style="color: #F581B1;">接单</span>
                         {{#  } else if(d.status === 1) { }}
-                        <span style="color: #F581B1;">打样</span>
-                        {{#  } else if(d.status === 2) { }}
-                        <span style="color: #F581B1;">采购</span>
-                        {{#  } else if(d.status === 3) { }}
-                        <span style="color: #F581B1;">排单</span>
-                        {{#  } else if(d.status === 4) { }}
-                        <span style="color: #F581B1;">生产</span>
+                        <span style="color: #F581B1;">生产阶段</span>
                         {{#  } else if(d.status === 5) { }}
                         <span style="color: #F581B1;">入库</span>
                         {{#  } else if(d.status === -1) { }}
@@ -74,7 +68,13 @@
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        {{#  if(d.status === 0){ }}
+                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                            <a class="layui-btn layui-btn-xs" lay-event="produce">投入生产</a>
+                        {{#  } }}
+                        {{#  if(d.status === 1){ }}
+                        <a class="layui-btn layui-btn-xs" lay-event="inbound">入库</a>
+                        {{#  } }}
                         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">作废</a>
                     </script>
 
@@ -118,7 +118,7 @@
                 , {field: 'status', title: '状态', width: 80, templet: '#statusTpl', unresize: true}
                 , {field: 'createTime', title: '创建时间', width: 120}
                 , {field: 'remarks', title: '备注', width: 200}
-                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width: 180}
+                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width: 250}
             ]]
             , id: 'orderTable'
             , page: true
@@ -154,6 +154,44 @@
                     }
                 });
                 layer.full(index);
+            } else if (obj.event === 'produce') {
+                layer.confirm('确定进入生产阶段？', function (index) {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: "application/json;",
+                        url: domain + "api/order/updateToProduce/" + data.id,
+                        success: function (result) {
+                            if (result.code == 0) {
+                                layer.msg(result.msg);
+                                layui.table.reload('orderTable');
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
+            } else if (obj.event === 'inbound') {
+                layer.confirm('确定订单已完成并入库？', function (index) {
+                    $.ajax({
+                        type: 'PUT',
+                        contentType: "application/json;",
+                        url: domain + "api/order/updateToFinish/" + data.id,
+                        success: function (result) {
+                            if (result.code == 0) {
+                                layer.msg(result.msg);
+                                layui.table.reload('orderTable');
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
             }
         });
 

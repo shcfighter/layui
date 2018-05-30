@@ -1,37 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/views/business/order-list.html" line="160" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/views/business/order-list.html" line="198" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="951a07b5-3d07-4a93-b31a-e65a4e9f22b0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/views/business/goods-list-outbound.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/outbound-add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/outbound-detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/outbound-edit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/outbound-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/product-add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/product-detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/product-edit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/product-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/purchase-order-detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/purchase-order-edit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/purchase-order-list-warehouse.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/purchase-order-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/commons.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/commons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/goods-add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/purchase-order-add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/goods-inbound.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/goods-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/goods-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/goods-outbound.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/plan-list3.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-list-read.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/plan-list4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui.sql" beforeDir="false" afterPath="$PROJECT_DIR$/layui.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/goods-record-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/goods-record-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/order-list-read.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-list-read.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/order-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/sample-list-read.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/sample-list-read.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/sample-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/sample-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/sample-order-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/sample-order-list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/role-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/role-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/user-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/user-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,74 +39,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="purchase-order-list-warehouse.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/purchase-order-list-warehouse.html">
+      <file leaf-file-name="order-list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/business/order-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="152" column="33" selection-start-line="152" selection-start-column="33" selection-end-line="152" selection-end-column="33" />
+            <state relative-caret-position="-220">
+              <caret line="119" column="44" lean-forward="true" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="outbound-list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/outbound-list.html">
+      <file leaf-file-name="order-edit.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="104" column="61" lean-forward="true" selection-start-line="104" selection-start-column="61" selection-end-line="104" selection-end-column="61" />
+            <state relative-caret-position="-432">
+              <caret line="174" column="41" lean-forward="true" selection-start-line="174" selection-start-column="41" selection-end-line="174" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="outbound-list-warehouse.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/outbound-list-warehouse.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="123" column="70" selection-start-line="123" selection-start-column="70" selection-end-line="123" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="purchase-order-list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/purchase-order-list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="outbound-edit.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/business/outbound-edit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="44" column="77" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="outbound-add.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/outbound-add.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="goods-list-outbound.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/goods-list-outbound.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="88" column="66" selection-start-line="88" selection-start-column="66" selection-end-line="88" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sample-order-list.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sample-order-list.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/business/sample-order-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="38" column="20" lean-forward="true" selection-start-line="38" selection-start-column="20" selection-end-line="40" selection-end-column="29" />
+            <state relative-caret-position="226">
+              <caret line="135" column="27" selection-start-line="135" selection-start-column="27" selection-end-line="135" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -179,7 +119,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/business/order-proofing.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-list.html" />
         <option value="$PROJECT_DIR$/views/business/plan-list3.html" />
         <option value="$PROJECT_DIR$/views/business/produce -list.html" />
@@ -191,16 +130,11 @@
         <option value="$PROJECT_DIR$/views/business/sample-add.html" />
         <option value="$PROJECT_DIR$/views/business/sample-detail.html" />
         <option value="$PROJECT_DIR$/views/business/order-detail.html" />
-        <option value="$PROJECT_DIR$/views/business/sample-list-read.html" />
-        <option value="$PROJECT_DIR$/views/business/order-list-read.html" />
         <option value="$PROJECT_DIR$/views/system/menu-auth.html" />
         <option value="$PROJECT_DIR$/views/business/sample-edit.html" />
-        <option value="$PROJECT_DIR$/views/business/order-list.html" />
-        <option value="$PROJECT_DIR$/views/business/sample-list.html" />
         <option value="$PROJECT_DIR$/views/business/plan-list2.html" />
         <option value="$PROJECT_DIR$/views/business/plan-add.html" />
         <option value="$PROJECT_DIR$/views/business/order-add.html" />
-        <option value="$PROJECT_DIR$/views/business/sample-order-list.html" />
         <option value="$PROJECT_DIR$/views/business/order-edit.html" />
         <option value="$PROJECT_DIR$/views/business/plan-edit.html" />
         <option value="$PROJECT_DIR$/views/business/plan-detail.html" />
@@ -208,9 +142,7 @@
         <option value="$PROJECT_DIR$/views/business/plan-list-produce.html" />
         <option value="$PROJECT_DIR$/views/business/purchase_order-list.html" />
         <option value="$PROJECT_DIR$/views/system/role-list.html" />
-        <option value="$PROJECT_DIR$/views/login.html" />
         <option value="$PROJECT_DIR$/views/business/plan-list-read.html" />
-        <option value="$PROJECT_DIR$/views/main.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-edit.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-detail.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-add.html" />
@@ -219,17 +151,25 @@
         <option value="$PROJECT_DIR$/views/business/product-detail.html" />
         <option value="$PROJECT_DIR$/views/business/product-edit.html" />
         <option value="$PROJECT_DIR$/views/business/product-list.html" />
-        <option value="$PROJECT_DIR$/views/index.html" />
         <option value="$PROJECT_DIR$/layuiadmin/commons.js" />
         <option value="$PROJECT_DIR$/views/business/outbound-detail.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-list.html" />
         <option value="$PROJECT_DIR$/views/business/outbound-list.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-list-warehouse.html" />
         <option value="$PROJECT_DIR$/views/system/user-list.html" />
-        <option value="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" />
         <option value="$PROJECT_DIR$/views/business/outbound-add.html" />
         <option value="$PROJECT_DIR$/views/business/goods-list-outbound.html" />
         <option value="$PROJECT_DIR$/views/business/outbound-edit.html" />
+        <option value="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" />
+        <option value="$PROJECT_DIR$/views/business/goods-record-list.html" />
+        <option value="$PROJECT_DIR$/views/index.html" />
+        <option value="$PROJECT_DIR$/views/main.html" />
+        <option value="$PROJECT_DIR$/views/login.html" />
+        <option value="$PROJECT_DIR$/views/business/sample-list-read.html" />
+        <option value="$PROJECT_DIR$/views/business/order-list.html" />
+        <option value="$PROJECT_DIR$/views/business/order-list-read.html" />
+        <option value="$PROJECT_DIR$/views/business/sample-list.html" />
+        <option value="$PROJECT_DIR$/views/business/sample-order-list.html" />
       </list>
     </option>
   </component>
@@ -238,6 +178,12 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
@@ -667,12 +613,12 @@
       <workItem from="1527553796943" duration="3297000" />
       <workItem from="1527569513368" duration="3936000" />
       <workItem from="1527589593759" duration="817000" />
-      <workItem from="1527590994176" duration="6034000" />
+      <workItem from="1527590994176" duration="17681000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154574000" />
+    <option name="totallyTimeSpent" value="166221000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -687,13 +633,13 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="9" />
+      <window_info anchor="right" id="Maven Projects" order="1" weight="0.32980332" />
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="3" />
@@ -701,42 +647,42 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.2753404" />
-      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="bottom" id="Find" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info id="Nl-Palette" order="5" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="right" id="Properties" order="7" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2753404" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="right" id="Properties" order="7" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -745,7 +691,7 @@
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info id="Nl-Palette" order="5" />
-      <window_info anchor="right" id="Maven Projects" order="9" />
+      <window_info anchor="right" id="Maven Projects" order="1" weight="0.32980332" />
       <window_info id="Favorites" order="6" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -760,7 +706,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/business/plan-list3.html" />
     <entry file="file://$PROJECT_DIR$/views/business/produce-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="571">
@@ -824,13 +769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/sample-list-read.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="167" column="30" lean-forward="true" selection-start-line="167" selection-start-column="30" selection-end-line="167" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/system/menu-auth.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -859,13 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/order-list-read.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="100" column="61" selection-start-line="100" selection-start-column="61" selection-end-line="100" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/plan-edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -884,13 +815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="86" column="55" selection-start-line="86" selection-start-column="55" selection-end-line="86" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/sample-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="77" />
         </state>
       </provider>
     </entry>
@@ -915,32 +839,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="10" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3944">
-          <caret line="715" column="73" selection-start-line="715" selection-start-column="73" selection-end-line="715" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/goods-add.html" />
     <entry file="file://$PROJECT_DIR$/views/business/order-detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3058">
           <caret line="139" column="72" selection-start-line="139" selection-start-column="72" selection-end-line="139" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4202">
-          <caret line="191" column="11" selection-start-line="148" selection-start-column="8" selection-end-line="191" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -996,13 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3674">
-          <caret line="167" selection-start-line="167" selection-end-line="167" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/product-edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1606">
@@ -1034,20 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/order-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2604">
-          <caret line="63" column="59" lean-forward="true" selection-start-line="63" selection-start-column="59" selection-end-line="63" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/sample-order-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="38" column="20" lean-forward="true" selection-start-line="38" selection-start-column="20" selection-end-line="40" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/order-add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="316">
@@ -1069,24 +951,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/outbound-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="104" column="61" lean-forward="true" selection-start-line="104" selection-start-column="61" selection-end-line="104" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/purchase-order-list-warehouse.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="152" column="33" selection-start-line="152" selection-start-column="33" selection-end-line="152" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/outbound-list-warehouse.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="123" column="70" selection-start-line="123" selection-start-column="70" selection-end-line="123" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -1106,8 +974,107 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/business/outbound-edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="44" column="77" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
+        <state relative-caret-position="154">
+          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/outbound-list-warehouse.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="139" column="37" selection-start-line="139" selection-start-column="37" selection-end-line="139" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/goods-record-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="67" column="32" selection-start-line="67" selection-start-column="32" selection-end-line="67" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="21" column="58" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/outbound-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="169" column="19" lean-forward="true" selection-start-line="152" selection-start-column="16" selection-end-line="169" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/sample-list-read.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-list-read.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="59" column="63" lean-forward="true" selection-start-line="59" selection-start-column="63" selection-end-line="59" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/sample-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="52" column="33" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-220">
+          <caret line="119" column="44" lean-forward="true" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-432">
+          <caret line="174" column="41" lean-forward="true" selection-start-line="174" selection-start-column="41" selection-end-line="174" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/sample-order-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="135" column="27" selection-start-line="135" selection-start-column="27" selection-end-line="135" selection-end-column="27" />
         </state>
       </provider>
     </entry>

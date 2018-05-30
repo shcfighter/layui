@@ -37,14 +37,23 @@
 
                     <script type="text/html" id="imagesTpl">
                         {{#  if(d.photoUrl){ }}
-                            <button class="layui-btn layui-btn-primary images" lay-event="sampleImages">样品</button>
+                            <button class="layui-btn images" lay-event="sampleImages">样品</button>
+                        {{#  } }}
+                    </script>
+                    <script type="text/html" id="statusTpl">
+                        {{#  if(d.status === 0){ }}
+                        <span style="color: #F581B1;">新建</span>
+                        {{#  } else if(d.status === 1) { }}
+                        <span style="color: #F581B1;">完成</span>
                         {{#  } }}
                     </script>
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                        {{#  if(d.status === 0){ }}
+                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        {{#  } }}
                     </script>
 
                 </div>
@@ -75,8 +84,8 @@
             , cols: [[
                 {field: 'sampleName', title: '样品名称', width: 180, sort: true}
                 , {field: 'sampleName', title: '样品型号', width: 100}
-                , {field: 'photoUrl', title: '样品', width: 200, templet: '#imagesTpl', unresize: true}
-                , {field: 'status', title: '状态', width: 80}
+                , {field: 'photoUrl', title: '样品', width: 150, templet: '#imagesTpl', unresize: true}
+                , {field: 'status', title: '状态', width: 100, templet: '#statusTpl', unresize: true}
                 , {field: 'createTime', title: '创建时间', width: 180}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
             ]]

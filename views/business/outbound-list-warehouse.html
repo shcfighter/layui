@@ -60,7 +60,7 @@
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                         {{#  if(d.status === 1){ }}
-                        <a class="layui-btn layui-btn-xs" lay-event="inbound">入库</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="outbound">出库</a>
                         <a class="layui-btn layui-btn-xs" lay-event="reject">拒绝</a>
                         {{#  } }}
                     </script>
@@ -89,7 +89,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/outbound/findOutBoundPage?status=1'
+            , url: domain + 'api/outbound/findPage?status=1'
             , cols: [[
                 {field: 'goodsName', title: '物品名称', width: 180, sort: true}
                 , {field: 'goodsModel', title: '物品型号', width: 180, sort: true}
@@ -134,12 +134,12 @@
                     }
                 });
                 layer.full(index);
-            } else if (obj.event === 'inbound') {
+            } else if (obj.event === 'outbound') {
                 layer.confirm('确定按申请单出库？', function (index) {
                     $.ajax({
                         type: 'POST',
                         contentType: "application/json;",
-                        url: domain + "api/goods/inbound/" + data.id,
+                        url: domain + "api/goods/outbound/" + data.id,
                         success: function (result) {
                             if (result.code == 0) {
                                 layer.msg(result.msg);
