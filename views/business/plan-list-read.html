@@ -18,7 +18,30 @@
             <div class="layui-card">
                 <div class="layui-card-header">生产计划</div>
                 <div class="layui-card-body">
+                    <div class="demoTable" style="margin-bottom: 10px;">
+                        产品名称：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="productName" id="productName" autocomplete="off">
+                        </div>
+                        生产批次：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="batchNo" id="batchNo" autocomplete="off">
+                        </div>
+                        状态：
+                        <div class="layui-inline">
+                            <div class="layui-form">
+                                <select name="type" id="status" lay-filter="typeSelect">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="layui-btn" data-type="reload">搜索</button>
+                        <!--<button class="layui-btn" data-type="download">下载</button>
+                        <button class="layui-btn" data-type="print">打印</button>-->
+                    </div>
+
                     <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
+
 
                     <script type="text/html" id="statusTpl">
                         {{#  if(d.status === 0){ }}
@@ -32,9 +55,6 @@
 
                     <script type="text/html" id="user-table-barDemo">
                         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        {{# if(d.status === 1) { }}
-                        <a class="layui-btn layui-btn-xs" lay-event="finish">完成</a>
-                        {{#  } }}
                     </script>
 
                 </div>
@@ -59,20 +79,21 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/plan/findPlan/' + GetQueryString("orderId")
+            , url: domain + 'api/plan/findPlanPage?status=1'
             , cols: [[
                 {field: 'planName', title: '生产代号', width: 120, sort: true}
                 , {field: 'productName', title: '产品名称', width: 120, sort: true}
+                , {field: 'batchNo', title: '生产批次', width: 110}
                 , {field: 'deptName', title: '部门', width: 80, sort: true}
                 , {field: 'num', title: '产品数量', width: 100}
-                , {field: 'batchNo', title: '生产批次', width: 110}
                 , {field: 'beginDate', title: '开始生产时间', width: 120}
                 , {field: 'endDate', title: '结束生产时间', width: 115}
                 , {field: 'status', title: '状态', width: 80, templet: '#statusTpl', unresize: true}
                 , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
             ]]
             , id: 'orderTable'
-            , limit: 99999
+            , page: true
+            ,height: 'full-100'
         });
 
         element.render();
@@ -84,8 +105,8 @@
             if (obj.event === 'detail') {
                 var index = layer.open({
                     type: 2,
-                    title: "查看订单",
-                    content: 'plan-add.html',
+                    title: "查看生产计划",
+                    content: 'plan-detail.html?sampleId=' + data.orderId,
                     area: ['300px', '300px'],
                     maxmin: true,
                     success: function (layero, index) {
@@ -113,26 +134,30 @@
                     }
                 });
                 layer.full(index);
-            } else if (obj.event === 'finish') {
-                layer.confirm('确定生产完成？', function (index) {
-                    $.ajax({
-                        type: 'PUT',
-                        contentType: "application/json;",
-                        url: domain + "api/plan/updateToFinish/" + data.id,
-                        success: function (result) {
-                            if (result.code == 0) {
-                                layer.msg(result.msg);
-                                layui.table.reload('orderTable');
-                            } else {
-                                layer.alert(result.msg);
-                            }
-                        },
-                        error: function () {
-                            console.log("网络错误！");
-                        }
-                    });
+            }
+
+        });
+
+        /* 触发弹层 */
+        var active = {
+            reload: function () {
+                //执行重载
+                table.reload('orderTable', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        productName: $('#productName').val(),
+                        batchNo: $('#batchNo').val(),
+                        status: $('#status').val()
+                    }
                 });
             }
+        };
+
+        $('.layui-btn-group .layui-btn, .demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] && active[type].call(this);
         });
 
     });

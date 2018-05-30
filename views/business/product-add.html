@@ -17,13 +17,13 @@
         <div class="layui-card-body" style="padding: 15px;">
             <form class="layui-form" action="" lay-filter="component-form-group">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">物品名称</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="goodsName" lay-verify="required" autocomplete="off" placeholder="请输入物品名称" class="layui-input">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">物品名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="goodsName" lay-verify="required" autocomplete="off" placeholder="请输入物品名称" class="layui-input">
+                            <input type="hidden" name="goodsType" lay-verify="required" autocomplete="off" value="2" class="layui-input">
+                        </div>
                     </div>
-                </div>
-
-                <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">物品型号</label>
                         <div class="layui-input-inline">
@@ -34,7 +34,6 @@
                         <label class="layui-form-label">物品类型</label>
                         <div class="layui-input-inline">
                             <select name="type" lay-filter="">
-                                <option value="1">原材料</option>
                                 <option value="2">成品</option>
                             </select>
                         </div>
@@ -73,12 +72,6 @@
                             <input type="text" name="unitPrice" lay-verify="required|number" placeholder="请输入产品单价" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">产品总价</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="totalPrice" lay-verify="required|number" placeholder="请输入产品总价" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
@@ -94,11 +87,11 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="layui-form-item">
                     <label class="layui-form-label">备注</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" id="LAY_demo1" name="remarks" style="display: none">
-                        </textarea>
+                        <textarea placeholder="请输入内容" class="layui-textarea" name="remarks"></textarea>
                     </div>
                 </div>
 
@@ -126,27 +119,8 @@
         var $ = layui.$
             , layer = layui.layer
             , laydate = layui.laydate
-            , form = layui.form
-            , layedit = layui.layedit;
+            , form = layui.form;
 
-        //构建一个默认的编辑器
-        var indexEdit = layedit.build('LAY_demo1', {
-            tool: ['strong' //加粗
-                ,'italic' //斜体
-                ,'underline' //下划线
-                ,'del' //删除线
-                ,'|' //分割线
-                ,'left' //左对齐
-                ,'center' //居中对齐
-                ,'right' //右对齐
-                ,'link' //超链接
-                ,'unlink' //清除链接
-                ,'face' //表情
-            ]
-            ,height: 100
-        });
-        /*$('.layui-textarea').text("<img src=\"file:///D:/IdeaProjects/layuiAdmin/layuiadmin/layui/images/face/29.gif\" alt=\"[拜拜]\">");
-        var index= layedit.build('LAY_demo1');*/
         form.render(null, 'component-form-group');
         laydate.render({
             elem: '#expiredDate'
@@ -154,17 +128,19 @@
         laydate.render({
             elem: '#produceDate'
         });
+        laydate.render({
+            elem: '#buyDate'
+        });
 
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
             data.field.produceDate = data.field.produceDate + " 00:00:00";
             data.field.expiredDate = data.field.expiredDate + " 00:00:00";
-            data.field.remarks = layedit.getContent(indexEdit);
             $.ajax({
                 type: 'POST',
                 contentType: "application/json;",
-                url: domain + "api/goods/insertGoods",
+                url: domain + "api/purchaseOrder/insertPurchaseOrder",
                 data: JSON.stringify(data.field),
                 success: function (result) {
                     if (result.code == 0) {

@@ -23,7 +23,8 @@ layui.config({
     base: '../layuiadmin/' //静态资源所在路径
   }).use(['element', 'table'], function(){
 	var $ = layui.$
-	,layer = layui.layer;
+		,layer = layui.layer
+		, element = layui.element;
 
 	$.ajaxSetup({
 		contentType:"application/json;charset=utf-8",
@@ -47,5 +48,6 @@ layui.config({
 		}
 	});
 
-
 });
+
+

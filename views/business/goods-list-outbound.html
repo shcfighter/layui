@@ -38,13 +38,9 @@
                             </div>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
-                        <button class="layui-btn" data-type="download">下载</button>
-                        <button class="layui-btn" data-type="print">打印</button>
                     </div>
 
-                    <div class="my_show">
                     <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
-                    </div>
 
                     <script type="text/html" id="typeTpl">
                         {{#  if(d.type === 1){ }}
@@ -55,7 +51,7 @@
                     </script>
 
                     <script type="text/html" id="user-table-barDemo">
-                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="select">选择</a>
                     </script>
 
                 </div>
@@ -79,6 +75,24 @@
             , layer = layui.layer
             , table = layui.table;
 
+        //监听工具条
+        table.on('tool(order-table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'select') {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layui.$('#goodsId').val(data.id);
+                parent.layui.$('input[name="goodsName"]').val(data.goodsName);
+                parent.layui.$('input[name="goodsModel"]').val(data.goodsModel);
+                //parent.layui.$('select[name="type"]').find("option[text=" + data.type + "]").attr("selected",true);
+                parent.layui.$("#goodsType").val(data.type);
+                parent.layui.form.render('select');
+                parent.layui.$("#goodsType").attr("disabled", true);
+                parent.layui.$('input[name="unit"]').val(data.unit);
+                parent.layui.$('input[name="color"]').val(data.color);
+                parent.layui.$('input[name="num"]').val(0);
+                parent.layer.close(index);
+            }
+        });
         //方法级渲染
         table.render({
             elem: '#order-table'
@@ -100,42 +114,6 @@
 
         element.render();
 
-
-        //监听工具条
-        table.on('tool(order-table)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'detail') {
-                var index = layer.open({
-                    type: 2,
-                    title: "查看物品",
-                    content: 'goods-detail.html',
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                        var body = layer.getChildFrame('body', index);
-                        var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-                        body.find('input[name="goodsName"]').val(data.goodsName);
-                        body.find('input[name="goodsModel"]').val(data.goodsModel);
-                        body.find("#goodsType").val(data.type);
-                        body.find('input[name="color"]').val(data.color);
-                        body.find('input[name="num"]').val(data.num);
-                        body.find('input[name="unit"]').val(data.unit);
-                        body.find('input[name="batchNo"]').val(data.batchNo);
-                        body.find('input[name="unitPrice"]').val(data.unitPrice);
-                        body.find('input[name="totalPrice"]').val(data.totalPrice);
-                        body.find('input[name="produceDate"]').val(data.produceDate);
-                        body.find('input[name="expiredDate"]').val(data.expiredDate);
-                        if (data.remarks){
-                            body.find('textarea[name="remarks"]').text(data.remarks);
-                        }
-
-                    }
-                });
-                layer.full(index);
-            }
-        });
-
-
         /* 触发弹层 */
         var active = {
             reload: function () {
@@ -149,29 +127,6 @@
                         batchNo: $('#batchNo').val(),
                         type: $('#type').val()
                     }
-                });
-            },
-            download: function () {
-                const a = document.createElement('a');
-                var href = domain + 'api/goods/goodsExport?1=1';
-                if($('#goodsName').val()){
-                    href += '&goodsName=' + $('#goodsName').val();
-                }
-                if($('#batchNo').val()){
-                    href += '&batchNo=' + $('#batchNo').val();
-                }
-                if($('#type').val()){
-                    href += '&type=' + $('#type').val();
-                }
-                a.setAttribute('href', href);
-                a.click();
-            },
-            print: function () {
-                $(".my_show").jqprint({
-                    debug: false,
-                    importCSS: true,
-                    printContainer: true,
-                    operaSupport: false
                 });
             }
         };
