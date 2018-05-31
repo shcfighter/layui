@@ -42,7 +42,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">选择样品</label>
                         <div class="layui-input-inline">
-                            <input type="hidden" name="sampleId" id="sampleId" lay-verify="" autocomplete="off" placeholder="请选择样品" class="layui-input">
+                            <input type="hidden" name="sampleId" id="sampleId" class="layui-input">
+                            <input type="hidden" name="sampleText" id="sampleText" lass="layui-input">
                             <button type="button" id="sample" class="layui-btn">样品</button>
                             <button type="button" id="select_sample" class="layui-btn">选择样品</button>
                         </div>
@@ -116,17 +117,6 @@
 <script src="../../layuiadmin/layui/layui.js"></script>
 <script src="../../layuiadmin/commons.js"></script>
 <script>
-    var json = {
-        "code": 0,
-        "msg": "",
-        "start": 0
-    };
-    function setJson(json){
-        console.log(json);
-        json = json;
-        console.log(json);
-    }
-
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
@@ -170,6 +160,11 @@
                         if(data.sample.photoUrl){
                             var images_data = [];
                             var images = data.sample.photoUrl.split(",");
+                            var json = {
+                                "code": 0,
+                                "msg": "",
+                                "start": 0
+                            }
                             $.each(images, function (index, image) {
                                 $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
                                 var image_data = {};
@@ -177,6 +172,7 @@
                                 images_data.push(image_data);
                                 json.data = images_data;
                             });
+                            $("#sampleText").val(JSON.stringify(json));
                         }
                         if(order.remarks){
                             $('.layui-textarea').text(order.remarks);
@@ -192,9 +188,12 @@
         });
 
         $("#sample").click(function () {
-            console.log(json);
+            var jsonText = $("#sampleText").val();
+            if("" == jsonText){
+                jsonText = "{ \"code\": 0,\"msg\": \"\",\"start\": 0}";
+            }
             layer.photos({
-                photos: json //格式见API文档手册页
+                photos: JSON.parse(jsonText) //格式见API文档手册页
             });
         });
 

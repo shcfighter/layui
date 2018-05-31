@@ -80,7 +80,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/sample/findSamplePage'
+            , url: domain + 'api/sample/findSamplePage?t=' + new Date().getTime()
             , cols: [[
                 {field: 'sampleName', title: '样品名称', width: 180, sort: true}
                 , {field: 'sampleName', title: '样品型号', width: 100}

@@ -27,7 +27,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">样品</label>
                         <div class="layui-input-inline">
-                            <input type="hidden" name="orderId" id = "sampleId" lay-verify="" autocomplete="off" placeholder="" class="layui-input">
+                            <input type="hidden" name="sampleText" id="sampleText" lass="layui-input">
+                            <input type="hidden" name="orderId" id = "sampleId" class="layui-input">
                             <button type="button" id="sample" class="layui-btn">样品</button>
                             <button type="button" class="layui-btn" id = "select_sample">选择样品</button>
                         </div>
@@ -99,11 +100,6 @@
 <script src="../../layuiadmin/layui/layui.js"></script>
 <script src="../../layuiadmin/commons.js"></script>
 <script>
-    var json = {
-        "code": 0,
-        "msg": "",
-        "start": 0
-    };
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
@@ -123,37 +119,45 @@
             elem: '#endDate'
         });
 
-        $.ajax({
-            type: 'GET',
-            //contentType: "application/json;",
-            url: domain + "api/sample/findSample/" + GetQueryString("sampleId"),
-            success: function (result) {
-                if (result.code == 0) {
-                    var data = result.data.sample;
-                    if(undefined != data && null != data && "" != data && "null" != data){
-                        if(data.photoUrl){
-                            var images_data = [];
-                            var images = data.photoUrl.split(",");
-                            $.each(images, function (index, image) {
-                                $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
-                                var image_data = {};
-                                image_data.src = image;
-                                images_data.push(image_data);
-                                json.data = images_data;
-                            });
+        if(undefined !== GetQueryString("sampleId") && null !== GetQueryString("sampleId") && "null" !== GetQueryString("sampleId")){
+            $.ajax({
+                type: 'GET',
+                //contentType: "application/json;",
+                url: domain + "api/sample/findSample/" + GetQueryString("sampleId"),
+                success: function (result) {
+                    if (result.code == 0) {
+                        var data = result.data.sample;
+                        if(undefined != data && null != data && "" != data && "null" != data){
+                            if(data.photoUrl){
+                                var json = {
+                                    "code": 0,
+                                    "msg": "",
+                                    "start": 0
+                                };
+                                var images_data = [];
+                                var images = data.photoUrl.split(",");
+                                $.each(images, function (index, image) {
+                                    $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
+                                    var image_data = {};
+                                    image_data.src = image;
+                                    images_data.push(image_data);
+                                    json.data = images_data;
+                                });
+                                $("#sampleText").val(JSON.stringify(json));
+                            }
+                            if(order.remarks){
+                                $('.layui-textarea').text(order.remarks);
+                            }
                         }
-                        if(order.remarks){
-                            $('.layui-textarea').text(order.remarks);
-                        }
+                    } else {
+                        layer.alert(result.msg);
                     }
-                } else {
-                    layer.alert(result.msg);
+                },
+                error: function () {
+                    console.log("网络错误！");
                 }
-            },
-            error: function () {
-                console.log("网络错误！");
-            }
-        });
+            });
+        }
 
         $("#select_sample").click(function () {
             var index = layer.open({
@@ -169,9 +173,12 @@
         });
 
         $("#sample").click(function () {
-            console.log(json);
+            var jsonText = $("#sampleText").val();
+            if("" == jsonText){
+                jsonText = "{ \"code\": 0,\"msg\": \"\",\"start\": 0}";
+            }
             layer.photos({
-                photos: json //格式见API文档手册页
+                photos: JSON.parse(jsonText) //格式见API文档手册页
             });
         });
 

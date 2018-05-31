@@ -36,10 +36,7 @@
                                 <select name="type" id="status" lay-filter="typeSelect">
                                     <option value="">请选择</option>
                                     <option value="0">接单</option>
-                                    <option value="1">打样</option>
-                                    <option value="2">采购</option>
-                                    <option value="3">排单</option>
-                                    <option value="4">生产</option>
+                                    <option value="1">生产阶段</option>
                                     <option value="5">入库</option>
                                     <option value="-1">作废</option>
                                 </select>
@@ -103,7 +100,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/order/findOrderPage'
+            , url: domain + 'api/order/findOrderPage?t=' + new Date().getTime()
             , cols: [[
                 {field: 'id', title: '编号', width: 80, sort: true}
                 , {field: 'productName', title: '产品名称', width: 180, sort: true}

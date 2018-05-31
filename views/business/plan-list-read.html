@@ -79,7 +79,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/plan/findPlanPage?status=1'
+            , url: domain + 'api/plan/findPlanPage?status=1&t=' + new Date().getTime()
             , cols: [[
                 {field: 'planName', title: '生产代号', width: 120, sort: true}
                 , {field: 'productName', title: '产品名称', width: 120, sort: true}

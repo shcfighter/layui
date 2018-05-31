@@ -71,7 +71,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/sample/findSamplePage?status=1'
+            , url: domain + 'api/sample/findSamplePage?status=1&t=' + new Date().getTime()
             , cols: [[
                 {field: 'sampleName', title: '样品名称', width: 180, sort: true}
                 , {field: 'sampleName', title: '样品型号', width: 100}
@@ -106,8 +106,8 @@
             });
             if (obj.event === 'select') {
                 var index = parent.layer.getFrameIndex(window.name);
-                //alert(parent.layui.parameter);
                 //parent.setJson(json);
+                parent.layui.$('#sampleText').val(JSON.stringify(json));
                 parent.layui.$('#sampleId').val(data.id);
                 parent.layer.close(index);
             } else if (obj.event === 'sampleImages') {

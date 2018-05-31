@@ -67,7 +67,7 @@
         //方法级渲染
         table.render({
             elem: '#order-table'
-            , url: domain + 'api/sample/findSamplePage?status=4'
+            , url: domain + 'api/sample/findSamplePage?status=4&t=' + new Date().getTime()
             , cols: [[
                 {field: 'sample_name', title: '样品名称', width: 180, sort: true}
                 , {field: 'sample_code', title: '样品型号', width: 100}
