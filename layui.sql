@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2018-05-30 09:48:26
+Date: 2018-06-02 10:55:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,7 +72,7 @@ CREATE TABLE `t_goods` (
 -- ----------------------------
 -- Records of t_goods
 -- ----------------------------
-INSERT INTO `t_goods` VALUES ('7', '白布', 'baibu', '1', '白色', '100', '匹', '0', '2018-05-29 05:00:52', null, null, null, null);
+INSERT INTO `t_goods` VALUES ('7', '白布', 'baibu', '1', '白色', '90', '匹', '0', '2018-05-29 05:00:52', '2018-05-30 04:27:37', null, '2', null);
 INSERT INTO `t_goods` VALUES ('8', '蓝色牛仔裤', '2018', '2', '蓝色', '100', '件', '0', '2018-05-29 05:37:35', null, null, null, null);
 INSERT INTO `t_goods` VALUES ('10', '染料', '2018983', '1', '黑色', '9', '桶', '0', '2018-05-30 01:40:25', '2018-05-30 01:43:14', null, '2', null);
 INSERT INTO `t_goods` VALUES ('11', '324', '432', '1', '434', '432', '432', '0', '2018-05-30 01:42:14', null, null, null, null);
@@ -96,7 +96,7 @@ CREATE TABLE `t_goods_use_record` (
   `remarks` varchar(512) DEFAULT NULL,
   `type` int(2) DEFAULT NULL COMMENT '1-新增；2-修改；3-入库；4-出库；5-删除;',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='货物使用情况';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='货物使用情况';
 
 -- ----------------------------
 -- Records of t_goods_use_record
@@ -104,6 +104,7 @@ CREATE TABLE `t_goods_use_record` (
 INSERT INTO `t_goods_use_record` VALUES ('15', '10', '染料', '2018983', '15', '10', '0', '2', '0', '2018-05-30 01:40:25', '2', null, '4');
 INSERT INTO `t_goods_use_record` VALUES ('16', '11', '324', '432', '12', '432', '0', '2', '0', '2018-05-30 01:42:14', '2', null, '4');
 INSERT INTO `t_goods_use_record` VALUES ('17', '10', '染料', '2018983', '12', '9', '10', '2', '0', '2018-05-30 01:43:15', '2', null, '4');
+INSERT INTO `t_goods_use_record` VALUES ('18', '7', '白布', 'baibu', '13', '90', '100', '超级管理员', '0', '2018-05-30 04:27:37', '2', null, '4');
 
 -- ----------------------------
 -- Table structure for t_menu
@@ -167,7 +168,7 @@ CREATE TABLE `t_order` (
   `order_time` datetime DEFAULT NULL,
   `contact_phone` varchar(11) DEFAULT NULL COMMENT '联系方式',
   `sample_id` int(11) DEFAULT NULL COMMENT '样品id',
-  `status` int(11) DEFAULT '0' COMMENT '0-接单、录单；1-打样；2-采购；3-排单；4-生产；5-入库；-1-作废',
+  `status` int(11) DEFAULT '0' COMMENT '0-接单、录单；1-生产阶段；5-入库；-1-作废',
   `is_deleted` int(2) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -175,18 +176,14 @@ CREATE TABLE `t_order` (
   `modifier` int(11) DEFAULT NULL,
   `remarks` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='入单 业务员接单';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='入单 业务员接单';
 
 -- ----------------------------
 -- Records of t_order
 -- ----------------------------
-INSERT INTO `t_order` VALUES ('14', '100', '牛仔裤', '件', '2018-05-31', '99.00', '9900.00', '服装专卖店', '张三', null, '18888888888', null, '5', null, '2018-05-23 13:29:13', '2018-05-23 13:29:13', '2', null, '做好call我');
-INSERT INTO `t_order` VALUES ('15', '54', '34', '432', '2018-05-31', '432.00', '4324.00', '432', '432', null, '19999999999', null, '1', null, '2018-05-23 13:10:36', '2018-05-23 13:10:36', '2', null, '4324');
-INSERT INTO `t_order` VALUES ('16', '400', '沙县小吃', '碗', '2018-05-24', '1.00', '400.00', '腾讯', '马化腾', null, '13133331245', null, '0', null, '2018-05-23 06:00:29', null, '2', null, '');
-INSERT INTO `t_order` VALUES ('17', '100', '订单20180526', '件', '2018-05-31', '100.00', '10000.00', '加', '张三', null, '18888888888', null, '4', null, '2018-05-26 15:53:29', '2018-05-26 15:53:29', '2', null, '随便');
-INSERT INTO `t_order` VALUES ('18', '2345', '123457', '2345', '2018-05-26', '3456.00', '456.00', '456456', '32456', null, '18888888888', null, '0', null, '2018-05-27 01:41:34', null, '2', null, '23456');
-INSERT INTO `t_order` VALUES ('19', '2345', '234567', '34', '2018-05-31', '345.00', '4356.00', '2345', '345', '2018-05-27 10:51:30', '19999999999', '14', '0', null, '2018-05-27 10:51:32', '2018-05-27 10:51:32', '2', null, '2345');
-INSERT INTO `t_order` VALUES ('20', '324', '汉字', '43', '2018-05-29', '432.00', '432.00', '432', '43', '2018-05-29 00:00:00', '18888888888', '14', '0', null, '2018-05-29 02:15:09', '2018-05-29 02:15:25', '2', '2', '432');
+INSERT INTO `t_order` VALUES ('21', '100', '夏天牛仔裤', '件', '2018-06-30', '99.00', '9900.00', '牛仔裤批发市场', '张三', '2018-05-28 00:00:00', '18813112970', '20', '0', null, '2018-05-30 10:48:45', '2018-05-31 01:53:35', '2', '2', '初次合作');
+INSERT INTO `t_order` VALUES ('22', '20', '白色衬衫', '件', '2018-07-24', '80.00', '1600.00', '某公司', '李四', '2018-05-11 00:00:00', '18736579021', '20', '1', null, '2018-05-30 18:56:04', '2018-05-30 18:56:04', '2', null, '');
+INSERT INTO `t_order` VALUES ('23', '432', '324', '432', '2018-05-31', '432.00', '43.00', '432', '432', '2018-05-31 00:00:00', '18888888888', null, '0', null, '2018-05-31 04:25:42', null, '2', null, '');
 
 -- ----------------------------
 -- Table structure for t_outbound
@@ -210,7 +207,7 @@ CREATE TABLE `t_outbound` (
   `modifier` int(255) DEFAULT NULL,
   `remarks` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='物品出库申请单';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='物品出库申请单';
 
 -- ----------------------------
 -- Records of t_outbound
@@ -218,6 +215,8 @@ CREATE TABLE `t_outbound` (
 INSERT INTO `t_outbound` VALUES ('10', '7', '1', '白布', 'baibu', '1', '白色', '0', '匹', '1', '0', '2018-05-30 00:47:06', '2018-05-30 01:02:22', '2', '2', '');
 INSERT INTO `t_outbound` VALUES ('11', '8', '1', '蓝色牛仔裤', '2018', '1', '蓝色', '0', '件', '0', '0', '2018-05-30 00:48:42', '2018-05-30 00:50:20', '2', '2', '');
 INSERT INTO `t_outbound` VALUES ('12', '10', '1', '染料', '2018983', '1', '黑色', '1', '桶', '2', '0', '2018-05-30 01:42:00', '2018-05-30 01:43:15', '2', '2', '');
+INSERT INTO `t_outbound` VALUES ('13', '7', '1', '白布', 'baibu', '1', '白色', '10', '匹', '2', '0', '2018-05-30 04:27:24', '2018-05-30 04:27:37', '2', '2', '');
+INSERT INTO `t_outbound` VALUES ('14', '8', '1', '蓝色牛仔裤', '2018', '2', '蓝色', '0', '件', '0', '1', '2018-05-31 01:11:59', '2018-05-31 01:13:16', '2', '2', '');
 
 -- ----------------------------
 -- Table structure for t_plan
@@ -280,16 +279,17 @@ CREATE TABLE `t_purchase_order` (
   `modifier` int(255) DEFAULT NULL,
   `remarks` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='采购单';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='采购单';
 
 -- ----------------------------
 -- Records of t_purchase_order
 -- ----------------------------
 INSERT INTO `t_purchase_order` VALUES ('11', '白布', 'baibu', '1', '1', '白色', '100', '匹', '20180529', '10.00', '1000.00', '2018-05-09', '2018-05-31', '白布有限公司', '张三', '2018-05-28', '2', '0', '2018-05-29 04:56:42', '2018-05-29 05:00:52', '2', '2', '入库吧');
 INSERT INTO `t_purchase_order` VALUES ('12', '324', '432', '1', '1', '434', '432', '432', '432', '432.00', '324.00', '2018-05-22', '2018-05-31', '432', '432', '2018-05-22', '2', '0', '2018-05-29 05:05:08', '2018-05-30 01:42:14', '2', '2', '');
-INSERT INTO `t_purchase_order` VALUES ('13', '435', '543', '2', '2', '543', '543', '54', '543', '543.00', null, '2018-05-02', '2018-05-29', null, null, null, '3', '0', '2018-05-29 05:26:12', '2018-05-30 01:41:01', '2', '2', '5435');
+INSERT INTO `t_purchase_order` VALUES ('13', '黑皮鞋', '2019', '2', '2', '黑色', '543', '双', '543', '543.00', null, '2018-05-02', '2022-05-20', null, null, null, '3', '0', '2018-05-29 05:26:12', '2018-05-30 11:01:08', '2', '2', '5435');
 INSERT INTO `t_purchase_order` VALUES ('14', '蓝色牛仔裤', '2018', '2', '2', '蓝色', '100', '件', '2019', '99.00', null, '2018-05-16', '2018-05-31', null, null, null, '2', '0', '2018-05-29 05:36:45', '2018-05-29 05:37:35', '2', '2', '34567');
 INSERT INTO `t_purchase_order` VALUES ('15', '染料', '2018983', '1', '1', '黑色', '10', '桶', '21425', '99.00', '990.00', '2018-05-30', '2018-05-31', '某小店', '张三', '2018-05-22', '2', '0', '2018-05-30 01:34:34', '2018-05-30 01:40:25', '2', '2', '34565');
+INSERT INTO `t_purchase_order` VALUES ('16', '白色衬衫', '2019', '2', '2', '白色', '100', '件', '3943', '99.00', null, '2018-05-23', '2021-05-07', null, null, null, '1', '0', '2018-05-30 11:01:37', '2018-05-30 11:01:41', '2', '2', '');
 
 -- ----------------------------
 -- Table structure for t_role
@@ -379,15 +379,14 @@ CREATE TABLE `t_sample` (
   `modifier` int(11) DEFAULT NULL,
   `remarks` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='样品表 打样';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='样品表 打样';
 
 -- ----------------------------
 -- Records of t_sample
 -- ----------------------------
-INSERT INTO `t_sample` VALUES ('14', '14', '蓝色牛仔裤', 'blue', 'http://47.98.232.164:8080/images/upload/144cbd62-6ee2-442c-b9ed-ab3e9031016b.jpg,http://47.98.232.164:8080/images/upload/76e21e63-3fad-4e54-8c15-322eeffb8c39.jpg,http://47.98.232.164:8080/images/upload/eb71e4b1-3b71-467c-9b7d-ecb2e9e0c6f7.jpg,http://47.98.232.164:8080/images/upload/3b635e55-0324-4985-8e8b-4f89041b29c7.jpg,http://47.98.232.164:8080/images/upload/11586639-b3df-423f-a2c9-79009ad8d0d2.jpg,http://47.98.232.164:8080/images/upload/0fae7a50-8826-40ff-a9b1-210853b885a5.jpg', '1', '0', '2018-05-26 22:13:10', '2018-05-27 04:40:16', '2', '2', '按照样品生产');
-INSERT INTO `t_sample` VALUES ('15', '15', '543', '54', 'http://47.98.232.164:8080/images/upload/f1852bcf-0a7f-4f69-a573-24b3ce14f200.jpg', '0', '0', '2018-05-23 05:10:36', null, '2', null, '43');
-INSERT INTO `t_sample` VALUES ('16', '17', '样品2018', '323456', 'http://47.98.232.164:8080/images/upload/5a9731cf-00a1-498f-a77c-11389a327729.jpg,http://47.98.232.164:8080/images/upload/5a7601c7-89c3-4fdf-9e6a-0e0dcf501dac.jpg,http://47.98.232.164:8080/images/upload/79ac8d75-510e-43c2-ac59-de6fc8e858ce.jpg', '0', '0', '2018-05-26 22:13:10', '2018-05-26 22:13:10', '2', '2', '234567');
-INSERT INTO `t_sample` VALUES ('18', null, '123', '2345', 'http://47.98.232.164:8080/images/upload/79e082fb-1421-49c5-9ede-bb6af15f57a8.jpg', '0', '1', '2018-05-26 14:11:53', '2018-05-26 14:12:23', '2', '2', '');
+INSERT INTO `t_sample` VALUES ('19', null, '夏天牛仔', '2018xinkuang', 'http://47.98.232.164:8080/images/upload/f252a9d8-9500-4e27-a90d-09b1b8ce4457.jpg,http://47.98.232.164:8080/images/upload/e1ae3e78-7e3b-4606-9a0f-4122e48e7acd.jpg,http://47.98.232.164:8080/images/upload/2d74c00c-29bc-4e92-8c0b-347c5a6022e7.jpg', '1', '0', '2018-05-30 10:45:36', '2018-05-30 10:46:03', '2', '2', '夏天牛仔');
+INSERT INTO `t_sample` VALUES ('20', null, '衬衫', '2019', 'http://47.98.232.164:8080/images/upload/c925500b-a1cc-4078-8077-8a12e164728d.jpg,http://47.98.232.164:8080/images/upload/638fd3b5-aa3b-4d79-821d-8263994c0ad0.jpg', '1', '0', '2018-05-30 10:47:07', '2018-05-30 10:53:28', '2', '2', '');
+INSERT INTO `t_sample` VALUES ('21', null, '鞋子', '2018', 'http://47.98.232.164:8080/images/upload/3f0d46e6-b3a1-4e61-a1fd-8e05cc4db81b.jpg,http://47.98.232.164:8080/images/upload/152f7d34-2a23-45a3-be01-223452aa486c.jpg', '0', '1', '2018-05-30 10:59:01', '2018-05-31 02:34:51', '2', '2', '');
 
 -- ----------------------------
 -- Table structure for t_sample_material
@@ -409,20 +408,15 @@ CREATE TABLE `t_sample_material` (
   `modifier` int(255) DEFAULT NULL,
   `remarks` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sample_material
 -- ----------------------------
-INSERT INTO `t_sample_material` VALUES ('11', '14', null, '麻布', '2343', '50', '白色', '匹', '0', '2018-05-23 12:58:11', null, '2', null, '尽快采购');
-INSERT INTO `t_sample_material` VALUES ('12', '14', null, '房价管理', '4', '43', '435', '435', '1', '2018-05-23 12:58:11', '2018-05-23 05:04:14', '2', '2', '343');
-INSERT INTO `t_sample_material` VALUES ('13', '14', null, '435', '543', '543', '543', '543', '1', '2018-05-23 12:58:11', '2018-05-23 05:02:49', '2', '2', '543');
-INSERT INTO `t_sample_material` VALUES ('14', '14', null, '蓝色染料', '23423', '10', '蓝色', '灌', '0', '2018-05-23 12:58:11', null, '2', null, '采购吧');
-INSERT INTO `t_sample_material` VALUES ('15', '15', null, '435', '54', '54', '543', '543', '0', '2018-05-23 13:10:36', null, '2', null, '54');
-INSERT INTO `t_sample_material` VALUES ('16', '16', null, '布匹', '23456', '10', '蓝色', '匹', '0', '2018-05-26 15:26:00', null, '2', null, '的发达省份');
-INSERT INTO `t_sample_material` VALUES ('17', '16', null, '线', '3456', '10', '5653', '34', '0', '2018-05-26 15:26:00', null, '2', null, '436');
-INSERT INTO `t_sample_material` VALUES ('19', '18', null, '234', '234', '23', '234', '234', '0', '2018-05-26 22:11:53', null, '2', null, '234');
-INSERT INTO `t_sample_material` VALUES ('20', '14', null, '345', '345', '3245', '32', '324', '1', '2018-05-26 14:30:47', '2018-05-26 14:30:59', '2', '2', '432');
+INSERT INTO `t_sample_material` VALUES ('21', '19', null, '白线', '123464', '10', '白色', '卷', '0', '2018-05-30 18:45:35', null, '2', null, '白色线');
+INSERT INTO `t_sample_material` VALUES ('22', '19', null, '白布', 'baibu', '10', '白色', '匹', '0', '2018-05-30 18:45:35', null, '2', null, '白色布匹');
+INSERT INTO `t_sample_material` VALUES ('23', '20', null, '布匹', '2018', '20', '白色', '匹', '0', '2018-05-30 18:47:07', null, '2', null, '白色布匹');
+INSERT INTO `t_sample_material` VALUES ('24', '21', null, '牛皮', '2018', '20', '褐色', '斤', '0', '2018-05-30 18:59:01', null, '2', null, '');
 
 -- ----------------------------
 -- Table structure for t_user

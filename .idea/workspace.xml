@@ -4,57 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/views/business/order-list.html" line="195" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="951a07b5-3d07-4a93-b31a-e65a4e9f22b0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/css/layui.css" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/css/layui.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/css/layui.mobile.css" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/css/layui.mobile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/css/modules/code.css" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/css/modules/code.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/css/modules/laydate/default/laydate.css" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/css/modules/laydate/default/laydate.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/css/modules/layer/default/layer.css" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/css/modules/layer/default/layer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/font/iconfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/carousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/code.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/element.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/flow.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/flow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/laydate.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/laydate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/layedit.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/layedit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/layer.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/layer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/laypage.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/laypage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/laytpl.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/laytpl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/layui-xtree.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/mobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/mobile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/tree.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/tree.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/upload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/lay/modules/util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/layui.all.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/layui.all.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layuiadmin/layui/layui.js" beforeDir="false" afterPath="$PROJECT_DIR$/layuiadmin/layui/layui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/goods-list-outbound.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/goods-list-outbound.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/goods-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/goods-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/goods-record-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/goods-record-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/order-add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/order-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/order-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/order-list-read.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-list-read.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/order-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/outbound-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/outbound-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/plan-add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/plan-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/plan-list-produce.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-list-produce.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/plan-list-read.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-list-read.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/plan-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/produce-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/produce-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/purchase-order-list-warehouse.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/purchase-order-list-warehouse.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/purchase-order-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/purchase-order-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/sample-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/sample-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/sample-order-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/sample-order-list.html" afterDir="false" />
-    </list>
+    <list default="true" id="951a07b5-3d07-4a93-b31a-e65a4e9f22b0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,8 +47,8 @@
       <file leaf-file-name="order-edit.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="193" column="13" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="13" />
+            <state relative-caret-position="2926">
+              <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
             </state>
           </provider>
         </entry>
@@ -293,7 +243,7 @@
     <property name="SearchEverywhereHistoryKey" value="sample-order-list.html&#9;FILE&#9;file://D:/IdeaProjects/layuiAdmin/views/business/sample-order-list.html&#10;goods-list-outbound.html&#9;FILE&#9;file://D:/IdeaProjects/layuiAdmin/views/business/goods-list-outbound.html&#10;sample-detail.html&#9;FILE&#9;file://D:/IdeaProjects/layuiAdmin/views/business/sample-detail.html&#10;order-look.html&#9;FILE&#9;file://D:/IdeaProjects/layuiAdmin/views/business/order-look.html" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../springboot" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
@@ -677,12 +627,12 @@
       <workItem from="1527553796943" duration="3297000" />
       <workItem from="1527569513368" duration="3936000" />
       <workItem from="1527589593759" duration="817000" />
-      <workItem from="1527590994176" duration="24727000" />
+      <workItem from="1527590994176" duration="25366000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173267000" />
+    <option name="totallyTimeSpent" value="173906000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -694,7 +644,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
@@ -1137,8 +1087,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="193" column="13" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="13" />
+        <state relative-caret-position="2926">
+          <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
         </state>
       </provider>
     </entry>
