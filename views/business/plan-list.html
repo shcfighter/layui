@@ -20,6 +20,9 @@
                 <div class="layui-card-body">
                     <div class="layui-btn-group" style="margin-bottom: 10px;">
                         <button class="layui-btn" data-type="add">新增</button>
+                        <button class="layui-btn" data-type="edit">编辑</button>
+                        <button class="layui-btn" data-type="del">删除</button>
+                        <button class="layui-btn" data-type="detail">查看</button>
                     </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
                         产品名称：
@@ -39,13 +42,66 @@
                             </div>
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
-                        <!--<button class="layui-btn" data-type="download">下载</button>
-                        <button class="layui-btn" data-type="print">打印</button>-->
                     </div>
 
-                    <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
+                    <table class="layui-table" lay-data="{page: true}" lay-filter="order-table" id="orderTable">
+                        <thead>
+                        <tr>
+                            <th lay-data="{checkbox:true, fixed:'left'}" rowspan="3"></th>
+                            <th lay-data="{field:'sampleCode', width:150}" rowspan="3">款号</th>
+                            <th lay-data="{field:'orderCode', width:150}" rowspan="3">订单号</th>
+                            <th lay-data="{field:'productName', width:150}" rowspan="3">产品名称</th>
+                            <th lay-data="{field:'photoUrl', width:150, templet: '#imagesTpl', unresize: true}" rowspan="3">产品图片</th>
+                            <th lay-data="{field:'billingDate', width:150}" rowspan="3">开单日期</th>
+                            <th lay-data="{field:'deptName', width:150}" rowspan="3">生产部门</th>
+                            <th lay-data="{field:'productionProcesses', width:150}" rowspan="3">生产工序</th>
+                            <!--<th lay-data="{align:'center'}" colspan="3" rowspan="2">原材料</th>-->
+                            <th lay-data="{align:'center'}" colspan="16">各尺码数量</th>
+                            <th lay-data="{field:'totalNum', width:120}" rowspan="3">总计</th>
+                            <th lay-data="{field:'billingUser', width:150}" rowspan="3">开单人</th>
+                            <th lay-data="{field:'auditUser', width:150}" rowspan="3">审核人</th>
+                            <th lay-data="{field:'status', width:150}" rowspan="3">状态</th>
+                            <th lay-data="{field:'remarks', width:300}" rowspan="3">备注</th>
+                        </tr>
+                        <tr>
+                            <th lay-data="{align:'center'}" colspan="2">4</th>
+                            <th lay-data="{align:'center'}" colspan="2">6</th>
+                            <th lay-data="{align:'center'}" colspan="2">8</th>
+                            <th lay-data="{align:'center'}" colspan="2">12</th>
+                            <th lay-data="{align:'center'}" colspan="2">14</th>
+                            <th lay-data="{align:'center'}" colspan="2">16</th>
+                            <th lay-data="{align:'center'}" colspan="2">18</th>
+                            <th lay-data="{align:'center', templet: '<div>{{d.detailList[8].sizeType}}</div>'}" colspan="2"></th>
+                        </tr>
+                        <tr>
+                            <!--<th lay-data="{align:'center', width:100, templet: '#materialListTpl'}">原料名</th>
+                            <th lay-data="{align:'center', width:100}">颜色</th>
+                            <th lay-data="{align:'center', width:100}">数量</th>-->
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[0].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[0].orderNum}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[1].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[1].orderNum}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[2].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[2].orderNum}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[3].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[3].orderNum}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[4].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[4].orderNum}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[5].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[5].orderNum}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[6].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[6].orderNum}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[7].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.detailList[7].orderNum}}</div>'}">数量</th>
+                        </tr>
+                        </thead>
+                    </table>
 
-
+                    <script type="text/html" id="imagesTpl">
+                        {{#  if(d.photoUrl){ }}
+                        <button class="layui-btn images" lay-event="sampleImages">样品</button>
+                        {{#  } }}
+                    </script>
                     <script type="text/html" id="statusTpl">
                         {{#  if(d.status === 0){ }}
                         <span style="color: #F581B1;">新建</span>
@@ -54,13 +110,6 @@
                         {{#  } else if(d.status === 2) { }}
                         <span style="color: #F581B1;">完成</span>
                         {{#  } }}
-                    </script>
-
-                    <script type="text/html" id="user-table-barDemo">
-                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="to_produce">投入生产</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                     </script>
 
                 </div>
@@ -83,127 +132,33 @@
             , table = layui.table;
 
         //方法级渲染
-        table.render({
-            elem: '#order-table'
-            , url: domain + 'api/plan/findPlanPage?t=' + new Date().getTime()
-            , cols: [[
-                {field: 'planName', title: '生产代号', width: 120, sort: true}
-                , {field: 'productName', title: '产品名称', width: 120, sort: true}
-                , {field: 'batchNo', title: '生产批次', width: 110}
-                , {field: 'deptName', title: '部门', width: 80, sort: true}
-                , {field: 'num', title: '产品数量', width: 100}
-                , {field: 'beginDate', title: '开始生产时间', width: 120}
-                , {field: 'endDate', title: '结束生产时间', width: 115}
-                , {field: 'status', title: '状态', width: 80, templet: '#statusTpl', unresize: true}
-                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
-            ]]
-            , id: 'orderTable'
-            , page: true
-            ,height: 'full-100'
+        table.init('order-table', {
+            url:  domain + 'api/plan/findPlanPage?t=' + new Date().getTime()
         });
-
         element.render();
-
 
         //监听工具条
         table.on('tool(order-table)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'detail') {
-                var index = layer.open({
-                    type: 2,
-                    title: "查看生产计划",
-                    content: 'plan-detail.html?sampleId=' + data.orderId,
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                        var body = layer.getChildFrame('body', index);
-                        body.find('input[name="productName"]').val(data.productName);
-                        body.find('input[name="num"]').val(data.num);
-                        body.find('input[name="planName"]').val(data.planName);
-                        body.find('input[name="deptName"]').val(data.deptName);
-                        body.find('input[name="batchNo"]').val(data.batchNo);
-                        body.find('input[name="beginDate"]').val(data.beginDate);
-                        body.find('input[name="endDate"]').val(data.endDate);
-                        if (data.remarks){
-                            body.find('textarea[name="remarks"]').text(data.remarks);
-                        }
-
-                        body.find('input[name="productName"]').attr("disabled", "disabled");
-                        body.find('input[name="num"]').attr("disabled", "disabled");
-                        body.find('input[name="planName"]').attr("disabled", "disabled");
-                        body.find('input[name="deptName"]').attr("disabled", "disabled");
-                        body.find('input[name="batchNo"]').attr("disabled", "disabled");
-                        body.find('input[name="beginDate"]').attr("disabled", "disabled");
-                        body.find('input[name="endDate"]').attr("disabled", "disabled");
-                        body.find('textarea[name="remarks"]').attr("disabled", "disabled");
-                        body.find(".layui-layout-admin").remove();
-                    }
+            if (obj.event === 'sampleImages') {
+                var json = {
+                    "code": 0,
+                    "msg": "",
+                    "start": 0
+                }
+                var images_data = [];
+                var images = data.photoUrl.split(",");
+                $.each(images, function (index, image) {
+                    $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
+                    var image_data = {};
+                    image_data.src = image;
+                    images_data.push(image_data);
+                    json.data = images_data;
                 });
-                layer.full(index);
-            } else if (obj.event === 'edit') {
-                var index = layer.open({
-                    type: 2,
-                    title: "编辑生产计划",
-                    content: 'plan-edit.html?sampleId=' + data.orderId,
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                        var body = layer.getChildFrame('body', index);
-                        body.find('input[name="id"]').val(data.id);
-                        body.find('input[name="productName"]').val(data.productName);
-                        body.find('input[name="num"]').val(data.num);
-                        body.find('input[name="planName"]').val(data.planName);
-                        body.find('input[name="deptName"]').val(data.deptName);
-                        body.find('input[name="batchNo"]').val(data.batchNo);
-                        body.find('input[name="beginDate"]').val(data.beginDate);
-                        body.find('input[name="endDate"]').val(data.endDate);
-                        if (data.remarks){
-                            body.find('textarea[name="remarks"]').text(data.remarks);
-                        }
-
-                    }
-                });
-                layer.full(index);
-            } else if (obj.event === 'to_produce') {
-                layer.confirm('确定投入生产？', function (index) {
-                    $.ajax({
-                        type: 'PUT',
-                        contentType: "application/json;",
-                        url: domain + "api/plan/updateToProduce/" + data.id,
-                        success: function (result) {
-                            if (result.code == 0) {
-                                layer.msg(result.msg);
-                                layui.table.reload('orderTable');
-                            } else {
-                                layer.alert(result.msg);
-                            }
-                        },
-                        error: function () {
-                            console.log("网络错误！");
-                        }
-                    });
-                });
-            } else if (obj.event === 'del') {
-                layer.confirm('确定需要删除该生产计划？', function (index) {
-                    $.ajax({
-                        type: 'DELETE',
-                        contentType: "application/json;",
-                        url: domain + "api/plan/deletePlan/" + data.id,
-                        success: function (result) {
-                            if (result.code == 0) {
-                                layer.msg(result.msg);
-                                layui.table.reload('orderTable');
-                            } else {
-                                layer.alert(result.msg);
-                            }
-                        },
-                        error: function () {
-                            console.log("网络错误！");
-                        }
-                    });
+                layer.photos({
+                    photos: json //格式见API文档手册页
                 });
             }
-
         });
 
         /* 触发弹层 */
@@ -213,6 +168,73 @@
                     type: 2,
                     title: "新建生产计划",
                     content: 'plan-add.html',
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            },
+            edit: function () {
+                var checkStatus = table.checkStatus('orderTable')
+                    , data = checkStatus.data;
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                if (ids.length <= 0) {
+                    layer.alert("请先选择！");
+                    return false;
+                }
+                if (ids.length > 1) {
+                    layer.alert("只可以选择一条记录！");
+                    return false;
+                }
+                var index = layer.open({
+                    type: 2,
+                    title: "修改计划单",
+                    content: 'plan-edit.html?id=' + ids[0],
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            },
+            del: function () {
+                var checkStatus = table.checkStatus('orderTable')
+                    , data = checkStatus.data;
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                if (ids.length <= 0) {
+                    layer.alert("请先选择！");
+                    return false;
+                }
+                layer.confirm('确定批量删除计划单？', function (index) {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8;",
+                        url: domain + "api/plan/batchDelete",
+                        data: {
+                            "ids": ids
+                        },
+                        success: function (result) {
+                            if (result.code == 0) {
+                                table.reload('orderTable');
+                                layer.close(index);
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
+            },
+            detail: function () {
+                var index = layer.open({
+                    type: 2,
+                    title: "修改样品",
+                    content: 'sample-edit.html',
                     area: ['300px', '300px'],
                     maxmin: true
                 });

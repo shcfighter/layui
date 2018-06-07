@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>网站后台管理模版</title>
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">样品</label>
+                        <div class="layui-input-inline" style="width: 500px;">
+                            <!--<select name="sampleId" lay-search lay-filter="sampleId" id="sampleId">
+                                <option value="">请选择</option>
+                            </select>-->
+                            <select name="sampleId" id="sampleId" lay-ignore style="width: 500px; height: 35px;">
+                                <option value="">请选择</option>
+                            </select>
+                            <input type="hidden" name="sampleId" class="layui-input" readonly>
+                        </div>
+                        <label class="">默认只显示50条，可输入款号搜索</label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">款号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="sampleCode" lay-verify="required" placeholder="请输入款式" autocomplete="off" class="layui-input" readonly>
+                            <input type="hidden" name="photoUrl" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">款式</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="style" lay-verify="required" placeholder="请输入款式" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">针型</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="needle" lay-verify="required" placeholder="请输入针型" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">材料</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="material" lay-verify="required" placeholder="请输入材料" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">公司</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="company" lay-verify="required" placeholder="请输入公司" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">客户品牌</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="brand" lay-verify="required" placeholder="请输入客户品牌" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产品数量</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="orderNum" lay-verify="required" autocomplete="off" placeholder="请输入产品数量" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产品单位</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="productUnit" lay-verify="required" autocomplete="off" placeholder="请输入产品单位" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">下单时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="orderTime" id="order-date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产品单价</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="unitPrice" lay-verify="required|number" placeholder="请输入产品单价" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">产品总价</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="totalPrice" lay-verify="required|number" placeholder="请输入产品总价" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">交付日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="deliverDate" id="LAY-component-form-group-date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作公司</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="cooperationCompany" lay-verify="required" autocomplete="off" placeholder="请输入合作公司" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作人</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="contactName" lay-verify="required" autocomplete="off" placeholder="请输入合作人" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">联系方式</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="contactPhone" lay-verify="required|phone" autocomplete="off" placeholder="请输入联系方式" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea" name="remarks"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-layout-admin">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="left: 0;">
+                            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script src="../../layuiadmin/commons.js"></script>
+<script src="../../layuiadmin/jquery-2.1.4.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/i18n/zh-CN.js"></script>
+<script>
+    var sample_id;
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json;",
+        url: domain + "api/sample/findSamplePage?limit=50",
+        success: function (result) {
+            if (result.code == 0) {
+                $.each(result.data, function (index, value) {
+                    $("#sampleId").append("<option value='" + value.id + "'>" + value.sampleCode + "</option>");
+                })
+            } else {
+                layer.alert(result.msg);
+            }
+        },
+        error: function () {
+            console.log("网络错误！");
+        }
+    });
+
+    $("#sampleId").select2({
+        ajax : {
+            url : domain + "api/sample/searchSample",
+            dataType : 'json', //数据类型是json
+            delay : 250, //延迟
+            data : function(params) { //params是select2的参数，下面的q就是通过params来获得的
+                //返回向服务器传递的参数
+                return {
+                    code : params.term //输入的查询条件
+                };
+            },
+            processResults : function(data,params) { //服务器处理结果，data是服务器返回的结果
+                return {
+                    results : data.data, //results应该是一个包含多个json对象的数组，这个根据服务器返回值进行设置，我的服务器返回的json对象的数组包含在data.results中。
+                };
+            },
+            cache : true //是否缓存
+        },
+        placeholder : '请选择增员人', //placeholder
+        escapeMarkup : function(markup) {
+            return markup;
+        }, // custom formatter
+        minimumInputLength : 1,
+        templateResult : formatRepo,
+        templateSelection : formatRepoSelection,
+        language: 'zh-CN', //国际化
+    });
+
+
+
+
+    //对搜索结果进行自定义显示
+    function formatRepo(repo) {
+        if (repo.loading) {
+            return repo.sampleCode;
+        }
+
+        var markup = "<div class='col-lg-6'>" + repo.sampleCode + "</div>";
+        return markup;
+    }
+
+    //选择后在select2上显示的内容
+    function formatRepoSelection(repo) {
+        if(undefined != repo.id && null != repo.id && "" != repo.id && sample_id != repo.id){
+            console.log(repo.id);
+            sample_id = repo.id;
+            $.ajax({
+                type: 'GET',
+                contentType: "application/json;",
+                url: domain + "api/sample/findSample/" + repo.id,
+                success: function (result) {
+                    if (result.code == 0) {
+                        var sample = result.data.sample;
+                        $("input[name='sampleCode']").val(sample.sampleCode);
+                        $("input[name='style']").val(sample.style);
+                        $("input[name='needle']").val(sample.needle);
+                        $("input[name='material']").val(sample.material);
+                        $("input[name='company']").val(sample.company);
+                        $("input[name='brand']").val(sample.brand);
+                        $("input[name='photoUrl']").val(sample.photoUrl);
+                    } else {
+                        layer.alert(result.msg);
+                    }
+                },
+                error: function () {
+                    console.log("网络错误！");
+                }
+            });
+        }
+        return repo.sampleCode;
+    }
+
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'laydate', 'layedit'], function () {
+        var $ = layui.$
+            , layer = layui.layer
+            , laydate = layui.laydate
+            , form = layui.form;
+
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#LAY-component-form-group-date'
+        });
+        laydate.render({
+            elem: '#order-date'
+        });
+
+
+
+        /*$.ajax({
+            type: 'GET',
+            contentType: "application/json;",
+            url: domain + "api/sample/findSamplePage?limit=50",
+            success: function (result) {
+                if (result.code == 0) {
+                    $.each(result.data, function (index, value) {
+                        $("select[name='sampleId']").append("<option value=\"" + value.id + "\">" + value.sampleCode + "</option>");
+                    })
+                    form.render('select');
+                } else {
+                    layer.alert(result.msg);
+                }
+            },
+            error: function () {
+                console.log("网络错误！");
+            }
+        });*/
+
+        /*form.on('select(sampleId)', function(data){
+            console.log(data);
+            if(!data.value){
+                return;
+            }
+            $.ajax({
+                type: 'GET',
+                contentType: "application/json;",
+                url: domain + "api/sample/findSample/" + data.value,
+                success: function (result) {
+                    if (result.code == 0) {
+                        var sample = result.data.sample;
+                        $("input[name='sampleCode']").val(sample.sampleCode);
+                        $("input[name='style']").val(sample.style);
+                        $("input[name='needle']").val(sample.needle);
+                        $("input[name='material']").val(sample.material);
+                        $("input[name='company']").val(sample.company);
+                        $("input[name='brand']").val(sample.brand);
+                        $("input[name='photoUrl']").val(sample.photoUrl);
+                    } else {
+                        layer.alert(result.msg);
+                    }
+                },
+                error: function () {
+                    console.log("网络错误！");
+                }
+            });
+        });*/
+
+        $("#sample").click(function () {
+            var jsonText = $("#sampleText").val();
+            if("" == jsonText){
+                jsonText = "{ \"code\": 0,\"msg\": \"\",\"start\": 0}";
+            }
+            layer.photos({
+                photos: JSON.parse(jsonText) //格式见API文档手册页
+            });
+        });
+
+        $("#select_sample").click(function () {
+            var index = layer.open({
+                type: 2,
+                title: "样品列表",
+                content: 'sample-order-list.html',
+                area: ['300px', '300px'],
+                maxmin: true,
+                success: function (layero, index) {
+                }
+            });
+            layer.full(index);
+        });
+
+        /* 监听提交 */
+        form.on('submit(component-form-demo1)', function (data) {
+            data.field.deliverDate = data.field.deliverDate + " 00:00:00";
+            data.field.orderDate = data.field.orderDate + " 00:00:00";
+            $.ajax({
+                type: 'POST',
+                contentType: "application/json;",
+                url: domain + "api/order/insertOrder",
+                data: JSON.stringify(data.field),
+                success: function (result) {
+                    if (result.code == 0) {
+                        layer.msg(result.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layui.table.reload('orderTable');
+                        parent.layer.close(index);
+                    } else {
+                        layer.alert(result.msg);
+                    }
+                },
+                error: function () {
+                    console.log("网络错误！");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+</body>
+
+</html>

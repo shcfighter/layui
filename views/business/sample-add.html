@@ -25,19 +25,47 @@
         <div class="layui-card-body" style="padding: 15px;">
             <form class="layui-form" action="" lay-filter="component-form-group">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">样品名称</label>
+                    <label class="layui-form-label">款号</label>
                     <div class="layui-input-inline">
-                        <input type="hidden" name="id" lay-verify="" autocomplete="off" class="layui-input">
-                        <input type="text" name="sampleName" lay-verify="required" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+                        <input type="text" name="sampleCode" lay-verify="required" autocomplete="off"
+                               placeholder="请输入款号" class="layui-input">
                     </div>
-                    <label class="layui-form-label">样品型号</label>
+                    <label class="layui-form-label">针形</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="sampleCode" lay-verify="" autocomplete="off" placeholder="请输入样品型号" class="layui-input">
+                        <input type="text" name="needle" lay-verify="required" autocomplete="off" placeholder="请输入针形"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">款式</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="style" lay-verify="required" autocomplete="off" placeholder="请输入款式"
+                               class="layui-input">
                     </div>
                 </div>
-
                 <div class="layui-form-item">
-
+                    <label class="layui-form-label">材料</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="material" lay-verify="required" autocomplete="off"
+                               placeholder="请输入材料" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">公司</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="company" lay-verify="required" autocomplete="off" placeholder="请输入公司"
+                               class="layui-input">
+                    </div>
+                    <label class="layui-form-label">客户品牌</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="brand" lay-verify="required" autocomplete="off" placeholder="请输入客户品牌"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">颜色</label>
+                    <div class="layui-input-inline">
+                        <!--<input type="text" name="color" lay-verify="required" autocomplete="off" placeholder="请输入颜色" class="layui-input">-->
+                        <select name="color" lay-search lay-filter="color">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="layui-form-item">
@@ -47,7 +75,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">预览图：</label>
+                    <label class="layui-form-label">预览图</label>
                     <div class="layui-input-block">
                         <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
                             <div class="layui-upload-list" id="upload-more-list"></div>
@@ -55,43 +83,39 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">原材料：</label>
+                    <label class="layui-form-label"></label>
                     <div class="layui-input-block">
-                        <button type="button" class="layui-btn" id="material-more">新增原材料</button>
+                        <button type="button" class="layui-btn" id="material-more">工艺尺寸</button>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="200">
-                            <col width="200">
-                            <col width="100">
-                            <col width="100">
-                            <col width="100">
-                            <col>
-                            <col width="50">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>物品名称</th>
-                            <th>物品型号</th>
-                            <th>颜色</th>
-                            <th>数量</th>
-                            <th>单位</th>
-                            <th>备注</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-block">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="200">
+                                <col width="200">
+                                <col width="100">
+                                <col width="50">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>尺寸</th>
+                                <th>初样</th>
+                                <th>单位</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">备注</label>
                     <div class="layui-input-block">
-                        <textarea class="layui-textarea" id="LAY_demo1" name="remarks" style="display: none">
-                        </textarea>
+                        <textarea placeholder="请输入内容" class="layui-textarea" name="remarks"></textarea>
                     </div>
                 </div>
 
@@ -113,19 +137,37 @@
 <script>
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
-    }).use(['form', 'laydate', 'layedit', 'upload'], function () {
+    }).use(['form', 'upload'], function () {
         var $ = layui.$
             , layer = layui.layer
-            , laydate = layui.laydate
             , form = layui.form
-            , layedit = layui.layedit
-            ,upload = layui.upload;
+            , upload = layui.upload;
 
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json;",
+            url: domain + "api/color/findColor",
+            success: function (result) {
+                if (result.code == 0) {
+                    $.each(result.data, function (index, value) {
+                        $("select[name='color']").append("<option value=\"" + value.colorName + "\">" + value.colorName + "</option>");
+                    })
+                    form.render('select');
+                } else {
+                    layer.alert(result.msg);
+                }
+            },
+            error: function () {
+                console.log("网络错误！");
+            }
+        });
+
+        form.render(null, 'component-form-group');
 
         $(".layui-table").on("click", ".layui-delete", function () {
             var $tr = $(this).closest("tr");
             layer.confirm('确认删除改原材料？', function (index) {
-                if($($tr).find("td").eq(0).attr("id")){
+                if ($($tr).find("td").eq(0).attr("id")) {
                     var id = $($tr).find("td").eq(0).text();
                     $.ajax({
                         type: 'GET',
@@ -143,83 +185,48 @@
                             console.log("网络错误！");
                         }
                     });
-                }else {
+                } else {
                     $($tr).remove();
                     layer.close(index);
                 }
             });
         });
 
-        $(".layui-btn-primary").click(function () {
-            layer.confirm('提交之后进入下一个环节将不可修改，确认提交？', function (index) {
-                $.ajax({
-                    type: 'POST',
-                    contentType: "application/json;",
-                    url: domain + "api/sample/updateToPurchase/" + $("input[name='id']").val(),
-                    success: function (result) {
-                        if (result.code == 0) {
-                            layer.msg(result.msg);
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layui.table.reload('orderTable');
-                            parent.layer.close(index);
-                        } else {
-                            layer.alert(result.msg);
-                        }
-                    },
-                    error: function () {
-                        console.log("网络错误！");
-                    }
-                });
-            });
-        });
-
-        //构建一个默认的编辑器
-        var indexEdit = layedit.build('LAY_demo1', {
-            tool: ['strong','italic','underline','del','|','left','center','right','link','unlink','face']
-            ,height: 100
-        });
-
         //多图片上传
         upload.render({
             elem: '#upload-more'
-            ,url: domain + 'api/upload'
-            ,multiple: true
-            ,before: function(obj){
+            , url: domain + 'api/upload'
+            , multiple: true
+            , before: function (obj) {
                 //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
+                obj.preview(function (index, file, result) {
 
                 });
             }
-            ,done: function(res){
+            , done: function (res) {
                 //上传完毕
-                if(res.code == 0){
+                if (res.code == 0) {
                     $.each(res.data, function (index, image) {
-                        $('#upload-more-list').append('<img src="'+ image +'" class="layui-upload-img">');
+                        $('#upload-more-list').append('<img src="' + image + '" class="layui-upload-img">');
                         $('#upload-more-list').after('<input type="hidden" name="photoUrls" value="' + image + '" class="layui-input">');
                     })
                 }
             }
         });
-        
+
         $("#material-more").click(function () {
             var index = layer.open({
                 type: 2,
-                title: "原材料",
-                content: 'material-add.html',
-                area: ['300px', '300px'],
+                title: "工艺尺寸",
+                content: 'sample-detail-add.html',
+                area: ['500px', '320px'],
                 maxmin: true,
                 success: function (layero, index) {
                     var body = layer.getChildFrame('body', index);
-
                 }
             });
-            layer.full(index);
+            //layer.full(index);
         });
-
-        /*$('.layui-textarea').text("<img src=\"file:///D:/IdeaProjects/layuiAdmin/layuiadmin/layui/images/face/29.gif\" alt=\"[拜拜]\">");
-        var index= layedit.build('LAY_demo1');*/
-        form.render(null, 'component-form-group');
-
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
@@ -227,36 +234,21 @@
             var arr = [];
             $.each(_tr, function (index, tr) {
                 var _td = $(tr).find("td");
-                var goods = {};
-                if($(_td[0]).attr("id")){
-                    goods.id =  $(_td[0]).text();
-                    goods.goodsName =  $(_td[1]).text();
-                    goods.goodsModel =  $(_td[2]).text();
-                    goods.color = $( _td[3]).text();
-                    goods.num =  $(_td[4]).text();
-                    goods.unit =  $(_td[5]).text();
-                    goods.remarks =  $(_td[6]).text();
-                } else {
-                    goods.goodsName =  $(_td[0]).text();
-                    goods.goodsModel =  $(_td[1]).text();
-                    goods.color = $( _td[2]).text();
-                    goods.num =  $(_td[3]).text();
-                    goods.unit =  $(_td[4]).text();
-                    goods.remarks =  $(_td[5]).text();
-                }
-                arr.push(goods);
+                var detail = {};
+                detail.attribute = $(_td[0]).text();
+                detail.value = $(_td[1]).text();
+                detail.unit = $(_td[2]).text();
+                arr.push(detail);
             })
-            data.field.remarks = layedit.getContent(indexEdit);
             var photoUrls = [];
             $.each($("input[name='photoUrls']"), function (index, value) {
                 photoUrls.push($(value).val());
             })
-            var params ={
+            var params = {
                 sample: data.field,
-                materialList: arr,
+                detailList: arr,
                 sampleUrls: photoUrls.join(",")
             }
-            console.log(photoUrls);
             $.ajax({
                 type: 'POST',
                 contentType: "application/json;",

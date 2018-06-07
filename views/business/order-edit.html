@@ -9,6 +9,7 @@
     <title>网站后台管理模版</title>
     <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/jquery.searchableSelect.css" media="all">
 </head>
 <body>
 
@@ -17,82 +18,156 @@
         <div class="layui-card-body" style="padding: 15px;">
             <form class="layui-form" action="" lay-filter="component-form-group">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">产品名称</label>
-                    <div class="layui-input-block">
-                        <input type="hidden" name="id" lay-verify="" autocomplete="off" class="layui-input" readonly>
-                        <input type="text" name="productName" lay-verify="required" autocomplete="off" placeholder="请输入产品名称" class="layui-input" >
+                    <div class="layui-inline">
+                        <label class="layui-form-label">样品</label>
+                        <div class="layui-input-inline" style="width: 450px;">
+                            <select name="sampleId" id="sampleId" lay-ignore style="display: none;">
+                                <option value="">请选择</option>
+                            </select>
+                            <input type="hidden" name="id" class="layui-input" readonly>
+                            <input type="hidden" name="sampleId" class="layui-input" readonly>
+                        </div>
+                        <label class="">默认只显示50条，可输入款号搜索</label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">款号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="sampleCode" lay-verify="required" placeholder="请输入款式" autocomplete="off" class="layui-input" readonly>
+                            <input type="hidden" name="photoUrl" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">款式</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="style" lay-verify="required" placeholder="请输入款式" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">针型</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="needle" lay-verify="required" placeholder="请输入针型" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">材料</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="material" lay-verify="required" placeholder="请输入材料" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">公司</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="company" lay-verify="required" placeholder="请输入公司" autocomplete="off" class="layui-input" readonly>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">客户品牌</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="brand" lay-verify="required" placeholder="请输入客户品牌" autocomplete="off" class="layui-input" readonly>
+                        </div>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">产品数量</label>
+                        <label class="layui-form-label">订单号</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="orderNum" lay-verify="required" autocomplete="off" placeholder="请输入产品数量" class="layui-input" >
+                            <input type="text" name="orderCode" lay-verify="required" autocomplete="off" placeholder="请输入订单号" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">产品单位</label>
+                        <label class="layui-form-label">交货号</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="productUnit" lay-verify="required" autocomplete="off" placeholder="请输入产品单位" class="layui-input" readonly>
+                            <input type="text" name="deliveryNumber" id="deliveryNumber" lay-verify="required" lay-verify="date" autocomplete="off" placeholder="请输入交货号" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">PO号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="poNumber" lay-verify="required" autocomplete="off" placeholder="请输入PO号" class="layui-input">
                         </div>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">选择样品</label>
+                        <label class="layui-form-label">订单类型</label>
                         <div class="layui-input-inline">
-                            <input type="hidden" name="sampleId" id="sampleId" class="layui-input">
-                            <input type="hidden" name="sampleText" id="sampleText" lass="layui-input">
-                            <button type="button" id="sample" class="layui-btn">样品</button>
-                            <button type="button" id="select_sample" class="layui-btn">选择样品</button>
+                            <select name="type" lay-filter="type">
+                                <option value="1">自营</option>
+                                <option value="2">外贸</option>
+                            </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">下单时间</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="orderDate" id="order-date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                            <input type="text" name="orderTime" id="order-date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
+
                 <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">产品单价</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="unitPrice" lay-verify="required|number" placeholder="请输入产品单价" autocomplete="off" class="layui-input" >
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">产品总价</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="totalPrice" lay-verify="required|number" placeholder="请输入产品总价" autocomplete="off" class="layui-input" >
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">交付日期</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="deliverDate" id="LAY-component-form-group-date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" >
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">合作公司</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="cooperationCompany" lay-verify="required" autocomplete="off" placeholder="请输入合作公司" class="layui-input" >
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">合作人</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="contactName" lay-verify="required" autocomplete="off" placeholder="请输入合作人" class="layui-input" >
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">联系方式</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="contactPhone" lay-verify="required|phone" autocomplete="off" placeholder="请输入联系方式" class="layui-input" >
-                        </div>
+                    <div class="layui-input-block">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="200">
+                                <col width="200">
+                                <col width="200">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>尺寸</th>
+                                <th>颜色</th>
+                                <th>数量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="text" name="sizeType" value="4" class="layui-input" readonly></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="sizeType" value="6" class="layui-input" readonly></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="sizeType" value="8" class="layui-input" readonly></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="sizeType" value="12" class="layui-input" readonly></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="sizeType" value="14" class="layui-input" readonly></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="sizeType" value="16" class="layui-input" readonly></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="sizeType" value="18" class="layui-input" readonly></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            <tr id="no_value">
+                                <td><input type="text" name="sizeType" value="" class="layui-input"></td>
+                                <td><select name="color" lay-search lay-filter="color"></select></td>
+                                <td><input type="text" name="num" value="0" class="layui-input"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -101,6 +176,7 @@
                         <textarea placeholder="请输入内容" class="layui-textarea" name="remarks"></textarea>
                     </div>
                 </div>
+
                 <div class="layui-form-item layui-layout-admin">
                     <div class="layui-input-block">
                         <div class="layui-footer" style="left: 0;">
@@ -116,68 +192,55 @@
 
 <script src="../../layuiadmin/layui/layui.js"></script>
 <script src="../../layuiadmin/commons.js"></script>
+<script src="../../layuiadmin/jquery-2.1.4.min.js"></script>
+<script src="../../layuiadmin/jquery.searchableSelect.js"></script>
 <script>
+    function callback(value){
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json;",
+            url: domain + "api/sample/findSample/" + value,
+            success: function (result) {
+                if (result.code == 0) {
+                    var sample = result.data.sample;
+                    $("input[name='sampleId']").val(sample.id);
+                    $("input[name='sampleCode']").val(sample.sampleCode);
+                    $("input[name='style']").val(sample.style);
+                    $("input[name='needle']").val(sample.needle);
+                    $("input[name='material']").val(sample.material);
+                    $("input[name='company']").val(sample.company);
+                    $("input[name='brand']").val(sample.brand);
+                    $("input[name='photoUrl']").val(sample.photoUrl);
+                } else {
+                    layer.alert(result.msg);
+                }
+            },
+            error: function () {
+                console.log("网络错误！");
+            }
+        });
+    }
     layui.config({
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'form', 'carousel', 'laydate'], function () {
+    }).use(['index', 'form', 'laydate', 'layedit'], function () {
         var $ = layui.$
             , layer = layui.layer
-            , form = layui.form
-            ,carousel = layui.carousel
-            , laydate = layui.laydate;
-
-        form.render(null, 'component-form-group');
-        laydate.render({
-            elem: '#LAY-component-form-group-date'
-        });
-        laydate.render({
-            elem: '#order-date'
-        });
+            , laydate = layui.laydate
+            , form = layui.form;
 
         $.ajax({
             type: 'GET',
-            //contentType: "application/json;",
-            url: domain + "api/order/getOrder/" + GetQueryString("id"),
+            contentType: "application/json;",
+            url: domain + "api/color/findColor",
             success: function (result) {
                 if (result.code == 0) {
-                    var data = result.data;
-                    var order = data.order;
-                    if(undefined != order && null != order && "" != order && "null" != order){
-                        $("input[name='id']").val(order.id);
-                        $("input[name='sampleId']").val(order.sampleId);
-                        $("input[name='productName']").val(order.productName);
-                        $("input[name='orderNum']").val(order.orderNum);
-                        $("input[name='productUnit']").val(order.productUnit);
-                        $("input[name='orderDate']").val(order.orderTime);
-                        $("input[name='unitPrice']").val(order.unitPrice);
-                        $("input[name='totalPrice']").val(order.totalPrice);
-                        $("input[name='deliverDate']").val(order.deliverDate);
-                        $("input[name='cooperationCompany']").val(order.cooperationCompany);
-                        $("input[name='contactName']").val(order.contactName);
-                        $("input[name='contactPhone']").val(order.contactPhone);
-                        if(data.sample.photoUrl){
-                            var images_data = [];
-                            var images = data.sample.photoUrl.split(",");
-                            var json = {
-                                "code": 0,
-                                "msg": "",
-                                "start": 0
-                            }
-                            $.each(images, function (index, image) {
-                                $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
-                                var image_data = {};
-                                image_data.src = image;
-                                images_data.push(image_data);
-                                json.data = images_data;
-                            });
-                            $("#sampleText").val(JSON.stringify(json));
-                        }
-                        if(order.remarks){
-                            $('.layui-textarea').text(order.remarks);
-                        }
-                    }
+                    $("select[name='color']").append("<option value=\"\">请选择</option>");
+                    $.each(result.data, function (index, value) {
+                        $("select[name='color']").append("<option value=\"" + value.colorName + "\">" + value.colorName + "</option>");
+                    })
+                    form.render('select');
                 } else {
                     layer.alert(result.msg);
                 }
@@ -187,38 +250,155 @@
             }
         });
 
-        $("#sample").click(function () {
-            var jsonText = $("#sampleText").val();
-            if("" == jsonText){
-                jsonText = "{ \"code\": 0,\"msg\": \"\",\"start\": 0}";
-            }
-            layer.photos({
-                photos: JSON.parse(jsonText) //格式见API文档手册页
-            });
+        form.render(null, 'component-form-group');
+        laydate.render({
+            elem: '#order-date'
+        });
+        laydate.render({
+            elem: '#deliveryNumber'
+            ,format: 'MM/dd'
         });
 
-        $("#select_sample").click(function () {
-            var index = layer.open({
-                type: 2,
-                title: "样品列表",
-                content: 'sample-order-list.html',
-                area: ['300px', '300px'],
-                maxmin: true,
-                success: function (layero, index) {
-                }
-            });
-            layer.full(index);
+        $.ajax({
+            type: "get",
+            contentType: "application/json; charset=utf-8",
+            url: domain + "api/sample/findSamplePage?limit=50",
+            success: function(data) {
+                var tbody = "";
+                $.each(data.data, function(n, value) {
+                    var trs = "";
+                    trs += "<option value=" + value.id + ">" + value.sampleCode + "</option>";
+                    tbody += trs;
+                });
+                $("#sampleId").append(tbody);
+
+                $.ajax({
+                    type: 'GET',
+                    contentType: "application/json;",
+                    url: domain + "api/order/getOrderAndDetails/" + GetQueryString("id"),
+                    success: function (result) {
+                        if (result.code == 0) {
+                            var order = result.data.order;
+                            $("input[name='id']").val(order.id);
+                            $("input[name='sampleId']").val(order.sampleId);
+                            $("input[name='sampleCode']").val(order.sampleCode);
+                            $("input[name='photoUrl']").val(order.photoUrl);
+                            $("input[name='style']").val(order.style);
+                            $("input[name='needle']").val(order.needle);
+                            $("input[name='material']").val(order.material);
+                            $("input[name='company']").val(order.company);
+                            $("input[name='brand']").val(order.brand);
+                            $("input[name='orderCode']").val(order.orderCode);
+                            $("input[name='deliveryNumber']").val(order.deliveryNumber);
+                            $("input[name='poNumber']").val(order.poNumber);
+                            $("select[name='type']").val(order.type);
+                            //form.render("select", "type");
+                            $("input[name='orderTime']").val(order.orderTime);
+                            $("textarea[name='remarks']").val(order.remarks);
+                            console.log(order.sampleId);
+                            if(undefined == $("#sampleId").find("option[value='" + order.sampleId + "']").val()){
+                                $("#sampleId").append("<option value=" + order.sampleId + ">" + order.sampleCode + "</option>");
+                            }
+                            $("#sampleId").find("option[value='" + order.sampleId + "']").attr("selected",true);
+                            $("#sampleId").searchableSelect("api/sample/searchSample?code=");
+                            $.each(result.data.orderDetails, function (index, value) {
+                                var $tr = $("input[value='" + value.sizeType + "']").closest("tr");
+                                if(undefined == $("input[value='" + value.sizeType + "']").val() && "" != value.color) {
+                                    $("#no_value").find("input[name='sizeType']").val(value.sizeType);
+                                    $("#no_value").find("select[name='color']").val(value.color);
+                                    $("#no_value").find("input[name='num']").val(value.num);
+                                }
+                                if("" != value.color){
+                                    $($tr).find("input[name='sizeType']").val(value.sizeType);
+                                    $($tr).find("select[name='color']").val(value.color);
+                                    $($tr).find("input[name='num']").val(value.num);
+                                }
+                            });
+                            //form.render('select', 'color');
+                            form.render('select');
+                            $("#sampleId").css("display", "none");
+                        } else {
+                            layer.alert(result.msg);
+                        }
+                    },
+                    error: function () {
+                        console.log("网络错误！");
+                    }
+                });
+            },
         });
+
+        /*$.ajax({
+            type: 'GET',
+            contentType: "application/json;",
+            url: domain + "api/order/getOrderAndDetails/" + GetQueryString("id"),
+            success: function (result) {
+                if (result.code == 0) {
+                    var order = result.data.order;
+                    $("input[name='id']").val(order.id);
+                    $("input[name='sampleId']").val(order.sampleId);
+                    $("input[name='sampleCode']").val(order.sampleCode);
+                    $("input[name='photoUrl']").val(order.photoUrl);
+                    $("input[name='style']").val(order.style);
+                    $("input[name='needle']").val(order.needle);
+                    $("input[name='material']").val(order.material);
+                    $("input[name='company']").val(order.company);
+                    $("input[name='brand']").val(order.brand);
+                    $("input[name='orderCode']").val(order.orderCode);
+                    $("input[name='deliveryNumber']").val(order.deliveryNumber);
+                    $("input[name='poNumber']").val(order.poNumber);
+                    $("select[name='type']").val(order.type);
+                    //form.render("select", "type");
+                    $("input[name='orderTime']").val(order.orderTime);
+                    $("textarea[name='remarks']").val(order.remarks);
+                    $.each(result.data.orderDetails, function (index, value) {
+                        var $tr = $("input[value='" + value.sizeType + "']").closest("tr");
+                        if(undefined == $("input[value='" + value.sizeType + "']").val()) {
+                            $("#no_value").find("input[name='sizeType']").val(value.sizeType);
+                            $("#no_value").find("select[name='color']").val(value.color);
+                            $("#no_value").find("input[name='num']").val(value.num);
+                        }
+                        $($tr).find("input[name='sizeType']").val(value.sizeType);
+                        $($tr).find("select[name='color']").val(value.color);
+                        $($tr).find("input[name='num']").val(value.num);
+                    });
+                    //form.render('select', 'color');
+                    form.render('select');
+                } else {
+                    layer.alert(result.msg);
+                }
+            },
+            error: function () {
+                console.log("网络错误！");
+            }
+        });*/
+
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
-            data.field.deliverDate = data.field.deliverDate + " 00:00:00";
-            data.field.orderDate = data.field.orderDate + " 00:00:00";
+            data.field.orderTime = data.field.orderTime + " 00:00:00";
+
+            var _tr = $(".layui-table").find("tbody").find("tr");
+            var arr = [];
+            $.each(_tr, function (index, tr) {
+                var _td = $(tr).find("td");
+                var detail = {};
+                detail.sizeType = $(_td[0]).find("input[name='sizeType']").val();
+                detail.color = $(_td[1]).find("select[name='color']").val();
+                detail.num = $(_td[2]).find("input[name='num']").val();
+                arr.push(detail);
+            });
+            var params = {
+                order: data.field,
+                detailList: arr
+            }
+            console.log(params);
+
             $.ajax({
                 type: 'POST',
                 contentType: "application/json;",
                 url: domain + "api/order/updateOrder",
-                data: JSON.stringify(data.field),
+                data: JSON.stringify(params),
                 success: function (result) {
                     if (result.code == 0) {
                         layer.msg(result.msg);
@@ -236,7 +416,6 @@
             return false;
         });
     });
-
 </script>
 
 </body>

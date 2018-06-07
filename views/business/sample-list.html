@@ -20,15 +20,18 @@
                 <div class="layui-card-body">
                     <div class="layui-btn-group" style="margin-bottom: 10px;">
                         <button class="layui-btn" data-type="add">新增</button>
+                        <button class="layui-btn" data-type="edit">编辑</button>
+                        <button class="layui-btn" data-type="del">删除</button>
+                        <button class="layui-btn" data-type="detail">查看</button>
                     </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
-                        样品名称：
-                        <div class="layui-inline">
-                            <input class="layui-input" name="sampleName" id="sampleName" autocomplete="off">
-                        </div>
-                        样品型号：
+                        款号：
                         <div class="layui-inline">
                             <input class="layui-input" name="sampleCode" id="sampleCode" autocomplete="off">
+                        </div>
+                        款式：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="style" id="style" autocomplete="off">
                         </div>
                         <button class="layui-btn" data-type="reload">搜索</button>
                     </div>
@@ -45,14 +48,6 @@
                         <span style="color: #F581B1;">新建</span>
                         {{#  } else if(d.status === 1) { }}
                         <span style="color: #F581B1;">完成</span>
-                        {{#  } }}
-                    </script>
-
-                    <script type="text/html" id="user-table-barDemo">
-                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        {{#  if(d.status === 0){ }}
-                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                         {{#  } }}
                     </script>
 
@@ -73,7 +68,6 @@
         var $ = layui.$
             , element = layui.element
             , layer = layui.layer
-            ,carousel = layui.carousel
             , table = layui.table;
 
 
@@ -82,12 +76,18 @@
             elem: '#order-table'
             , url: domain + 'api/sample/findSamplePage?t=' + new Date().getTime()
             , cols: [[
-                {field: 'sampleName', title: '样品名称', width: 180, sort: true}
-                , {field: 'sampleName', title: '样品型号', width: 100}
-                , {field: 'photoUrl', title: '样品', width: 150, templet: '#imagesTpl', unresize: true}
-                , {field: 'status', title: '状态', width: 100, templet: '#statusTpl', unresize: true}
+                {checkbox: true}
+                , {field: 'sampleCode', title: '款号', width: 180, sort: true}
+                , {field: 'needle', title: '针形', width: 100}
+                , {field: 'style', title: '款式', width: 150}
+                , {field: 'material', title: '材料', width: 150}
+                , {field: 'company', title: '公司', width: 150}
+                , {field: 'brand', title: '客户品牌', width: 150}
+                , {field: 'photoUrl', title: '图示', width: 110, templet: '#imagesTpl', unresize: true}
+                , {field: 'color', title: '颜色', width: 100}
+                , {field: 'status', title: '是否中标', width: 100, templet: '#statusTpl', unresize: true}
                 , {field: 'createTime', title: '创建时间', width: 180}
-                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo'}
+                , {field: 'remarks', title: '备注', width: 180}
             ]]
             , id: 'orderTable'
             , page: true
@@ -99,54 +99,7 @@
         //监听工具条
         table.on('tool(order-table)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'detail') {
-                var index = layer.open({
-                    type: 2,
-                    title: "查看订单",
-                    content: 'sample-detail.html?id=' + data.id,
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                    }
-                });
-                layer.full(index);
-            } else if (obj.event === 'edit') {
-                var index = layer.open({
-                    type: 2,
-                    title: "查看订单",
-                    content: 'sample-edit.html?id=' + data.id,
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                        if (data.status === 1) {
-                            var body = layer.getChildFrame('body', index);
-                            body.find('#upload-more').remove();
-                            body.find('#material-more').remove();
-                            body.find('.layui-footer').remove();
-                        }
-                    }
-                });
-                layer.full(index);
-            } else if (obj.event === 'del') {
-                layer.confirm('确定删除该样品吗？', function (index) {
-                    $.ajax({
-                        type: 'DELETE',
-                        contentType: "application/json;",
-                        url: domain + "api/sample/delete/"+ data.id,
-                        success: function (result) {
-                            if (result.code == 0) {
-                                layer.msg(result.msg);
-                                layui.table.reload('orderTable');
-                            } else {
-                                layer.alert(result.msg);
-                            }
-                        },
-                        error: function () {
-                            console.log("网络错误！");
-                        }
-                    });
-                });
-            } else if (obj.event === 'sampleImages') {
+            if (obj.event === 'sampleImages') {
                 var json = {
                     "code": 0,
                     "msg": "",
@@ -179,6 +132,73 @@
                 });
                 layer.full(index);
             },
+            edit: function () {
+                var checkStatus = table.checkStatus('orderTable')
+                    , data = checkStatus.data;
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                if (ids.length <= 0) {
+                    layer.alert("请先选择！");
+                    return false;
+                }
+                if (ids.length > 1) {
+                    layer.alert("只可以选择一条记录！");
+                    return false;
+                }
+                var index = layer.open({
+                    type: 2,
+                    title: "修改样品",
+                    content: 'sample-edit.html?id=' + ids[0],
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            },
+            del: function () {
+                var checkStatus = table.checkStatus('orderTable')
+                    , data = checkStatus.data;
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                if (ids.length <= 0) {
+                    layer.alert("请先选择！");
+                    return false;
+                }
+                layer.confirm('确定批量删除样品？', function (index) {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8;",
+                        url: domain + "api/sample/batchDelete",
+                        data: {
+                            "ids": ids
+                        },
+                        success: function (result) {
+                            if (result.code == 0) {
+                                table.reload('orderTable');
+                                layer.close(index);
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
+            },
+            detail: function () {
+                var index = layer.open({
+                    type: 2,
+                    title: "修改样品",
+                    content: 'sample-edit.html',
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            },
             reload: function () {
                 //执行重载
                 table.reload('orderTable', {
@@ -186,7 +206,7 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     , where: {
-                        sampleName: $('#sampleName').val(),
+                        style: $('#style').val(),
                         sampleCode: $('#sampleCode').val()
                     }
                 });
