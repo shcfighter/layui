@@ -282,7 +282,6 @@
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
             data.field.orderTime = data.field.orderTime + " 00:00:00";
-
             var _tr = $(".layui-table").find("tbody").find("tr");
             var arr = [];
             $.each(_tr, function (index, tr) {

@@ -338,14 +338,7 @@
                                     $($tr).find("tr").eq(index).find("select[name=\"color\"]").val(value.color);
                                     $($tr).find("tr").eq(index).find("input[name=\"num\"]").val(value.num);
                                 }
-                                /*if("" != value.color){
-                                    $($tr).find("input[name='sizeType']").val(value.sizeType);
-                                    $($tr).find("select[name='color']").val(value.color);
-                                    $($tr).find("input[name='orderNum']").val(value.orderNum);
-                                    $($tr).find("input[name='maneuveringNumber']").val(value.maneuveringNumber);
-                                }*/
                             });
-                            //form.render('select', 'color');
                             form.render('select');
                             $("#orderId").css("display", "none");
                         } else {
@@ -356,7 +349,6 @@
                         console.log("网络错误！");
                     }
                 });
-
             },
         });
 

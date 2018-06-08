@@ -31,63 +31,60 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">采购单编号</label>
+                        <label class="layui-form-label">款号</label>
                         <div class="layui-input-inline">
-                            <input type="hidden" name="id" lay-verify="required" autocomplete="off" placeholder="" class="layui-input" readonly>
-                            <input type="text" name="purchaseCode" lay-verify="required" autocomplete="off" placeholder="请输入采购单编号" class="layui-input" readonly>
+                            <input type="text" name="sampleCode" lay-verify="required" autocomplete="off" placeholder="请输入款号" class="layui-input" readonly>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">订单编号</label>
                         <div class="layui-input-inline">
                             <input type="text" name="orderCode" lay-verify="required" autocomplete="off" placeholder="请输入订单编号" class="layui-input" readonly>
-                            <input type="hidden" name="orderId" lay-verify="required" autocomplete="off" class="layui-input" readonly>
+                            <input type="hidden" name="orderId" lay-verify="required" autocomplete="off" placeholder="" class="layui-input" readonly>
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">原材料名称</label>
+                        <label class="layui-form-label">产品名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="productName" lay-verify="required" autocomplete="off" placeholder="请输入原材料名称" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">成份</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="ingredients" lay-verify="required" autocomplete="off" placeholder="请输入成份" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">颜色</label>
-                        <div class="layui-input-inline">
-                            <select name="color" lay-search></select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">批次</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="batchNo" lay-verify="required" autocomplete="off" placeholder="请输入批次" class="layui-input">
+                            <input type="text" name="productName" lay-verify="required" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
                         </div>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">重量</label>
+                        <label class="layui-form-label">规格</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="weight" lay-verify="required" placeholder="请输入重量" autocomplete="off" class="layui-input">
+                            <input type="text" name="specification" lay-verify="required" autocomplete="off" placeholder="请输入规格" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">件(箱)数</label>
+                        <label class="layui-form-label">数量</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="num" lay-verify="required|number" placeholder="请输入数量" autocomplete="off" class="layui-input">
+                            <input type="text" name="num" lay-verify="required|number" autocomplete="off" placeholder="请输入数量" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">外发日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="outgoingTime" id="outgoingTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <label class="layui-form-label">货源公司</label>
+                        <label class="layui-form-label">生产部门</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="company" lay-verify="required|number" placeholder="请输入货源公司" autocomplete="off" class="layui-input">
+                            <input type="hidden" name="deptId" lay-verify="" class="layui-input">
+                            <input type="hidden" name="deptName" lay-verify="" class="layui-input">
+                            <select name="dept" lay-search="" lay-filter="deptName">
+                                <option value="">请选择生产部门</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">外发单位</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="company" lay-verify="required" placeholder="请输入外发单位" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -125,6 +122,7 @@
                 if (result.code == 0) {
                     var order = result.data;
                     $("input[name='orderCode']").val(order.orderCode);
+                    $("input[name='sampleCode']").val(order.sampleCode);
                     $("input[name='orderId']").val(order.id);
                 } else {
                     layer.alert(result.msg);
@@ -140,31 +138,15 @@
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'form'], function () {
+    }).use(['index', 'form', 'laydate'], function () {
         var $ = layui.$
             , layer = layui.layer
+            , laydate = layui.laydate
             , form = layui.form;
 
-        $.ajax({
-            type: 'GET',
-            contentType: "application/json;",
-            url: domain + "api/color/findColor?t=" + new Date().getTime(),
-            success: function (result) {
-                if (result.code == 0) {
-                    $("select[name='color']").append("<option value=\"\">请选择</option>");
-                    $.each(result.data, function (index, value) {
-                        $("select[name='color']").append("<option value=\"" + value.colorName + "\">" + value.colorName + "</option>");
-                    })
-                    form.render('select');
-                } else {
-                    layer.alert(result.msg);
-                }
-            },
-            error: function () {
-                console.log("网络错误！");
-            }
+        laydate.render({
+            elem: '#outgoingTime'
         });
-        form.render(null, 'component-form-group');
 
         $.ajax({
             type: "GET",
@@ -178,53 +160,51 @@
                     tbody += trs;
                 });
                 $("#orderId").append(tbody);
-                $.ajax({
-                    type: 'GET',
-                    contentType: "application/json;",
-                    url: domain + "api/purchaseOrder/getPurchaseOrder/" + GetQueryString("id"),
-                    success: function (result) {
-                        if (result.code == 0) {
-                            var purchaseOrder = result.data;
-                            $("input[name='id']").val(purchaseOrder.id);
-                            $("input[name='orderId']").val(purchaseOrder.orderId);
-                            $("input[name='purchaseCode']").val(purchaseOrder.purchaseCode);
-                            $("input[name='productName']").val(purchaseOrder.productName);
-                            $("input[name='orderCode']").val(purchaseOrder.orderCode);
-                            $("input[name='ingredients']").val(purchaseOrder.ingredients);
-                            $("select[name='color']").val(purchaseOrder.color);
-                            $("input[name='batchNo']").val(purchaseOrder.batchNo);
-                            $("input[name='weight']").val(purchaseOrder.weight);
-                            $("input[name='num']").val(purchaseOrder.num);
-                            $("input[name='company']").val(purchaseOrder.company);
-                            $("textarea[name='remarks']").val(purchaseOrder.remarks);
-                            if(undefined == $("#orderId").find("option[value='" + purchaseOrder.orderId + "']").val()){
-                                $("#orderId").append("<option value=" + purchaseOrder.orderId + ">" + purchaseOrder.orderCode + "</option>");
-                            }
-                            $("#orderId").find("option[value='" + purchaseOrder.orderId + "']").attr("selected",true);
-                            //添加带搜索框的下拉框
-                            $("#orderId").searchableSelect("api/order/searchOrder?code=");
-
-                            //form.render('select', 'color');
-                            form.render('select');
-                            $("#orderId").css("display", "none");
-                        } else {
-                            layer.alert(result.msg);
-                        }
-                    },
-                    error: function () {
-                        console.log("网络错误！");
-                    }
-                });
-
+                //添加带搜索框的下拉框
+                $("#orderId").searchableSelect("api/order/searchOrder?code=");
             },
+        });
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json;",
+            url: domain + "api/dept/findDeptTree?t=" + new Date().getTime(),
+            success: function (result) {
+                if (result.code == 0) {
+                    $("select[name='dept']").append("<option value=\"\">请选择</option>");
+                    $.each(result.data, function (index, value) {
+                        $("select[name='dept']").append("<option value=\"" + value.id + "\">" + value.name + "</option>");
+                        $.each(value.children, function (index2, value2) {
+                            $("select[name='dept']").append("<option value=\"" + value2.id + "\">" + value2.name + "</option>");
+                            $.each(value2.children, function (index3, value3) {
+                                $("select[name='dept']").append("<option value=\"" + value3.id + "\">" + value3.name + "</option>");
+                            })
+                        })
+                    })
+                    form.render('select');
+                } else {
+                    layer.alert(result.msg);
+                }
+            },
+            error: function () {
+                console.log("网络错误！");
+            }
+        });
+
+        form.render(null, 'component-form-group');
+
+        /** 部门选中事件 */
+        form.on('select(deptName)', function(data){
+            $("input[name='deptId']").val(data.value);
+            $("input[name='deptName']").val(data.elem[data.elem.selectedIndex].text);
         });
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
+            data.field.outgoingTime = data.field.outgoingTime + " 00:00:00";
             $.ajax({
                 type: 'POST',
                 contentType: "application/json;",
-                url: domain + "api/purchaseOrder/updatePurchaseOrder",
+                url: domain + "api/orderOutgoing/insertOrderOutgoing",
                 data: JSON.stringify(data.field),
                 success: function (result) {
                     if (result.code == 0) {
@@ -246,5 +226,4 @@
 </script>
 
 </body>
-
 </html>
