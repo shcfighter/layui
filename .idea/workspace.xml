@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/views/business/order-list.html" line="197" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/views/business/order-list.html" line="188" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="951a07b5-3d07-4a93-b31a-e65a4e9f22b0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/views/business/outgoing-add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/outgoing-edit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/outgoing-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/business/product-apply-list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/order-add-select2.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/views/business/order-add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/order-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/order-list-read.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-list-read.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/order-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/order-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/plan-add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-add.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/business/plan-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/product-add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/product-add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/product-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/product-edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/plan-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/plan-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/product-apply-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/product-apply-list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/business/purchase-order-add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/purchase-order-add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/purchase-order-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/purchase-order-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/business/purchase-order-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/purchase-order-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/sample-list-read.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/sample-list-read.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/business/sample-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/business/sample-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/role-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/role-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/system/user-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/system/user-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/business/sample-order-list.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,48 +40,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="product-apply-list.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/business/product-apply-list.html">
+      <file leaf-file-name="order-list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/business/order-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="90" column="57" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
+            <state relative-caret-position="182">
+              <caret line="153" column="78" selection-start-line="153" selection-start-column="51" selection-end-line="153" selection-end-column="78" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product-add.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/product-add.html">
+      <file leaf-file-name="plan-list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/business/plan-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-918">
-              <caret line="67" column="38" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="270">
+              <caret line="248" column="38" selection-start-line="248" selection-start-column="38" selection-end-line="248" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product-edit.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/business/product-edit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="185" column="70" selection-start-line="185" selection-start-column="70" selection-end-line="185" selection-end-column="70" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plan-add.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="plan-add.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/business/plan-add.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="253" column="22" lean-forward="true" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="22" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="330">
+              <caret line="241" column="53" selection-start-line="241" selection-start-column="53" selection-end-line="241" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -92,12 +70,39 @@
       <file leaf-file-name="plan-edit.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/business/plan-edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="335" column="56" lean-forward="true" selection-start-line="335" selection-start-column="56" selection-end-line="335" selection-end-column="56" />
+            <state relative-caret-position="204">
+              <caret line="342" column="65" lean-forward="true" selection-start-line="342" selection-start-column="28" selection-end-line="342" selection-end-column="65" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order-add.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/business/order-add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="276" column="103" selection-start-line="276" selection-start-column="103" selection-end-line="276" selection-end-column="103" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="purchase-order-add.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/business/purchase-order-add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="184" column="49" selection-start-line="184" selection-start-column="49" selection-end-line="184" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order-edit.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="512">
+              <caret line="364" selection-start-line="364" selection-end-line="364" />
             </state>
           </provider>
         </entry>
@@ -168,14 +173,12 @@
         <option value="$PROJECT_DIR$/views/index.html" />
         <option value="$PROJECT_DIR$/views/main.html" />
         <option value="$PROJECT_DIR$/views/login.html" />
-        <option value="$PROJECT_DIR$/views/business/sample-list-read.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-list-warehouse.html" />
         <option value="$PROJECT_DIR$/views/business/plan-list-read.html" />
         <option value="$PROJECT_DIR$/views/business/produce-list.html" />
         <option value="$PROJECT_DIR$/views/business/plan-list-produce.html" />
         <option value="$PROJECT_DIR$/views/business/outbound-list-warehouse.html" />
         <option value="$PROJECT_DIR$/views/business/outbound-list.html" />
-        <option value="$PROJECT_DIR$/views/business/order-list-read.html" />
         <option value="$PROJECT_DIR$/views/business/goods-record-list.html" />
         <option value="$PROJECT_DIR$/views/business/goods-list-outbound.html" />
         <option value="$PROJECT_DIR$/views/business/goods-list.html" />
@@ -188,24 +191,26 @@
         <option value="$PROJECT_DIR$/views/business/sample-add.html" />
         <option value="$PROJECT_DIR$/layuiadmin/jquery.searchableSelect2.js" />
         <option value="$PROJECT_DIR$/layuiadmin/jquery.searchableSelect.js" />
-        <option value="$PROJECT_DIR$/views/business/order-list.html" />
-        <option value="$PROJECT_DIR$/views/business/plan-list.html" />
-        <option value="$PROJECT_DIR$/views/business/order-edit.html" />
-        <option value="$PROJECT_DIR$/views/business/plan-add.html" />
-        <option value="$PROJECT_DIR$/views/business/sample-list.html" />
         <option value="$PROJECT_DIR$/views/system/user-list.html" />
         <option value="$PROJECT_DIR$/views/system/role-list.html" />
-        <option value="$PROJECT_DIR$/views/business/purchase-order-add.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-edit.html" />
         <option value="$PROJECT_DIR$/views/business/purchase-order-list.html" />
-        <option value="$PROJECT_DIR$/views/business/order-add.html" />
         <option value="$PROJECT_DIR$/views/business/outgoing-list.html" />
         <option value="$PROJECT_DIR$/views/business/outgoing-add.html" />
         <option value="$PROJECT_DIR$/views/business/outgoing-edit.html" />
-        <option value="$PROJECT_DIR$/views/business/plan-edit.html" />
         <option value="$PROJECT_DIR$/views/business/product-add.html" />
         <option value="$PROJECT_DIR$/views/business/product-edit.html" />
         <option value="$PROJECT_DIR$/views/business/product-apply-list.html" />
+        <option value="$PROJECT_DIR$/views/business/sample-list.html" />
+        <option value="$PROJECT_DIR$/views/business/sample-list-read.html" />
+        <option value="$PROJECT_DIR$/views/business/order-list-read.html" />
+        <option value="$PROJECT_DIR$/views/business/order-list.html" />
+        <option value="$PROJECT_DIR$/views/business/plan-list.html" />
+        <option value="$PROJECT_DIR$/views/business/order-edit.html" />
+        <option value="$PROJECT_DIR$/views/business/purchase-order-add.html" />
+        <option value="$PROJECT_DIR$/views/business/order-add.html" />
+        <option value="$PROJECT_DIR$/views/business/plan-edit.html" />
+        <option value="$PROJECT_DIR$/views/business/plan-add.html" />
       </list>
     </option>
   </component>
@@ -233,6 +238,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -255,9 +262,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -266,7 +271,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hadoop" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -655,12 +660,15 @@
       <workItem from="1528015969609" duration="797000" />
       <workItem from="1528019093497" duration="8161000" />
       <workItem from="1528072309470" duration="67188000" />
-      <workItem from="1528348237306" duration="16579000" />
+      <workItem from="1528348237306" duration="17266000" />
+      <workItem from="1528452553934" duration="3044000" />
+      <workItem from="1528504925973" duration="890000" />
+      <workItem from="1528507913613" duration="4277000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266631000" />
+    <option name="totallyTimeSpent" value="275529000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -688,7 +696,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.28895614" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.2934947" />
       <window_info anchor="right" id="Database" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -696,11 +704,11 @@
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="right" id="Properties" order="7" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info id="Nl-Palette" order="5" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Properties" order="7" />
+      <window_info id="Nl-Palette" order="5" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="2" />
@@ -713,7 +721,7 @@
       <window_info anchor="bottom" id="Run" order="3" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28895614" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2934947" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="bottom" id="TODO" order="7" />
@@ -797,13 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/sample-list-read.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/outbound-add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
@@ -853,13 +854,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/order-list-read.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="94" column="62" selection-start-line="94" selection-start-column="62" selection-end-line="94" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/goods-record-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -888,13 +882,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/sample-order-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="109" column="69" selection-start-line="109" selection-start-column="69" selection-end-line="109" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/sample-order-list.html" />
     <entry file="file://$PROJECT_DIR$/layuiadmin/commons.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -910,17 +898,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/layuiadmin/ajaxselect.js" />
-    <entry file="file://$PROJECT_DIR$/views/business/order-add-select2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="233" column="27" selection-start-line="233" selection-start-column="21" selection-end-line="233" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-add-select2.html" />
     <entry file="file://$PROJECT_DIR$/layuiadmin/style/jquery.searchableSelect.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -946,24 +924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-403">
           <caret line="131" column="40" lean-forward="true" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/order-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="164" column="33" lean-forward="true" selection-start-line="164" selection-start-column="33" selection-end-line="164" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="311" column="36" selection-start-line="311" selection-start-column="36" selection-end-line="311" selection-end-column="36" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -995,26 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/purchase-order-add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1570">
-          <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/order-add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="219" column="11" lean-forward="true" selection-start-line="219" selection-start-column="11" selection-end-line="219" selection-end-column="11" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/outgoing-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="968">
@@ -1029,13 +969,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/sample-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="78" column="16" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/purchase-order-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
@@ -1047,9 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="219" column="11" lean-forward="true" selection-start-line="168" selection-start-column="8" selection-end-line="219" selection-end-column="11" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1074,48 +1004,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/plan-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="79" lean-forward="true" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/plan-edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="335" column="56" lean-forward="true" selection-start-line="335" selection-start-column="56" selection-end-line="335" selection-end-column="56" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/business/plan-add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="253" column="22" lean-forward="true" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/business/product-add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-918">
+        <state relative-caret-position="1474">
           <caret line="67" column="38" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/business/product-edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
+        <state relative-caret-position="4070">
           <caret line="185" column="70" selection-start-line="185" selection-start-column="70" selection-end-line="185" selection-end-column="70" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1125,8 +1023,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/business/product-apply-list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="90" column="57" selection-start-line="90" selection-start-column="57" selection-end-line="90" selection-end-column="57" />
+        <state relative-caret-position="336">
+          <caret line="44" column="56" lean-forward="true" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/sample-list-read.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="65" column="37" lean-forward="true" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/sample-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="191" column="22" selection-start-line="191" selection-start-column="22" selection-end-line="223" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-list-read.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="122" lean-forward="true" selection-start-line="122" selection-end-line="122" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="153" column="78" selection-start-line="153" selection-start-column="51" selection-end-line="153" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/purchase-order-add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="184" column="49" selection-start-line="184" selection-start-column="49" selection-end-line="184" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/plan-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="248" column="38" selection-start-line="248" selection-start-column="38" selection-end-line="248" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="276" column="103" selection-start-line="276" selection-start-column="103" selection-end-line="276" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/order-edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="364" selection-start-line="364" selection-end-line="364" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/plan-edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="342" column="65" lean-forward="true" selection-start-line="342" selection-start-column="28" selection-end-line="342" selection-end-column="65" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/business/plan-add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="241" column="53" selection-start-line="241" selection-start-column="53" selection-end-line="241" selection-end-column="53" />
         </state>
       </provider>
     </entry>

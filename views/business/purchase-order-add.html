@@ -177,11 +177,12 @@
                 console.log("网络错误！");
             }
         });
+        form.render(null, 'component-form-group');
 
         $.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
-            url: domain + "api/order/findOrderPage?limit=50&t=" + new Date().getTime(),
+            url: domain + "api/order/searchOrder?t=" + new Date().getTime(),
             success: function(data) {
                 var tbody = "";
                 $.each(data.data, function(n, value) {
@@ -195,7 +196,6 @@
             },
         });
 
-        form.render(null, 'component-form-group');
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {

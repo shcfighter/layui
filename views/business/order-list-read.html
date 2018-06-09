@@ -18,14 +18,17 @@
             <div class="layui-card">
                 <div class="layui-card-header">订单列表</div>
                 <div class="layui-card-body">
+                    <div class="layui-btn-group" style="margin-bottom: 10px;">
+                        <button class="layui-btn" data-type="detail">查看</button>
+                    </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
-                        产品名称：
+                        款号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="productName" id="productName" autocomplete="off">
+                            <input class="layui-input" name="sampleCode" id="sampleCode" autocomplete="off">
                         </div>
-                        合作公司：
+                        订单号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="cooperationCompany" id="cooperationCompany" autocomplete="off">
+                            <input class="layui-input" name="orderCode" id="orderCode" autocomplete="off">
                         </div>
                         状态：
                         <div class="layui-inline">
@@ -33,10 +36,7 @@
                                 <select name="type" id="status" lay-filter="typeSelect">
                                     <option value="">请选择</option>
                                     <option value="0">接单</option>
-                                    <option value="1">打样</option>
-                                    <option value="2">采购</option>
-                                    <option value="3">排单</option>
-                                    <option value="4">生产</option>
+                                    <option value="1">生产阶段</option>
                                     <option value="5">入库</option>
                                     <option value="-1">作废</option>
                                 </select>
@@ -47,9 +47,60 @@
                         <button class="layui-btn" data-type="print">打印</button>-->
                     </div>
 
-                    <div class="my_show">
-                    <table class="layui-hide" id="order-table" lay-filter="order-table"></table>
-                    </div>
+                    <table class="layui-table" lay-data="{page: true}" lay-filter="order-table" id="orderTable">
+                        <thead>
+                        <tr>
+                            <th lay-data="{checkbox:true, fixed:'left'}" rowspan="3"></th>
+                            <th lay-data="{field:'sampleCode', width:150}" rowspan="3">款号</th>
+                            <th lay-data="{field:'orderCode', width:150}" rowspan="3">订单号</th>
+                            <th lay-data="{field:'deliveryNumber', width:150}" rowspan="3">交货号</th>
+                            <th lay-data="{field:'poNumber', width:150}" rowspan="3">PO号</th>
+                            <th lay-data="{field:'type', width:150, templet: '#typeTpl'}" rowspan="3">订单类型</th>
+                            <th lay-data="{field:'company', width:150}" rowspan="3">公司</th>
+                            <th lay-data="{field:'brand', width:150}" rowspan="3">客户品牌</th>
+                            <th lay-data="{field:'photoUrl', width:150, templet: '#imagesTpl', unresize: true}" rowspan="3">图示</th>
+                            <th lay-data="{field:'orderTime', width:150}" rowspan="3">下单日期</th>
+                            <th lay-data="{align:'center'}" colspan="16">各尺码数量</th>
+                            <th lay-data="{field:'totalNum', width:120}" rowspan="3">总计</th>
+                            <th lay-data="{field:'status', width:120, templet: '#statusTpl', unresize: true}" rowspan="3">状态</th>
+                            <th lay-data="{field:'remarks', width:300}" rowspan="3">备注</th>
+                        </tr>
+                        <tr>
+                            <th lay-data="{align:'center'}" colspan="2">4</th>
+                            <th lay-data="{align:'center'}" colspan="2">6</th>
+                            <th lay-data="{align:'center'}" colspan="2">8</th>
+                            <th lay-data="{align:'center'}" colspan="2">12</th>
+                            <th lay-data="{align:'center'}" colspan="2">14</th>
+                            <th lay-data="{align:'center'}" colspan="2">16</th>
+                            <th lay-data="{align:'center'}" colspan="2">18</th>
+                            <th lay-data="{align:'center', templet: '<div>{{d.details[8].sizeType}}</div>'}" colspan="2"></th>
+                        </tr>
+                        <tr>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[0].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[0].num}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[1].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[1].num}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[2].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[2].num}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[3].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[3].num}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[4].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[4].num}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[5].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[5].num}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[6].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[6].num}}</div>'}">数量</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[7].color}}</div>'}">颜色</th>
+                            <th lay-data="{align:'center', width:100, templet: '<div>{{d.details[7].num}}</div>'}">数量</th>
+                        </tr>
+
+                        </thead>
+                    </table>
+                    <script type="text/html" id="imagesTpl">
+                        {{#  if(d.photoUrl){ }}
+                        <button class="layui-btn images" lay-event="sampleImages">样品</button>
+                        {{#  } }}
+                    </script>
 
                     <script type="text/html" id="statusTpl">
                         {{#  if(d.status === 0){ }}
@@ -62,9 +113,12 @@
                         <span style="color: #F581B1;">作废</span>
                         {{#  } }}
                     </script>
-
-                    <script type="text/html" id="user-table-barDemo">
-                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                    <script type="text/html" id="typeTpl">
+                        {{#  if(d.type === 1){ }}
+                        <span style="color: #F581B1;">自营</span>
+                        {{#  } else if(d.type === 2) { }}
+                        <span style="color: #F581B1;">外贸</span>
+                        {{#  } }}
                     </script>
 
                 </div>
@@ -90,53 +144,47 @@
             , table = layui.table;
 
         //方法级渲染
-        table.render({
-            elem: '#order-table'
-            , url: domain + 'api/order/findOrderPage?status=1&t=' + new Date().getTime()
-            , cols: [[
-                {field: 'id', title: '编号', width: 80, sort: true}
-                , {field: 'productName', title: '产品名称', width: 180, sort: true}
-                , {field: 'orderNum', title: '数量', width: 100, sort: true}
-                , {field: 'productUnit', title: '单位', width: 60}
-                , {field: 'unitPrice', title: '单价', width: 100}
-                , {field: 'totalPrice', title: '总价', width: 100}
-                , {field: 'deliverDate', title: '交付时间', width: 110, sort: true}
-                , {field: 'orderTime', title: '下单时间', width: 120}
-                , {field: 'cooperationCompany', title: '合作公司', width: 120}
-                , {field: 'contactPhone', title: '联系方式', width: 120}
-                , {field: 'status', title: '状态', width: 80, templet: '#statusTpl', unresize: true}
-                , {field: 'createTime', title: '创建时间', width: 120}
-                , {field: 'remarks', title: '备注', width: 200}
-                , {align: 'center', fixed: 'right', toolbar: '#user-table-barDemo', width: 250}
-            ]]
-            , id: 'orderTable'
-            , page: true
-            ,height: 'full-100'
+        table.init('order-table', {
+            url:  domain + 'api/order/findOrderPage?status=1&t=' + new Date().getTime()
         });
 
         element.render();
-
-
         //监听工具条
         table.on('tool(order-table)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'detail') {
-                var index = layer.open({
-                    type: 2,
-                    title: "查看订单",
-                    content: 'order-detail.html?id=' + data.id,
-                    area: ['300px', '300px'],
-                    maxmin: true,
-                    success: function (layero, index) {
-                    }
+            if (obj.event === 'sampleImages') {
+                var json = {
+                    "code": 0,
+                    "msg": "",
+                    "start": 0
+                }
+                var images_data = [];
+                var images = data.photoUrl.split(",");
+                $.each(images, function (index, image) {
+                    $("#carousel-img").append("<div><img src=\"" + image + "\"></div>");
+                    var image_data = {};
+                    image_data.src = image;
+                    images_data.push(image_data);
+                    json.data = images_data;
                 });
-                layer.full(index);
+                layer.photos({
+                    photos: json //格式见API文档手册页
+                });
             }
         });
 
-
         /* 触发弹层 */
         var active = {
+            detail: function () {
+                var index = layer.open({
+                    type: 2,
+                    title: "修改样品",
+                    content: 'sample-edit.html',
+                    area: ['300px', '300px'],
+                    maxmin: true
+                });
+                layer.full(index);
+            },
             reload: function () {
                 //执行重载
                 table.reload('orderTable', {
@@ -144,33 +192,10 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     , where: {
-                        productName: $('#productName').val(),
-                        cooperationCompany: $('#cooperationCompany').val(),
+                        sampleCode: $('#sampleCode').val(),
+                        orderCode: $('#orderCode').val(),
                         status: $('#status').val()
                     }
-                });
-            },
-            download: function () {
-                const a = document.createElement('a');
-                var href = domain + 'api/order/orderExport?1=1';
-                if($('#productName').val()){
-                    href += '&productName=' + $('#productName').val();
-                }
-                if($('#cooperationCompany').val()){
-                    href += '&cooperationCompany=' + $('#cooperationCompany').val();
-                }
-                if($('#status').val()){
-                    href += '&status=' + $('#status').val();
-                }
-                a.setAttribute('href', href);
-                a.click();
-            },
-            print: function () {
-                $(".my_show").jqprint({
-                    debug: false,
-                    importCSS: true,
-                    printContainer: true,
-                    operaSupport: false
                 });
             }
         };

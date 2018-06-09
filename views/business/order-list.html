@@ -23,15 +23,16 @@
                         <button class="layui-btn" data-type="edit">编辑</button>
                         <button class="layui-btn" data-type="del">删除</button>
                         <button class="layui-btn" data-type="detail">查看</button>
+                        <button class="layui-btn" data-type="go_plan">进入排期</button>
                     </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
-                        产品名称：
+                        款号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="productName" id="productName" autocomplete="off">
+                            <input class="layui-input" name="sampleCode" id="sampleCode" autocomplete="off">
                         </div>
-                        合作公司：
+                        订单号：
                         <div class="layui-inline">
-                            <input class="layui-input" name="cooperationCompany" id="cooperationCompany" autocomplete="off">
+                            <input class="layui-input" name="orderCode" id="orderCode" autocomplete="off">
                         </div>
                         状态：
                         <div class="layui-inline">
@@ -65,7 +66,7 @@
                             <th lay-data="{field:'orderTime', width:150}" rowspan="3">下单日期</th>
                             <th lay-data="{align:'center'}" colspan="16">各尺码数量</th>
                             <th lay-data="{field:'totalNum', width:120}" rowspan="3">总计</th>
-                            <th lay-data="{field:'winningBid', width:120, templet: '#winningBidTpl', unresize: true}" rowspan="3">是否中标</th>
+                            <th lay-data="{field:'status', width:120, templet: '#statusTpl', unresize: true}" rowspan="3">状态</th>
                             <th lay-data="{field:'remarks', width:300}" rowspan="3">备注</th>
                         </tr>
                         <tr>
@@ -107,9 +108,11 @@
 
                     <script type="text/html" id="statusTpl">
                         {{#  if(d.status === 0){ }}
-                        <span style="color: #F581B1;">接单</span>
+                        <span style="color: #F581B1;">草稿</span>
                         {{#  } else if(d.status === 1) { }}
-                        <span style="color: #F581B1;">生产阶段</span>
+                        <span style="color: #F581B1;">排期</span>
+                        {{#  } else if(d.status === 2) { }}
+                        <span style="color: #F581B1;">生产</span>
                         {{#  } else if(d.status === 5) { }}
                         <span style="color: #F581B1;">入库</span>
                         {{#  } else if(d.status === -1) { }}
@@ -122,25 +125,6 @@
                         {{#  } else if(d.type === 2) { }}
                         <span style="color: #F581B1;">外贸</span>
                         {{#  } }}
-                    </script>
-                    <script type="text/html" id="winningBidTpl">
-                        {{#  if(d.winningBid === 0){ }}
-                        <span style="color: #F581B1;">否</span>
-                        {{#  } else if(d.winningBid === 1) { }}
-                        <span style="color: #F581B1;">是</span>
-                        {{#  } }}
-                    </script>
-
-                    <script type="text/html" id="user-table-barDemo">
-                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        {{#  if(d.status === 0){ }}
-                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                            <a class="layui-btn layui-btn-xs" lay-event="produce">投入生产</a>
-                        {{#  } }}
-                        {{#  if(d.status === 1){ }}
-                        <a class="layui-btn layui-btn-xs" lay-event="inbound">入库</a>
-                        {{#  } }}
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">作废</a>
                     </script>
 
                 </div>
@@ -264,6 +248,43 @@
                     });
                 });
             },
+            go_plan: function () {
+                var checkStatus = table.checkStatus('orderTable')
+                    , data = checkStatus.data;
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                if (ids.length <= 0) {
+                    layer.alert("请先选择！");
+                    return false;
+                }
+                if (ids.length > 1) {
+                    layer.alert("只可以选择一条记录！");
+                    return false;
+                }
+                if(data[0].status != 0){
+                    layer.alert("该条记录不可操作！");
+                    return false;
+                }
+                layer.confirm('确定该订单进入排期阶段？', function (index) {
+                    $.ajax({
+                        type: 'PUT',
+                        url: domain + "api/order/updateToPlan/" + ids[0],
+                        success: function (result) {
+                            if (result.code == 0) {
+                                table.reload('orderTable');
+                                layer.close(index);
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
+            },
             detail: function () {
                 var index = layer.open({
                     type: 2,
@@ -281,8 +302,8 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     , where: {
-                        productName: $('#productName').val(),
-                        cooperationCompany: $('#cooperationCompany').val(),
+                        sampleCode: $('#sampleCode').val(),
+                        orderCode: $('#orderCode').val(),
                         status: $('#status').val()
                     }
                 });

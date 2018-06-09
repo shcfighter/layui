@@ -23,6 +23,7 @@
                         <button class="layui-btn" data-type="edit">编辑</button>
                         <button class="layui-btn" data-type="del">删除</button>
                         <button class="layui-btn" data-type="detail">查看</button>
+                        <button class="layui-btn" data-type="go_produce">进入生产</button>
                     </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
                         产品名称：
@@ -60,7 +61,7 @@
                             <th lay-data="{field:'totalNum', width:120}" rowspan="3">总计</th>
                             <th lay-data="{field:'billingUser', width:150}" rowspan="3">开单人</th>
                             <th lay-data="{field:'auditUser', width:150}" rowspan="3">审核人</th>
-                            <th lay-data="{field:'status', width:150}" rowspan="3">状态</th>
+                            <th lay-data="{field:'status', width:100, templet: '#statusTpl'}" rowspan="3">状态</th>
                             <th lay-data="{field:'remarks', width:300}" rowspan="3">备注</th>
                         </tr>
                         <tr>
@@ -216,6 +217,43 @@
                         data: {
                             "ids": ids
                         },
+                        success: function (result) {
+                            if (result.code == 0) {
+                                table.reload('orderTable');
+                                layer.close(index);
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
+            },
+            go_produce: function () {
+                var checkStatus = table.checkStatus('orderTable')
+                    , data = checkStatus.data;
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                if (ids.length <= 0) {
+                    layer.alert("请先选择！");
+                    return false;
+                }
+                if (ids.length > 1) {
+                    layer.alert("只可以选择一条记录！");
+                    return false;
+                }
+                if(data[0].status != 0){
+                    layer.alert("该条记录不可操作！");
+                    return false;
+                }
+                layer.confirm('确定该计划单进入生产阶段？', function (index) {
+                    $.ajax({
+                        type: 'PUT',
+                        url: domain + "api/plan/updateToProduce/" + ids[0],
                         success: function (result) {
                             if (result.code == 0) {
                                 table.reload('orderTable');

@@ -264,17 +264,17 @@
         $.ajax({
             type: "get",
             contentType: "application/json; charset=utf-8",
-            url: domain + "api/sample/findSamplePage?limit=50",
+            url: domain + "api/sample/searchSample?t=" + new Date().getTime(),
             success: function(data) {
                 var tbody = "";
                 $.each(data.data, function(n, value) {
                     var trs = "";
-                    trs += "<option value=" + value.id + ">" + value.sampleCode + "</option>";
+                    trs += "<option value=" + value.id + ">" + value.code + "</option>";
                     tbody += trs;
                 });
                 $("#sampleId").append(tbody);
                 //添加带搜索框的下拉框
-                $("#sampleId").searchableSelect("api/sample/searchSample?code=");
+                $("#sampleId").searchableSelect("api/sample/searchSample?t=" + new Date().getTime() + "code=");
             },
         });
 

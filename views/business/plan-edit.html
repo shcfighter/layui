@@ -274,12 +274,12 @@
         $.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
-            url: domain + "api/order/findOrderPage?limit=50&t=" + new Date().getTime(),
+            url: domain + "api/order/searchOrder?statuss=1&t=" + new Date().getTime(),
             success: function(data) {
                 var tbody = "";
                 $.each(data.data, function(n, value) {
                     var trs = "";
-                    trs += "<option value=" + value.id + ">" + value.orderCode + "</option>";
+                    trs += "<option value=" + value.id + ">" + value.code + "</option>";
                     tbody += trs;
                 });
                 $("#orderId").append(tbody);
@@ -306,7 +306,7 @@
                             }
                             $("#orderId").find("option[value='" + plan.orderId + "']").attr("selected",true);
                             //添加带搜索框的下拉框
-                            $("#orderId").searchableSelect("api/order/searchOrder?code=");
+                            $("#orderId").searchableSelect("api/order/searchOrder?statuss=1&t=" + new Date().getTime());
                             console.log(result.data.detailList)
                             $.each(result.data.detailList, function (index, value) {
                                 var $tr = $("input[value='" + value.sizeType + "']").closest("tr");

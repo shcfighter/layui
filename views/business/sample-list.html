@@ -23,6 +23,7 @@
                         <button class="layui-btn" data-type="edit">编辑</button>
                         <button class="layui-btn" data-type="del">删除</button>
                         <button class="layui-btn" data-type="detail">查看</button>
+                        <button class="layui-btn" data-type="finished">中标</button>
                     </div>
                     <div class="demoTable" style="margin-bottom: 10px;">
                         款号：
@@ -76,7 +77,7 @@
             elem: '#order-table'
             , url: domain + 'api/sample/findSamplePage?t=' + new Date().getTime()
             , cols: [[
-                {checkbox: true}
+                {checkbox: true, fixed:'left'}
                 , {field: 'sampleCode', title: '款号', width: 180, sort: true}
                 , {field: 'needle', title: '针形', width: 100}
                 , {field: 'style', title: '款式', width: 150}
@@ -174,6 +175,39 @@
                         data: {
                             "ids": ids
                         },
+                        success: function (result) {
+                            if (result.code == 0) {
+                                table.reload('orderTable');
+                                layer.close(index);
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("网络错误！");
+                        }
+                    });
+                });
+            },
+            finished: function () {
+                var checkStatus = table.checkStatus('orderTable')
+                    , data = checkStatus.data;
+                var ids = [];
+                for (var i = 0; i < data.length; i++) {
+                    ids.push(data[i].id);
+                }
+                if (ids.length <= 0) {
+                    layer.alert("请先选择！");
+                    return false;
+                }
+                if (ids.length > 1) {
+                    layer.alert("只可以选择一条记录！");
+                    return false;
+                }
+                layer.confirm('确定该样品设置为中标？', function (index) {
+                    $.ajax({
+                        type: 'PUT',
+                        url: domain + "api/sample/updateToFinished/" + ids[0],
                         success: function (result) {
                             if (result.code == 0) {
                                 table.reload('orderTable');

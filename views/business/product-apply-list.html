@@ -84,6 +84,11 @@
                         </tr>
                         </thead>
                     </table>
+                    <script type="text/html" id="imagesTpl">
+                        {{#  if(d.photoUrl){ }}
+                        <button class="layui-btn images" lay-event="sampleImages">样品</button>
+                        {{#  } }}
+                    </script>
                     <script type="text/html" id="statusTpl">
                         {{#  if(d.status === 0){ }}
                         <span style="color: #F581B1;">草稿</span>

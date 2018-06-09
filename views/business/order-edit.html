@@ -233,7 +233,7 @@
         $.ajax({
             type: 'GET',
             contentType: "application/json;",
-            url: domain + "api/color/findColor",
+            url: domain + "api/color/findColor?t=" + new Date().getTime(),
             success: function (result) {
                 if (result.code == 0) {
                     $("select[name='color']").append("<option value=\"\">请选择</option>");
@@ -262,12 +262,12 @@
         $.ajax({
             type: "get",
             contentType: "application/json; charset=utf-8",
-            url: domain + "api/sample/findSamplePage?limit=50",
+            url: domain + "api/sample/searchSample?t=" + new Date().getTime(),
             success: function(data) {
                 var tbody = "";
                 $.each(data.data, function(n, value) {
                     var trs = "";
-                    trs += "<option value=" + value.id + ">" + value.sampleCode + "</option>";
+                    trs += "<option value=" + value.id + ">" + value.code + "</option>";
                     tbody += trs;
                 });
                 $("#sampleId").append(tbody);
@@ -327,52 +327,6 @@
                 });
             },
         });
-
-        /*$.ajax({
-            type: 'GET',
-            contentType: "application/json;",
-            url: domain + "api/order/getOrderAndDetails/" + GetQueryString("id"),
-            success: function (result) {
-                if (result.code == 0) {
-                    var order = result.data.order;
-                    $("input[name='id']").val(order.id);
-                    $("input[name='sampleId']").val(order.sampleId);
-                    $("input[name='sampleCode']").val(order.sampleCode);
-                    $("input[name='photoUrl']").val(order.photoUrl);
-                    $("input[name='style']").val(order.style);
-                    $("input[name='needle']").val(order.needle);
-                    $("input[name='material']").val(order.material);
-                    $("input[name='company']").val(order.company);
-                    $("input[name='brand']").val(order.brand);
-                    $("input[name='orderCode']").val(order.orderCode);
-                    $("input[name='deliveryNumber']").val(order.deliveryNumber);
-                    $("input[name='poNumber']").val(order.poNumber);
-                    $("select[name='type']").val(order.type);
-                    //form.render("select", "type");
-                    $("input[name='orderTime']").val(order.orderTime);
-                    $("textarea[name='remarks']").val(order.remarks);
-                    $.each(result.data.orderDetails, function (index, value) {
-                        var $tr = $("input[value='" + value.sizeType + "']").closest("tr");
-                        if(undefined == $("input[value='" + value.sizeType + "']").val()) {
-                            $("#no_value").find("input[name='sizeType']").val(value.sizeType);
-                            $("#no_value").find("select[name='color']").val(value.color);
-                            $("#no_value").find("input[name='num']").val(value.num);
-                        }
-                        $($tr).find("input[name='sizeType']").val(value.sizeType);
-                        $($tr).find("select[name='color']").val(value.color);
-                        $($tr).find("input[name='num']").val(value.num);
-                    });
-                    //form.render('select', 'color');
-                    form.render('select');
-                } else {
-                    layer.alert(result.msg);
-                }
-            },
-            error: function () {
-                console.log("网络错误！");
-            }
-        });*/
-
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
